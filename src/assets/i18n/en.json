@@ -1,3 +1,44 @@
 {
-
+  "Common": {
+    "Label": {
+      "Sort": "Sort",
+      "All": "All",
+      "No": "No",
+      "Items": "{{value}} Item(s)",
+      "Add_New": "Add New",
+      "Register": "Register"
+    },
+    "Button": {
+      "Back": "Back",
+      "Close": "Close",
+      "Register": "Register",
+      "Save": "Save",
+      "Edit": "edit",
+      "Update": "Update",
+      "Confirme": "Confirme",
+      "Yes": "Yes",
+      "No": "No",
+      "Delete": "Delete",
+      "Add_New": "Add New",
+      "Export_PDF": "Export to PDF",
+      "Export_Excel": "Export to Excel",
+      "Add_Img": "add img",
+      "Upload":"Upload",
+      "Remove":"Remove",
+      "Logout":"Logout",
+      "Profile":"Profile",
+      "Login":"Login",
+      "Next":"Next",
+      "Previous":"Previous",
+      "Action":"Action"
+    }
+  },
+  "Account": {
+    "Label": {
+      "Id": "Id",
+      "AccountId": "Account Id",
+      "AccountName":"Account Name",
+      "Balance":"Balance"
+    }
+  }
 }

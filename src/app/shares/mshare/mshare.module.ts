@@ -22,10 +22,12 @@ import { TooltipModule } from '@progress/kendo-angular-tooltip';
 import { UploadModule } from '@progress/kendo-angular-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
+import { ModalComponent } from '../component/modal/modal.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { DataTablesModule } from 'angular-datatables';
 @NgModule({
   declarations: [
-
+    ModalComponent
   ],
   imports: [
     // InputsModule,
@@ -68,8 +70,11 @@ import { TranslateModule } from '@ngx-translate/core';
     ScrollViewModule,
     SortableModule,
     TooltipModule,
-    UploadModule,
-  ]
+    UploadModule
+  ],
+  entryComponents: [
+    ModalComponent,
+  ],
 })
 export class MshareModule {
   static forRoot(): ModuleWithProviders<MshareModule> {

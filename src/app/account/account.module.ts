@@ -4,6 +4,10 @@ import { AccountComponent } from './account/account.component';
 import { AccountListComponent } from './account-list/account-list.component';
 import { AddAccountComponent } from './add-account/add-account.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { MshareModule } from '../shares/mshare/mshare.module';
+import { AccountRoutingModule } from './account-routing.module';
+import { AgGridModule } from 'ag-grid-angular';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -15,7 +19,10 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     EditAccountComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    AccountRoutingModule,
+    MshareModule,
+    DataTablesModule
   ]
 })
 export class AccountModule { }

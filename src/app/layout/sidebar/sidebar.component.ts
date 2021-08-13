@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 import { UrlComplete } from '../../shares/model/url-complete';
 import { Member } from '../../shares/model/members';
 import { Group } from '../../shares/model/groups';
+import { AccountType } from '../../shares/model/account-type';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +12,8 @@ import { Group } from '../../shares/model/groups';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+
+  accountTypes: AccountType[] = accountTypes;
 
   urlComplete: UrlComplete = {
     mainUrl: '',
@@ -94,4 +97,43 @@ export class SidebarComponent implements OnInit {
     // this.allModulesService.members.active = member;
   }
 
+  routerAccount(accountType: AccountType) {
+    this.urlComplete.mainUrl = 'acc';
+    this.urlComplete.subUrl = accountType.code;
+    console.log(accountType);
+  }
+
 }
+
+export const accountTypes: AccountType[] = [
+  {
+    id: 1,
+    code: 'A100',
+    name: 'Admin',
+    remark: 'A'
+  },
+  {
+    id: 2,
+    code: 'B100',
+    name: 'Senair',
+    remark: 'A'
+  },
+  {
+    id: 3,
+    code: 'C100',
+    name: 'Master',
+    remark: 'A'
+  },
+  {
+    id: 4,
+    code: 'D100',
+    name: 'Agent',
+    remark: 'A'
+  },
+  {
+    id: 5,
+    code: 'E100',
+    name: 'Member',
+    remark: 'A'
+  }
+];

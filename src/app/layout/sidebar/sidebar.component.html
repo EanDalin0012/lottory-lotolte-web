@@ -7,6 +7,22 @@
                   <li class="menu-title">
                       <span>Main</span>
                   </li>
+
+                  <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'acc'}">
+                    <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'acc' }">
+                        <i class="la la-dashboard"></i>
+                        <span>Account</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <ul style="display: none;"
+                        [ngStyle]="{ 'display' : urlComplete.mainUrl === 'acc' ? 'block' : 'none' }">
+
+                        <li *ngFor = "let accountType of accountTypes" (click)="routerAccount(accountType)">
+                          <a [ngClass]="{ 'active' : urlComplete.subUrl ===  accountType.code}" href="javascript:">{{accountType.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+
                   <li class="submenu" [ngClass]="{ 'active' : urlComplete.mainUrl === 'dashboard' }">
                       <a href="javascript:" [ngClass]="{ 'subdrop' : urlComplete.mainUrl === 'dashboard' }">
                           <i class="la la-dashboard"></i>
