@@ -8,6 +8,7 @@ import { MshareModule } from '../shares/mshare/mshare.module';
 import { AccountRoutingModule } from './account-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { DataTablesModule } from 'angular-datatables';
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 
 
 
@@ -16,7 +17,8 @@ import { DataTablesModule } from 'angular-datatables';
     AccountComponent,
     AccountListComponent,
     AddAccountComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    AccountProfileComponent
   ],
   imports: [
     CommonModule,

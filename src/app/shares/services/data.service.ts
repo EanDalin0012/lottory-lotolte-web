@@ -9,16 +9,24 @@ export class DataService {
   private visitSource =  new BehaviorSubject<any>('');
   visitData = this.visitSource.asObservable();
 
+  private visitSourceParamRoutorChange =  new BehaviorSubject<any>('');
+  visitSourceParamRoutorChangeData = this.visitSourceParamRoutorChange.asObservable();
+
   private viewProductDetail =  new BehaviorSubject<any>('');
   viewProductDetailData = this.visitSource.asObservable();
 
   visitMessage(message: any) {
-    console.log('message', message);
     this.visitSource.next(message);
   }
 
+  visitParamRouterChange(message: any) {
+    this.visitSourceParamRoutorChange.next(message);
+  }
+
   viewProductDetailMessage(message: any) {
-    console.log('viewProductDetailMessage', message);
     this.viewProductDetail.next(message);
   }
+
+
+
 }

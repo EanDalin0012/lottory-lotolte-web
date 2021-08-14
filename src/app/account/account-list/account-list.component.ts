@@ -8,6 +8,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { ToastrService } from "ngx-toastr";
 import { AllModulesService } from '../../shares/all-modules.service';
+import { accountDatas } from './account-data';
+import { Account } from 'src/app/shares/model/account';
+import { ActivatedRoute, NavigationStart, Router, NavigationEnd, NavigationError, Event } from '@angular/router';
+import { Utils } from '../../shares/utils/utils.static';
+import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 declare const $: any;
 @Component({
   selector: 'app-account-list',
@@ -15,9 +20,9 @@ declare const $: any;
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
-  lstOvertime: any[] = [];
+  accounts: Account[] = [];
   @ViewChild(DataTableDirective, { static: false })
-  dtElement: DataTableDirective;
+  dtElement: any;
   public dtOptions: DataTables.Settings = {};
 
   public rows:any[] = [];
@@ -28,16 +33,19 @@ export class AccountListComponent implements OnInit {
   url: any = "overtime";
   public tempId: any;
   public editId: any;
-
+  accountType = '';
+  accountDisplay: Account[] = [];
+  i = 1;
   constructor(
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
     private formBuilder: FormBuilder,
     // private toastr: ToastrService,
-    private srvModuleService: AllModulesService,
   ) {
+
     this.titleService.setTitle('Account-Admin');
+    this.dtElement as DataTableDirective;
     this.dtOptions = {
       // ... skipped ...
       pageLength: 10,
@@ -48,27 +56,42 @@ export class AccountListComponent implements OnInit {
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitMessage(url[5]);
-    this.inquiry();
+    this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
+      if (message !== '') {
+        this.accountType = message;
+        this.inquiry('ngOnInit');
+      } else {
 
-    // for data table configuration
+        const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+        console.log('account_type', account_type);
+        this.accountType = account_type;
+      }
+    });
+
+    this.inquiry('ngOnInit');
     this.dtOptions = {
       // ... skipped ...
       pageLength: 10,
       dom: "lrtip",
     };
+
+
   }
 
-  inquiry(){
-    // this.srvModuleService.get(this.url).subscribe((data) => {
-    //   console.log(data);
-    //   this.lstOvertime = overtime;
-    //   this.dtTrigger.next();
-    //   this.rows = this.lstOvertime;
-    //   this.srch = [...this.rows];
-    // });
-    this.lstOvertime = overtime;
+  inquiry(note: string){
+    console.log(note);
+
+      this.accounts = accountDatas;
+      this.accountDisplay = [];
+      this.accounts.forEach(element => {
+        if(this.accountType == element.accountType) {
+          this.accountDisplay.push(element);
+        }
+      });
+      console.log(this.accountDisplay, this.accountDisplay.length);
+
       this.dtTrigger.next();
-      this.rows = this.lstOvertime;
+      this.rows = this.accountDisplay
       this.srch = [...this.rows];
   }
 
@@ -77,125 +100,3 @@ export class AccountListComponent implements OnInit {
   }
 
 }
-let overtime = [
-  {
-    id: 1,
-    name: "Bernardo Galaviz",
-    otDate: "08-03-2019",
-    otHrs: "04",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 2,
-    name: "John Deo",
-    otDate: "25-04-2019",
-    otHrs: "07",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 3,
-    name: "Russia david",
-    otDate: "12-09-2019",
-    otHrs: "09",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 4,
-    name: "Mark hentry",
-    otDate: "15-10-2019",
-    otHrs: "02",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 5,
-    name: "Ruchared hentry",
-    otDate: "23-04-2019",
-    otHrs: "04",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 6,
-    name: "Mark rio",
-    otDate: "11-07-2019",
-    otHrs: "05",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 7,
-    name: "John Galaviz",
-    otDate: "25-08-2019",
-    otHrs: "08",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 8,
-    name: "Loren Gatlin",
-    otDate: "05-01-2019",
-    otHrs: "5",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 9,
-    name: "Tarah Shropshire",
-    otDate: "05-01-2019",
-    otHrs: "5",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 10,
-    name: "John Doe",
-    otDate: "13-01-2019",
-    otHrs: "5",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 11,
-    name: "John Smith",
-    otDate: "20-01-2019",
-    otHrs: "5",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-  {
-    id: 12,
-    name: "John Smith",
-    otDate: "20-01-2019",
-    otHrs: "5",
-    otType: "Normal day OT 1.5x",
-    status: "New",
-    approvedBy: "Richard Miles",
-    description: "Lorem ipsum dollar",
-  },
-];

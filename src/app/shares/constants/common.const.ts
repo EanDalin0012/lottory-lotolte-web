@@ -14,8 +14,11 @@ export enum LOCAL_STORAGE {
   I18N            = 'i18n',
   LAST_EVENT_TIME = 'lastEventTime',
   LAST_TIME_CHECK_NOTIFICATION = 'theLastTimeCheckNotification',
-  Authorization   = 'Authorization'
+  Authorization   = 'Authorization',
+  AccountTypeCode = 'AccountTypeCode'
 }
+
+
 
 export enum LANGUAGE {
   EN = '01',      // english
@@ -29,3 +32,13 @@ export enum LANGUAGE {
   I18N_JA = 'ja',
   I18N_ZH = 'zh'
 }
+
+export enum AccountTypeCode {
+  Admin = 'adm',
+  Senair = 'seni',
+  Master = 'mast',
+  Agentcy = 'agen',
+  Member = 'memb'
+}
+
+

@@ -20,7 +20,7 @@
   <!-- /Page Header -->
 
   <!-- Overtime Statistics -->
-  <div class="row">
+  <!-- <div class="row">
       <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
           <div class="stats-info">
               <h6>Overtime Employee</h6>
@@ -45,54 +45,36 @@
               <h4>5</h4>
           </div>
       </div>
-  </div>
+  </div> -->
   <!-- /Overtime Statistics -->
 
   <div class="row">
       <div class="col-md-12">
-          <div class="table-responsive">
+          <div class="table-responsive custom-table-select">
               <table datatable [dtOptions]="dtOptions"
                   class="table table-striped custom-table mb-0 datatable">
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>Name</th>
-                          <th>OT Date</th>
-                          <th class="text-center">OT Hours</th>
-                          <th>OT Type</th>
-                          <th>Description</th>
+                          <th>{{'Account.Label.AccountID' | translate}}</th>
+                          <th>{{'Account.Label.AccountName' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.Balance' | translate}}</th>
                           <th class="text-center">Status</th>
-                          <th>Approved by</th>
                           <th class="text-right">Actions</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let item of lstOvertime;let i = index">
-                          <td>{{item.id}}</td>
-                          <td>
-                              <h2 class="table-avatar blue-link">
-                                  <a routerLink="/employees/employeeprofile" class="avatar"><img alt=""
-                                          src="assets/img/profiles/avatar-0{{i+ 1}}.jpg"></a>
-                                  <a routerLink="/employees/employeeprofile">{{item.name}}</a>
-                              </h2>
-                          </td>
-                          <td>{{item.otDate}}</td>
-                          <td class="text-center">{{item.otHrs}}</td>
-                          <td>{{item.otType}}x</td>
-                          <td>{{item.description}}r</td>
+                      <tr *ngFor="let item of accountDisplay;let i = index;">
+                          <td>{{i + 1}}</td>
+                          <td>{{item.accountId}}</td>
+                          <td>{{item.accountName}}</td>
+                          <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
                           <td class="text-center">
                               <div class="action-label">
                                   <a class="btn btn-white btn-sm btn-rounded">
                                       <i class="fa fa-dot-circle-o text-purple"></i>{{item.status || statusValue}}
                                   </a>
                               </div>
-                          </td>
-                          <td>
-                              <h2 class="table-avatar">
-                                  <a routerLink="/employees/employeeprofile" class="avatar avatar-xs"><img
-                                          src="assets/img/profiles/avatar-0{{i+ 1}}.jpg" alt=""></a>
-                                  <a routerLink="/employees/employeeprofile">{{item.approvedBy}}</a>
-                              </h2>
                           </td>
                           <td class="text-right">
                               <div class="dropdown dropdown-action">
@@ -107,6 +89,7 @@
                                   </div>
                               </div>
                           </td>
+
                       </tr>
                   </tbody>
               </table>

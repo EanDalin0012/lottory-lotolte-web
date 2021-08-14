@@ -10,6 +10,7 @@ export class AuthorizationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log();
   }
 
 }

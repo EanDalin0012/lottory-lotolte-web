@@ -8482,3 +8482,33 @@ table.dataTable thead .sorting {
   background-color: #f43b48;
   border-color: #f43b48;
 }
+
+/* .form-control-sm.form-control {
+  height: 30px;
+  border-radius: 0;
+} */
+
+.custom-table-select div div label select {
+  display: inline-block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem 1.75rem .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  vertical-align: middle;
+  background: #fff url('assets/img/select-dr.svg') no-repeat right .75rem center/8px 10px;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+
+div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  margin: 2px 0;
+  white-space: nowrap;
+  justify-content: flex-end;
+}

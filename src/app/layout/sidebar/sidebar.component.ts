@@ -5,6 +5,9 @@ import { UrlComplete } from '../../shares/model/url-complete';
 import { Member } from '../../shares/model/members';
 import { Group } from '../../shares/model/groups';
 import { AccountType } from '../../shares/model/account-type';
+import { AccountTypeCode, LOCAL_STORAGE } from '../../shares/constants/common.const';
+import { DataService } from '../../shares/services/data.service';
+import { Utils } from '../../shares/utils/utils.static';
 
 @Component({
   selector: 'app-sidebar',
@@ -32,9 +35,11 @@ export class SidebarComponent implements OnInit {
     total: []
   };
   groups: Group;
+  accountType ='';
 
   constructor(
     private router: Router,
+    private dataService: DataService
   ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -75,6 +80,21 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.urlComplete.mainUrl = 'acc';
+    this.urlComplete.subUrl = AccountTypeCode.Admin;
+
+    this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
+      let account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+      if (message !== '') {
+        account_type = message;
+      } else {
+        this.accountType = account_type;
+      }
+
+      this.urlComplete.mainUrl = 'acc';
+      this.urlComplete.subUrl = account_type;
+    });
+
     // Slide up and down of menus
     $(document).on("click", "#sidebar-menu a", function (e) {
       e.stopImmediatePropagation();
@@ -91,6 +111,16 @@ export class SidebarComponent implements OnInit {
         $(this).next("ul").slideUp(350);
       }
     });
+
+    this.dataService.visitData.subscribe(message => {
+      if (message !== '') {
+        setTimeout(() => {
+          this.urlComplete.mainUrl = message;
+          this.urlComplete.subUrl = message;
+        });
+      }
+    });
+
   }
 
   setActive(member:any) {
@@ -100,7 +130,9 @@ export class SidebarComponent implements OnInit {
   routerAccount(accountType: AccountType) {
     this.urlComplete.mainUrl = 'acc';
     this.urlComplete.subUrl = accountType.code;
-    console.log(accountType);
+    Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, accountType.code);
+    this.dataService.visitParamRouterChange(accountType.code);
+    this.router.navigate(['/acc/']);
   }
 
 }
@@ -108,31 +140,31 @@ export class SidebarComponent implements OnInit {
 export const accountTypes: AccountType[] = [
   {
     id: 1,
-    code: 'A100',
+    code: AccountTypeCode.Admin,
     name: 'Admin',
     remark: 'A'
   },
   {
     id: 2,
-    code: 'B100',
+    code: AccountTypeCode.Senair,
     name: 'Senair',
     remark: 'A'
   },
   {
     id: 3,
-    code: 'C100',
+    code: AccountTypeCode.Master,
     name: 'Master',
     remark: 'A'
   },
   {
     id: 4,
-    code: 'D100',
+    code: AccountTypeCode.Agentcy,
     name: 'Agent',
     remark: 'A'
   },
   {
     id: 5,
-    code: 'E100',
+    code: AccountTypeCode.Member,
     name: 'Member',
     remark: 'A'
   }
