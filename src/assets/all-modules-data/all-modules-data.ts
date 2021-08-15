@@ -1,5 +1,75 @@
 import { InMemoryDbService } from "angular-in-memory-web-api";
+import { DeviceInfo } from '../../app/shares/model/device-detector';
 
+
+export const deviceInfos: DeviceInfo[] = [
+  {
+    id: 1,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+  {
+    id: 2,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+  {
+    id: 3,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+  {
+    id: 4,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+  {
+    id: 5,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+  {
+    id: 6,
+    browser: "Chrome",
+    browser_version: "92.0.4515.131",
+    device: "Unknown",
+    deviceType: "desktop",
+    orientation: "landscape",
+    os: "Windows",
+    os_version: "windows-10",
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+  },
+];
 export class AllModulesData implements InMemoryDbService {
   createDb() {
     // Apps Module Contacts Database

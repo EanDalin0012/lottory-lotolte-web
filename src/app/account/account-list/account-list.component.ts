@@ -14,6 +14,8 @@ import { AccountDepositComponent } from '../account-deposit/account-deposit.comp
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { AccountPipe } from '../../shares/pipe/account.pipe';
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
+import { Router } from '@angular/router';
+import { StoreUtil } from '../../shares/utils/store';
 declare const $: any;
 @Component({
   selector: 'app-account-list',
@@ -21,6 +23,7 @@ declare const $: any;
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
+  storeUtil = new StoreUtil();
   accounts: Account[] = [];
   @ViewChild(DataTableDirective, { static: false })
   dtElement: any;
@@ -41,14 +44,18 @@ export class AccountListComponent implements OnInit {
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
+    private router: Router
   ) {
 
     this.titleService.setTitle('Account-Admin');
     this.dtElement as DataTableDirective;
     this.dtOptions = {
       // ... skipped ...
-      pageLength: 10,
+      // pageLength: 10,
       dom: "lrtip",
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      processing: true
     };
   }
 
@@ -60,7 +67,6 @@ export class AccountListComponent implements OnInit {
         this.accountType = message;
         this.inquiry('ngOnInit');
       } else {
-
         const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
         console.log('account_type', account_type);
         this.accountType = account_type;
@@ -68,13 +74,6 @@ export class AccountListComponent implements OnInit {
     });
 
     this.inquiry('ngOnInit');
-    this.dtOptions = {
-      // ... skipped ...
-      pageLength: 10,
-      dom: "lrtip",
-    };
-
-
   }
 
   inquiry(note: string){
@@ -128,6 +127,11 @@ export class AccountListComponent implements OnInit {
 
       }
     });
+  }
+
+  details(item: any) {
+    Utils.setSecureStorage('toDetailsAccountInfo', item);
+    this.router.navigate(['/acc/details']);
   }
 
 }

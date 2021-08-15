@@ -1,7 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { InputsModule } from '@progress/kendo-angular-inputs';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import 'hammerjs';
@@ -23,13 +21,13 @@ import { UploadModule } from '@progress/kendo-angular-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '../component/modal/modal.component';
-import { AgGridModule } from 'ag-grid-angular';
-import { DataTablesModule } from 'angular-datatables';
 import { AccountPipe } from '../pipe/account.pipe';
+import { AccountStatusPipe } from '../pipe/account-status.pipe';
 @NgModule({
   declarations: [
     ModalComponent,
-    AccountPipe
+    AccountPipe,
+    AccountStatusPipe
   ],
   imports: [
     // InputsModule,
@@ -73,7 +71,9 @@ import { AccountPipe } from '../pipe/account.pipe';
     SortableModule,
     TooltipModule,
     UploadModule,
-    AccountPipe
+    // pipe
+    AccountPipe,
+    AccountStatusPipe
   ],
   entryComponents: [
     ModalComponent,

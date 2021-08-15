@@ -13,8 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { DataTablesModule } from 'angular-datatables';
-import { AccountPipe } from './shares/pipe/account.pipe';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { Utils } from './shares/utils/utils.static';
+import { LOCAL_STORAGE } from './shares/constants/common.const';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,4 +50,8 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private deviceService: DeviceDetectorService) {
+    Utils.setSecureStorage(LOCAL_STORAGE.DEVICE_INFO, this.deviceService.getDeviceInfo());
+  }
+ }

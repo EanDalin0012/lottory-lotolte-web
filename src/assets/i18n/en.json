@@ -8,7 +8,13 @@
       "Add_New": "Add New",
       "Register": "Register",
       "Remark":"Remark",
-      "Amount":"Amount"
+      "Amount":"Amount",
+      "WithDrawal": {
+        "fromAccount":"From Account"
+      },
+      "Deposit": {
+        "toAccount":"To Account"
+      }
     },
     "Button": {
       "Back": "Back",
@@ -55,6 +61,19 @@
     },
     "Holder": {
 
+    }
+  },
+  "AccountDetail": {
+    "DeviceInfo":{
+      "ID":"ID",
+      "userAgent":"User Agent",
+      "os":"OS",
+      "browser":"Browser",
+      "device":"Device",
+      "osVersion":"OS Version",
+      "browserVersion":"Browser Version",
+      "deviceType":"Device Type",
+      "orientation":"Orientation"
     }
   }
 }
