@@ -76,16 +76,31 @@
                                   </a>
                               </div>
                           </td>
-                          <td class="text-right">
+                          <td class="text-right" style="width: 100px;">
                               <div class="dropdown dropdown-action">
-                                  <a class="action-icon dropdown-toggle" data-toggle="dropdown"
-                                      aria-expanded="false"><i class="material-icons">more_vert</i></a>
+                                  <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                  </a>
                                   <div class="dropdown-menu dropdown-menu-right">
-                                      <a class="dropdown-item" data-toggle="modal" data-target="#edit_overtime"
-                                          (click)="edit(item.id)"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                      <a class="dropdown-item" data-toggle="modal" data-target="#delete_overtime"
-                                          (click)="tempId = item.id"><i class="fa fa-trash-o m-r-5"></i>
-                                          Delete</a>
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="edit(item.id)">
+                                        <i class="fa fa-pencil m-r-5"></i>
+                                        Edit
+                                      </a>
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="deposit(item)">
+                                        <i class="fa fa-pencil m-r-5"></i>
+                                        Deposit
+                                      </a>
+
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="edit(item.id)">
+                                        <i class="fa fa-pencil m-r-5"></i>
+                                        Withdrawal
+                                      </a>
+
+
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="tempId = item.id">
+                                        <i class="fa fa-trash-o m-r-5"></i>
+                                          Delete
+                                      </a>
                                   </div>
                               </div>
                           </td>

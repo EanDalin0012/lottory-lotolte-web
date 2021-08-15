@@ -41,4 +41,12 @@ export enum AccountTypeCode {
   Member = 'memb'
 }
 
+export enum BTN_ROLES {
+  CLOSE     = 'CLOSE',
+  EDIT      = 'EDIT',
+  SAVE      = 'SAVE',
+  DELETE    = 'DELETE',
+  ACTIVE    = 'ACTIVE'
+
+}
 

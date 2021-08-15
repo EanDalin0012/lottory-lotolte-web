@@ -4,15 +4,13 @@ import { ModalService } from '../../shares/services/modal.service';
 import { DataService } from '../../shares/services/data.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { ToastrService } from "ngx-toastr";
-import { AllModulesService } from '../../shares/all-modules.service';
 import { accountDatas } from './account-data';
 import { Account } from 'src/app/shares/model/account';
-import { ActivatedRoute, NavigationStart, Router, NavigationEnd, NavigationError, Event } from '@angular/router';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
+import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
 declare const $: any;
 @Component({
   selector: 'app-account-list',
@@ -97,6 +95,16 @@ export class AccountListComponent implements OnInit {
 
   edit(value:any) {
 
+  }
+
+  deposit(value:any) {
+    this.modalService.open(
+      AccountDepositComponent,
+      {
+      callback: _response => {
+
+      }
+    });
   }
 
 }

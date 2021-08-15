@@ -85,6 +85,7 @@ export class SidebarComponent implements OnInit {
 
     this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
       let account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+      console.log('this.account_type', account_type);
       if (message !== '') {
         account_type = message;
       } else {
@@ -93,6 +94,7 @@ export class SidebarComponent implements OnInit {
 
       this.urlComplete.mainUrl = 'acc';
       this.urlComplete.subUrl = account_type;
+      console.log('this.urlComplete', this.urlComplete);
     });
 
     // Slide up and down of menus
@@ -112,14 +114,14 @@ export class SidebarComponent implements OnInit {
       }
     });
 
-    this.dataService.visitData.subscribe(message => {
-      if (message !== '') {
-        setTimeout(() => {
-          this.urlComplete.mainUrl = message;
-          this.urlComplete.subUrl = message;
-        });
-      }
-    });
+    // this.dataService.visitData.subscribe(message => {
+    //   if (message !== '') {
+    //     setTimeout(() => {
+    //       this.urlComplete.mainUrl = message;
+    //       this.urlComplete.subUrl = message;
+    //     });
+    //   }
+    // });
 
   }
 

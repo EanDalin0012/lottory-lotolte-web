@@ -8493,7 +8493,7 @@ table.dataTable thead .sorting {
   width: 100%;
   height: calc(1.5em + .75rem + 2px);
   padding: .375rem 1.75rem .375rem .75rem;
-  font-size: 1rem;
+  font-size: 1.50rem;
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
@@ -8511,4 +8511,616 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   margin: 2px 0;
   white-space: nowrap;
   justify-content: flex-end;
+}
+
+
+.contentsWrap {
+  max-height: 85vh;
+  overflow-y: scroll;
+  padding: 1px 15px 15px 15px;
+}
+
+.contentsWrap .contentsWrap {
+  padding: 0;
+}
+
+.contentsWrap::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+.contentsWrap::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+.contentsWrap01 {
+  overflow-y: unset !important;
+}
+
+.frameWrap>.hide+.container01 {
+  margin-top: 0;
+}
+
+.container01 {
+  margin: 10px 0;
+  padding: 25px 24px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px rgba(197, 197, 197, .45);
+}
+
+.container01 .tab01 {
+  max-width: 1204px;
+  margin: 0 auto 20px;
+}
+
+
+.container01 .contset_box {
+  margin: 0 -24px 8px;
+}
+
+.container01 .contset_box:first-child {
+  margin-top: -25px;
+  border-radius: 4px 4px 0 0;
+}
+.container01 {
+  padding: 10px 24px;
+}
+
+.web_container {
+  margin-top: 30px;
+}
+
+.contentsWrap .loading {
+  z-index: 150;
+}
+
+body>.loading {
+  position: fixed;
+}
+
+
+kendo-dialog:focus {
+  outline: -webkit-focus-ring-color auto 0px !important;
+}
+
+.web_container {
+  margin-top: 30px;
+
+}
+
+.addAlertCender div:nth-child(2) {
+  margin: auto;
+  width: auto;
+}
+
+.addAlertCender div kendo-dialog-actions button.k-button {
+  display: inline-block !important;
+  min-height: 40px !important;
+  padding: 8px 20px !important;
+  font-weight: 500 !important;
+  font-size: .9375rem !important;
+  color: #fff !important;
+  background: #2e210e !important;
+  border-radius: 50px !important;
+  border: none !important;
+  float: right !important;
+}
+
+
+.addAlertCender div kendo-dialog-actions button.k-button {
+  display: inline-block !important;
+  min-height: 40px !important;
+  padding: 8px 20px !important;
+  font-weight: 500 !important;
+  font-size: .9375rem !important;
+  color: #000 !important;
+  background: #ffffff !important;
+  border-radius: 50px !important;
+  border: none !important;
+  float: right !important;
+  border: 1px solid #0077ffd4 !important;
+  /* box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important; */
+}
+
+.k-dialog .k-dialog-buttongroup {
+  padding: 15px 0px 26px 85px !important;
+}
+
+.pop-confirm-btn>div kendo-dialog-actions>button:nth-child(2) {
+  border: 1px solid #0077ffd4 !important;
+  font-weight: bolder;
+  box-shadow: 0 0px 0px rgb(0 0 0 / 28%) !important;
+  background-color: #ffffff00 !important;
+  color: #000000 !important;
+}
+
+.pop-confirm-btn>div kendo-dialog-actions>button:nth-child(1) {
+  border: 1px solid red !important;
+  color: red !important;
+  box-shadow: 0 0px 0px rgb(0 0 0 / 28%) !important;
+}
+
+kendo-dialog {
+  overflow: hidden !important;
+}
+
+.open-alert div kendo-dialog-actions button.k-button {
+  background: url('assets/img/check-circle-solid.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: 25% !important;
+  background-position-x: 5px !important;
+  background-position-y: 5px !important;
+  height: 35px !important;
+  width: 100px !important;
+  border-color: currentColor !important;
+  color: #212529 !important;
+  font-family: 'El Messiri', 'Khmer', sans-serif !important;
+  border-radius: 0.25rem !important;
+  text-align: right !important;
+}
+
+.open-alert div kendo-dialog-actions button.k-button:hover {
+  background-image: url('assets/img/check-circle-solid.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: 25% !important;
+  background-color: #c1c7d0 !important;
+  color: #030303!important;
+  text-align: right !important;
+}
+
+
+
+.pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2) {
+  background: url('assets/img/check-circle-solid.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: 22% !important;
+  background-position-x: 8px !important;
+  background-position-y: 5px !important;
+  height: 35px !important;
+  width: 100px !important;
+  border-color: currentColor !important;
+  color: #212529 !important;
+  font-family: 'El Messiri', 'Khmer', sans-serif !important;
+  border-radius: 0.25rem !important;
+  text-align: right !important;
+  font-size: 1rem !important;
+}
+
+.pop-dialog-confirm div kendo-dialog-actions button.k-button:nth-child(2):hover {
+  /* background-image: url('assets/images/check-circle-solid.svg') !important;
+  background-repeat: no-repeat !important; */
+  /* background-size: 25% !important; */
+  background-color: #c1c7d0 !important;
+  color: #030303!important;
+  text-align: right !important;
+}
+
+
+.pop-dialog-close div kendo-dialog-actions button.k-button:nth-child(1) {
+  background: url('assets/img/close-solid.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: 17% !important;
+  background-position-x: 10px !important;
+  background-position-y: 7px !important;
+  height: 35px !important;
+  width: 100px !important;
+  border-color: currentColor !important;
+  color: #212529 !important;
+  font-family: 'El Messiri', 'Khmer', sans-serif !important;
+  border-radius: 0.25rem !important;
+  text-align: right !important;
+  min-width: 95px;
+  box-sizing: border-box;
+  border-width: 1px !important;
+  border-style: solid !important;
+  font-size: 1rem !important;
+  line-height: 1.5;
+  padding: 9px 20px;
+}
+
+.pop-dialog-close div kendo-dialog-actions button.k-button:nth-child(1):hover {
+  /* background-image: url('assets/images/close-solid.svg') !important;
+  background-repeat: no-repeat !important;
+  background-size: 17% !important; */
+  background-color: #c1c7d0 !important;
+  color: #030303!important;
+  text-align: right !important;
+}
+
+
+.pop_header {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  padding: 10px 50px 10px 25px;
+  color: #fff;
+  background: #222d32;
+}
+
+.pop_header h1 {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 30px;
+  letter-spacing: normal;
+}
+
+.pop_header .btn_popclose {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 66px;
+  height: 100%;
+  text-indent: -999em;
+}
+
+
+.pop_header.w {
+  color: #7a6d5c;
+  background: #fff;
+  border-bottom: 1px solid #d7d3ce;
+}
+
+.pop_header.w .btn_popclose {
+  background: url("assets/img/btn_popclose02.png") no-repeat center center;
+}
+.pop_header {
+  z-index: 99;
+}
+
+
+.btn_popclose {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 66px;
+  height: 100%;
+  text-indent: -999em;
+  background: url("assets/img/btn_popclose.png") no-repeat center center;
+  border: none;
+}
+
+kendo-dialog div.k-dialog {
+  width: 90%;
+}
+
+div.in_box button {
+  display: none;
+}
+
+.in_box .btn_del {
+  position: absolute;
+  display: block;
+  right: 20px;
+  top: 32px;
+  width: 25px;
+  height: 25px;
+  text-indent: -999em;
+  background: url("assets/img/btn_close.png") no-repeat center center;
+  background-size: 12px;
+}
+
+
+.web_container+.c_btn {
+  padding-top: 24px;
+  border-top: 1px solid #e4e2de;
+}
+
+.c_btn {
+  margin: 24px 0;
+  text-align: center;
+  overflow: hidden;
+  width: 100%;
+}
+
+.pop_header h1 {
+  font-size: 2.0625rem;
+}
+
+body {
+  font-size: 1.50rem;
+}
+
+.k-window {
+  font-size: 1.50rem;
+}
+
+.c_btn button, .c_btn a {
+  margin: 0 5px;
+}
+.btn-w100px-h35px {
+  height: 35px;
+  width: 100px;
+}
+.margin-left-5px {
+  margin-left: 5px;
+}
+.margin-top-5px {
+  margin-top: 5px;
+}
+.k-button{
+  font-size: 1.50rem;
+}
+.margin-top-1px {
+  margin-top: 1px;
+}
+.font-size-20px {
+  font-size: 20px;
+}
+
+.font-weigh-700{
+  font-weight: 700;
+}
+
+
+
+input[type=text],
+input[type=password],
+input[type=number],
+input[type=tel],
+input[type=rang],
+input[type=email],
+input[type=url],
+input[type=date],
+input[type=datetime],
+input[type=month],
+input[type=tel],
+input[type=search],
+input[type=color],
+input[type=file],
+.k-textbox {
+    background-color: rgb(232, 240, 254);
+    /* background:#eff2f5; */
+    display: inline-block;
+    /* height: 40px; */
+    margin: 0;
+    padding: 3px 12px;
+    font-weight: normal;
+    font-size: 1.50rem;
+    font-family: 'Noto Sans', 'Noto Sans Khmer', 'Verdana', 'Geneva', 'Tahoma', 'sans-serif';
+    color: #000;
+    vertical-align: middle;
+    border: none;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+}
+
+
+input[type=checkbox]:not(.k-checkbox),
+input[type=radio]:not(.k-radio) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0;
+    vertical-align: middle;
+    font-size: 1em;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+}
+
+
+input[type=checkbox].chk_style+* {
+  color: rgba(0, 0, 0, .4);
+}
+
+input[type=checkbox]+span,
+input[type=radio]+span {
+  cursor: pointer;
+  opacity: .7;
+}
+
+
+input[type=checkbox]+span:before,
+input[type=radio]+*:before {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+input[type=checkbox],
+.checkbox01 {
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+
+input[type=checkbox]:checked,
+input[type=checkbox]:checked+*:before {
+    background-position: left bottom;
+}
+
+input[type=radio] {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+    vertical-align: middle;
+    /* background: url("assets/images/radio_off.png") no-repeat left center; */
+}
+
+input:checked+span {
+    opacity: 1;
+}
+
+input[type=checkbox]:only-child,
+input[type=radio]:only-child {
+    position: static;
+    margin: 0;
+    opacity: 1;
+}
+
+input[type=file] {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+input[type=text]:only-child,
+input[type=password]:only-child,
+input[type=search]:only-child,
+input[type=number]:only-child,
+input[type=email]:only-child,
+input[type=tel]:only-child,
+.k-textbox:only-child {
+    max-width: 100%;
+    width: 100%;
+    border-bottom: 2px solid #3f496d;
+}
+
+
+input::-ms-input-placeholder,
+input::-moz-placeholder {
+    font-weight: normal;
+    opacity: .5;
+}
+input::placeholder {
+  font-weight: normal;
+  opacity: .5;
+  font-family: 'El Messiri',  'Khmer', sans-serif !important;
+}
+
+input::placeholder {
+    font-weight: normal;
+    opacity: .5;
+    font-size: 1.50rem;
+
+}
+
+input::-webkit-input-placeholder {
+    font-weight: normal;
+    opacity: .5;
+}
+
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.2);
+}
+
+input:focus:not([type=checkbox]):not([type=radio]),
+textarea:focus,
+.k-textbox:focus select:focus {
+    padding: 3px 10px;
+    border-bottom: 2px solid #3f496d;
+}
+
+input[readonly=readonly]:not([type=checkbox]):not([type=radio]) {
+    color: #000;
+    background: #d5d2ce;
+}
+
+input[readonly=readonly]:focus:not([type=checkbox]):not([type=radio]) {
+    padding: 5px 12px;
+    border: none;
+}
+
+input:disabled {
+    color: #cdcdcd;
+    background: #f1f1f1;
+}
+
+input.num {
+    text-align: right;
+}
+
+input.inp_error {
+    color: #f14874 !important;
+    border-color: #f14874 !important;
+}
+
+
+label.txt_hide input+* {
+  display: inline-block;
+  width: 24px;
+  text-align: left;
+  text-indent: -999em;
+}
+
+label.txt_hide input+*:before {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+
+textarea::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder,
+textarea::-ms-input-placeholder {
+    color: #898989;
+}
+
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+.lang_list label input {
+  position: absolute;
+  opacity: 0;
+}
+
+.lang_list label input+* {
+  opacity: 1;
+}
+
+.lang_list label input+*:before {
+  display: none;
+}
+
+.contset_box label input+* {
+  opacity: 1;
+}
+
+.contset_box .k-dropdown-wrap>.k-input {
+  padding-left: 0;
+  font-size: 1rem;
+}
+
+
+.form-control {
+  height: 34px !important;
+}
+
+.form-control:focus {
+  border-color: #3c8dbc;
+  box-shadow: none;
+  background-color: rgb(232, 240, 254);
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.disable-01 {
+  background-color: #000 !important;
+  color: white !important;
+}
+
+.k-dropdown, .k-dropdowntree {
+  width: 100%;
+  height: 34px;
 }

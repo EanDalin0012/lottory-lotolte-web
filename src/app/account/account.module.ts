@@ -9,6 +9,8 @@ import { AccountRoutingModule } from './account-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { DataTablesModule } from 'angular-datatables';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
+import { AccountDepositComponent } from './account-deposit/account-deposit.component';
+import { AccountWithdrawalComponent } from './account-withdrawal/account-withdrawal.component';
 
 
 
@@ -18,7 +20,9 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
     AccountListComponent,
     AddAccountComponent,
     EditAccountComponent,
-    AccountProfileComponent
+    AccountProfileComponent,
+    AccountDepositComponent,
+    AccountWithdrawalComponent
   ],
   imports: [
     CommonModule,
