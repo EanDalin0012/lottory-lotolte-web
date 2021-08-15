@@ -4,6 +4,8 @@ import { Account } from 'src/app/shares/model/account';
 import { BTN_ROLES, LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { accountDatas } from '../account-list/account-data';
 import { Utils } from '../../shares/utils/utils.static';
+import { TranslateService } from '@ngx-translate/core';
+import { PipeUtils } from '../../shares/utils/pipe-utils';
 
 @Component({
   selector: 'app-account-deposit',
@@ -19,6 +21,10 @@ export class AccountDepositComponent implements OnInit {
   currenctAccount: string = '000-000-001';
   currenctAccountName: string = 'Ean Dalin';
   amount: number = 0.00;
+  toAccountId: string = '';
+  toAccountName: string = '';
+
+  displayToAccount: string = '';
 
   defaultAccount = {
     id: 0, accountId: '', accountName: 'Select Account', currency: '', accountType: '', status: '', accountBalace: 0
@@ -31,12 +37,18 @@ export class AccountDepositComponent implements OnInit {
   account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalace: 0};
   accountDisplay:Account[] = [];
 
-  constructor() { }
+  constructor(
+    private translateService: TranslateService
+  ) { }
 
   ngOnInit(): void {
-    console.log();
+    if(this.modal.message) {
+      this.toAccountId = this.modal.message.accountId;
+      this.toAccountName = this.modal.message.accountName;
+      this.displayToAccount = this.translateService.instant('Deposit.Label.DisplayToAccount', {accountID: PipeUtils.account(this.toAccountId), accountName: this.toAccountName});
+
+    }
     const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
-    console.log('account_type', account_type);
     const accountType = account_type;
 
     this.accounts = accountDatas;

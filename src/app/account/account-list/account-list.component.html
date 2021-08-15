@@ -5,15 +5,22 @@
   <div class="page-header">
       <div class="row align-items-center">
           <div class="col">
-              <h3 class="page-title">Overtime</h3>
+              <h3 class="page-title">Account</h3>
               <ul class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                  <li class="breadcrumb-item active">Overtime</li>
+                  <li class="breadcrumb-item active">Account</li>
               </ul>
           </div>
-          <div class="col-auto float-right ml-auto">
-              <a class="btn add-btn" data-toggle="modal" data-target="#add_overtime"><i class="fa fa-plus"></i> Add
-                  Overtime</a>
+          <div class="col-auto float-right ml-auto" style="margin-right: 10px;" (click)="newAccount()">
+            <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 150px;">
+              <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
+              <span class="font-weigh-700 margin-left-5px">New Account</span>
+            </button>
+
+              <!-- <a class="btn add-btn" data-toggle="modal" data-target="#add_overtime">
+                <i class="fa fa-plus"></i>
+                Add Overtime
+              </a> -->
           </div>
       </div>
   </div>
@@ -66,7 +73,7 @@
                   <tbody>
                       <tr *ngFor="let item of accountDisplay;let i = index;">
                           <td>{{i + 1}}</td>
-                          <td>{{item.accountId}}</td>
+                          <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
                           <td class="text-center">
@@ -91,9 +98,14 @@
                                         Deposit
                                       </a>
 
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="edit(item.id)">
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="withdrawal(item)">
                                         <i class="fa fa-pencil m-r-5"></i>
                                         Withdrawal
+                                      </a>
+
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="tempId = item.id">
+                                        <i class="fa fa-trash-o m-r-5"></i>
+                                        Details
                                       </a>
 
 
@@ -101,6 +113,7 @@
                                         <i class="fa fa-trash-o m-r-5"></i>
                                           Delete
                                       </a>
+
                                   </div>
                               </div>
                           </td>

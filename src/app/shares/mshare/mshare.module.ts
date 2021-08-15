@@ -25,9 +25,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '../component/modal/modal.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { DataTablesModule } from 'angular-datatables';
+import { AccountPipe } from '../pipe/account.pipe';
 @NgModule({
   declarations: [
-    ModalComponent
+    ModalComponent,
+    AccountPipe
   ],
   imports: [
     // InputsModule,
@@ -70,7 +72,8 @@ import { DataTablesModule } from 'angular-datatables';
     ScrollViewModule,
     SortableModule,
     TooltipModule,
-    UploadModule
+    UploadModule,
+    AccountPipe
   ],
   entryComponents: [
     ModalComponent,

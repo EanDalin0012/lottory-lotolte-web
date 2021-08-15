@@ -11,6 +11,9 @@ import { Account } from 'src/app/shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
+import { AddAccountComponent } from '../add-account/add-account.component';
+import { AccountPipe } from '../../shares/pipe/account.pipe';
+import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 declare const $: any;
 @Component({
   selector: 'app-account-list',
@@ -38,8 +41,6 @@ export class AccountListComponent implements OnInit {
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
-    private formBuilder: FormBuilder,
-    // private toastr: ToastrService,
   ) {
 
     this.titleService.setTitle('Account-Admin');
@@ -100,6 +101,28 @@ export class AccountListComponent implements OnInit {
   deposit(value:any) {
     this.modalService.open(
       AccountDepositComponent,
+      {
+        message: value,
+        callback: _response => {
+
+      }
+    });
+  }
+
+  withdrawal(value:any) {
+    this.modalService.open(
+      AccountWithdrawalComponent,
+      {
+        message: value,
+        callback: _response => {
+
+      }
+    });
+  }
+
+  newAccount() {
+    this.modalService.open(
+      AddAccountComponent,
       {
       callback: _response => {
 

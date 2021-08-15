@@ -1,1 +1,88 @@
-<p>add-account works!</p>
+<div class="contentsWrap">
+  <div class="container01" style="margin-top: 35px;">
+      <div class="web_container">
+          <!-- header -->
+          <div class="pop_header">
+              <h1>Deposit Money</h1>
+              <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
+          </div>
+          <!-- //header -->
+          <div class="web_Wrap">
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">Your Currenct Account</label>
+                  <input disabled  type="text" [ngClass]="currenctAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
+
+                  <!-- <div class="in_box">
+                      <button type="button" [ngClass]="currenctAccount? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div> -->
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">Your Currenct Account Name</label>
+                  <input disabled type="text" [ngClass]="currenctAccountName? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccountName" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
+
+                  <!-- <div class="in_box">
+                      <button type="button" [ngClass]="currenctAccountName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div> -->
+
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label class="font-khmer-cursive">To Account</label>
+                <kendo-dropdownlist [data]="accounts" [filterable]="true" [textField]="'accountName'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="account" [ngModelOptions]="{standalone:
+                  true}" [defaultItem]="defaultAccount">
+                      <ng-template kendoDropDownListValueTemplate let-dataItem>
+                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
+                      </ng-template>
+                      <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
+                      </ng-template>
+                </kendo-dropdownlist>
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">Amount</label>
+                  <input type="text" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
+
+                  <!-- <div class="in_box">
+                      <button type="button" [ngClass]="currenctAccountName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div> -->
+
+              </div>
+            </div>
+
+              <div class="form-row">
+                  <div class="form-group col-md-12">
+                      <label>Remark</label>
+                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
+
+                      <div class="in_box">
+                          <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      </div>
+
+                  </div>
+              </div>
+
+
+          </div>
+
+      </div>
+
+
+      <div class="c_btn">
+
+          <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+              <span class="k-icon k-i-close-circle k-i-x-circle margin-top-1px font-size-20px"></span>
+              <span class="font-weigh-700 margin-left-5px">Close</span>
+          </button>
+
+          <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+              <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+              <span class="font-weigh-700 margin-left-5px">Save</span>
+          </button>
+
+      </div>
+  </div>
+</div>

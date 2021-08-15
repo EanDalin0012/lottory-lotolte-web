@@ -6,7 +6,9 @@
       "No": "No",
       "Items": "{{value}} Item(s)",
       "Add_New": "Add New",
-      "Register": "Register"
+      "Register": "Register",
+      "Remark":"Remark",
+      "Amount":"Amount"
     },
     "Button": {
       "Back": "Back",
@@ -31,6 +33,10 @@
       "Next":"Next",
       "Previous":"Previous",
       "Action":"Action"
+    },
+    "Holder": {
+      "EnterRemark": "Enter remark",
+      "EnterAmount": "Enter amount"
     }
   },
   "Account": {
@@ -39,6 +45,16 @@
       "AccountID": "Account ID",
       "AccountName":"Account Name",
       "Balance":"Balance"
+    }
+  },
+  "Deposit": {
+    "Label": {
+      "YourCurrenctAccount":"Your currenct account",
+      "AccountName":"Account Name",
+      "DisplayToAccount":"Account ID: {{accountID}} , Account Name: {{accountName}}"
+    },
+    "Holder": {
+
     }
   }
 }

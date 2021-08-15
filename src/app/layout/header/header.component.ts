@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   };
   notifications: any;
   messagesData: MessagesData[] = [];
+  flags = 'assets/img/flags/us.png';
 
   constructor(
     private translate: TranslateService,
@@ -123,6 +124,13 @@ export class HeaderComponent implements OnInit {
 
   onChangeLanguage(code: string) {
     this.langCode = code;
+    if(code == 'en') {
+      this.flags = 'assets/img/flags/us.png';
+    } else if (code == 'kh') {
+      this.flags = 'assets/img/flags/kh.png';
+    } else if (code == 'ch') {
+      this.flags = 'assets/img/flags/cn.png';
+    }
     console.log(this.langCode, localStorage.I18N, code);
     Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
     this.translate.use( this.langCode );

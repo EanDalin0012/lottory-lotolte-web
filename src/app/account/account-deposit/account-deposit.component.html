@@ -32,31 +32,23 @@
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label class="font-khmer-cursive">To Account</label>
-                <kendo-dropdownlist [data]="accounts" [filterable]="true" [textField]="'accountName'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="account" [ngModelOptions]="{standalone:
-                  true}" [defaultItem]="defaultAccount">
-                      <ng-template kendoDropDownListValueTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                      </ng-template>
-                      <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                      </ng-template>
-                </kendo-dropdownlist>
+                <input disabled type="text" [ngClass]="displayToAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="displayToAccount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
               </div>
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">Amount</label>
-                  <input type="text" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
+                  <input type="text" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'Common.Holder.EnterAmount' | translate}}">
 
-                  <!-- <div class="in_box">
-                      <button type="button" [ngClass]="currenctAccountName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div> -->
+                  <div class="in_box">
+                      <button type="button" [ngClass]="amount? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div>
 
               </div>
             </div>
 
               <div class="form-row">
                   <div class="form-group col-md-12">
-                      <label>Name</label>
-                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'RegiCateAdd.Holder.Enter_Category_Name' | translate}}">
+                      <label>{{'Common.Label.Remark' | translate}}</label>
+                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
 
                       <div class="in_box">
                           <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -65,16 +57,6 @@
                   </div>
               </div>
 
-              <div class="form-row">
-                  <div class="form-group form-group-last col-md-12">
-                      <label>Description</label>
-                      <input type="text" [ngClass]="description? 'active-input' : ''" [(ngModel)]="description" placeholder="{{'RegiCateAdd.Holder.Enter_Description' | translate}}" class="form-control">
-                      <div class="in_box">
-                          <button type="button" [ngClass]="description? 'btn_del' : ''" (click)="onClickBtndescription()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1><span>Delete text</span></button>
-                      </div>
-
-                  </div>
-              </div>
 
           </div>
 

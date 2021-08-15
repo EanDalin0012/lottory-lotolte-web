@@ -11,6 +11,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { AccountDepositComponent } from './account-deposit/account-deposit.component';
 import { AccountWithdrawalComponent } from './account-withdrawal/account-withdrawal.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 
 
@@ -22,7 +23,8 @@ import { AccountWithdrawalComponent } from './account-withdrawal/account-withdra
     EditAccountComponent,
     AccountProfileComponent,
     AccountDepositComponent,
-    AccountWithdrawalComponent
+    AccountWithdrawalComponent,
+    AccountDetailsComponent
   ],
   imports: [
     CommonModule,
