@@ -6,6 +6,7 @@ import { accountDatas } from '../account-list/account-data';
 import { Utils } from '../../shares/utils/utils.static';
 import { TranslateService } from '@ngx-translate/core';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
+import { ModalService } from '../../shares/services/modal.service';
 
 @Component({
   selector: 'app-account-deposit',
@@ -38,7 +39,8 @@ export class AccountDepositComponent implements OnInit {
   accountDisplay:Account[] = [];
 
   constructor(
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private modalService: ModalService,
   ) { }
 
   ngOnInit(): void {
@@ -86,4 +88,12 @@ export class AccountDepositComponent implements OnInit {
     this.description = '';
   }
 
+  alertMessage() {
+    this.modalService.alert(
+      'Hello',
+      {
+        modalClass: 'message-alert kendo-dialog-actions-with-95px open-alert'
+      }
+    );
+  }
 }

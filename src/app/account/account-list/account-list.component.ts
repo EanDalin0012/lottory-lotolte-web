@@ -4,7 +4,6 @@ import { ModalService } from '../../shares/services/modal.service';
 import { DataService } from '../../shares/services/data.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { accountDatas } from './account-data';
 import { Account } from 'src/app/shares/model/account';
@@ -12,7 +11,6 @@ import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
-import { AccountPipe } from '../../shares/pipe/account.pipe';
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { Router } from '@angular/router';
 import { StoreUtil } from '../../shares/utils/store';
@@ -61,24 +59,17 @@ export class AccountListComponent implements OnInit {
 
   ngOnInit(): void {
     const url = (window.location.href).split('/');
-    this.dataService.visitMessage(url[5]);
+    this.dataService.visitParamRouterChange(url[3]);
     this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
-      if (message !== '') {
-        this.accountType = message;
-        this.inquiry('ngOnInit');
-      } else {
-        const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
-        console.log('account_type', account_type);
-        this.accountType = account_type;
-      }
+      const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+      this.accountType = account_type;
+      this.inquiry();
     });
 
-    this.inquiry('ngOnInit');
+    this.inquiry();
   }
 
-  inquiry(note: string){
-    console.log(note);
-
+  inquiry(){
       this.accounts = accountDatas;
       this.accountDisplay = [];
       this.accounts.forEach(element => {
@@ -86,8 +77,6 @@ export class AccountListComponent implements OnInit {
           this.accountDisplay.push(element);
         }
       });
-      console.log(this.accountDisplay, this.accountDisplay.length);
-
       this.dtTrigger.next();
       this.rows = this.accountDisplay
       this.srch = [...this.rows];

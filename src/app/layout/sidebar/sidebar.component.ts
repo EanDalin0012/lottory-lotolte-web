@@ -41,28 +41,28 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private dataService: DataService
   ) {
-    this.router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationEnd) {
-        $(".main-wrapper").removeClass('slide-nav');
-        $(".sidebar-overlay").removeClass('opened');
-        const url = event.url.split("/");
-        this.urlComplete.mainUrl = url[1];
-        this.urlComplete.subUrl = url[2];
-        this.urlComplete.childUrl = url[3];
-        if (url[1] === "") {
-          this.urlComplete.mainUrl = "dashboard";
-          this.urlComplete.subUrl = "admin";
-        }
+    // this.router.events.subscribe((event: Event) => {
+    //   if (event instanceof NavigationEnd) {
+    //     $(".main-wrapper").removeClass('slide-nav');
+    //     $(".sidebar-overlay").removeClass('opened');
+    //     const url = event.url.split("/");
+    //     this.urlComplete.mainUrl = url[1];
+    //     this.urlComplete.subUrl = url[2];
+    //     this.urlComplete.childUrl = url[3];
+    //     if (url[1] === "") {
+    //       this.urlComplete.mainUrl = "dashboard";
+    //       this.urlComplete.subUrl = "admin";
+    //     }
 
-        if (url[2] === "chat" || url[2] === "calls") {
-          this.sidebarMenus.chat = true;
-          this.sidebarMenus.default = false;
-        } else {
-          this.sidebarMenus.chat = false;
-          this.sidebarMenus.default = true;
-        }
-      }
-    });
+    //     if (url[2] === "chat" || url[2] === "calls") {
+    //       this.sidebarMenus.chat = true;
+    //       this.sidebarMenus.default = false;
+    //     } else {
+    //       this.sidebarMenus.chat = false;
+    //       this.sidebarMenus.default = true;
+    //     }
+    //   }
+    // });
 
     this.groups = {
       active: "",
@@ -85,15 +85,31 @@ export class SidebarComponent implements OnInit {
 
     this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
       let account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+      let msg = '';
       console.log('this.account_type', account_type);
+      console.log('message', message);
       if (message !== '') {
-        account_type = message;
+        msg = message;
       } else {
         this.accountType = account_type;
+        msg = account_type;
+      }
+      switch (msg) {
+        case 'profile':
+          this.urlComplete.mainUrl = 'acc'+message;
+          this.urlComplete.subUrl = message;
+          break;
+        case 'acc':
+          this.urlComplete.mainUrl = 'acc';
+          this.urlComplete.subUrl = account_type;
+          break;
+        default:
+          this.urlComplete.mainUrl = '';
+          this.urlComplete.subUrl = account_type;
+          break;
       }
 
-      this.urlComplete.mainUrl = 'acc';
-      this.urlComplete.subUrl = account_type;
+
       console.log('this.urlComplete', this.urlComplete);
     });
 
@@ -133,7 +149,7 @@ export class SidebarComponent implements OnInit {
     this.urlComplete.mainUrl = 'acc';
     this.urlComplete.subUrl = accountType.code;
     Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, accountType.code);
-    this.dataService.visitParamRouterChange(accountType.code);
+    this.dataService.visitParamRouterChange('acc');
     this.router.navigate(['/acc/']);
   }
 

@@ -8648,8 +8648,8 @@ kendo-dialog {
   background: url('assets/img/check-circle-solid.svg') !important;
   background-repeat: no-repeat !important;
   background-size: 25% !important;
-  background-position-x: 5px !important;
-  background-position-y: 5px !important;
+  background-position-x: 10px !important;
+  background-position-y: 7px !important;
   height: 35px !important;
   width: 100px !important;
   border-color: currentColor !important;
@@ -8657,15 +8657,19 @@ kendo-dialog {
   font-family: 'El Messiri', 'Khmer', sans-serif !important;
   border-radius: 0.25rem !important;
   text-align: right !important;
+  font-size: 1.50rem!important;
+  width: 95px !important;
+  margin-right: 10px;
 }
 
 .open-alert div kendo-dialog-actions button.k-button:hover {
   background-image: url('assets/img/check-circle-solid.svg') !important;
   background-repeat: no-repeat !important;
   background-size: 25% !important;
-  background-color: #c1c7d0 !important;
+  border-color: #212529 !important;
   color: #030303!important;
   text-align: right !important;
+  ;
 }
 
 
@@ -9127,4 +9131,22 @@ input[type=number]::-webkit-outer-spin-button {
 
 .padding-0{
   padding: 0px;
+}
+
+.message-alert {
+  font-weight: 900;
+  color: #000;
+}
+
+.kendo-dialog-actions-with-95px div kendo-dialog-actions button.k-button {
+  width: 90px !important;
+}
+
+.k-actions.k-actions-stretched .k-button {
+  width: 100px !important;
+}
+
+.tab-content>.active {
+  display: block !important;
+  opacity: 1 !important;
 }

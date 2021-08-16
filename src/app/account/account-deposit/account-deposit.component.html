@@ -11,7 +11,7 @@
 
             <div class="form-row">
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">Your Currenct Account</label>
+                  <label class="font-khmer-cursive">From Account</label>
                   <input disabled  type="text" [ngClass]="currenctAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
 
                   <!-- <div class="in_box">
@@ -19,7 +19,7 @@
                   </div> -->
               </div>
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">Your Currenct Account Name</label>
+                  <label class="font-khmer-cursive">From Account Name</label>
                   <input disabled type="text" [ngClass]="currenctAccountName? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccountName" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
 
                   <!-- <div class="in_box">
@@ -70,7 +70,7 @@
               <span class="font-weigh-700 margin-left-5px">Close</span>
           </button>
 
-          <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+          <button (click)="alertMessage()"  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
               <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
               <span class="font-weigh-700 margin-left-5px">Save</span>
           </button>

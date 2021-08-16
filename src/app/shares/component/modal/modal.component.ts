@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalDataService } from '../../services/modal-data.service';
 
 @Component({
   selector: 'app-modal',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalComponent implements OnInit {
 
-  constructor() { }
+  message: string = '';
+  constructor(private modalDataService: ModalDataService) {
+    this.modalDataService.currentMessage.subscribe(message => this.message = message);
+  }
 
   ngOnInit(): void {
+    this.modalDataService.currentMessage.subscribe(message => this.message = message)
   }
 
 }

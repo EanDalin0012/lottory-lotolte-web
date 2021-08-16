@@ -12,7 +12,7 @@ export class AccountProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const url = (window.location.href).split('/');
-    this.dataService.visitMessage(url[4]);
+    this.dataService.visitParamRouterChange(url[4]);
   }
 
 }

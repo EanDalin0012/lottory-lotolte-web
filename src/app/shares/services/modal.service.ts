@@ -68,7 +68,7 @@ export class ModalService {
    * @param width (number) Modal
    * @param minWidth (number) Modal
    */
-  alert(content: any,{ title = '', btnText = 'OK', modalClass = [], callback = (res: any) => {}, height = 0, width = 0, minWidth = 0 }) {
+  alert(content: any,{ title = '', btnText = 'OK', modalClass = '', callback = (res: any) => {}, height = 0, width = 0, minWidth = 0 }) {
     let contentComponent: any;
 
     if (typeof content === 'string') {
