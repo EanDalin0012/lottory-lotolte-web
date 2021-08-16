@@ -50,13 +50,19 @@
       "Id": "Id",
       "AccountID": "Account ID",
       "AccountName":"Account Name",
-      "Balance":"Balance"
+      "Balance":"Balance",
+      "FromAccount":"From account",
+      "FromAccountName":"From Account Name",
+      "ToAccount":"To Account"
+    },
+    "Message": {
+      "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?"
     }
   },
   "Deposit": {
     "Label": {
-      "YourCurrenctAccount":"Your currenct account",
-      "AccountName":"Account Name",
+      "FromAccount":"From account",
+      "FromAccountName":"From Account Name",
       "DisplayToAccount":"Account ID: {{accountID}} , Account Name: {{accountName}}"
     },
     "Holder": {

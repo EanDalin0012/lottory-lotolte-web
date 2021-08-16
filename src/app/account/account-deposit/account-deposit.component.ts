@@ -89,10 +89,23 @@ export class AccountDepositComponent implements OnInit {
   }
 
   alertMessage() {
-    this.modalService.alert(
-      'Hello',
+    this.modalService.confirm(
+      this.translateService.instant(
+        'Account.Message.DoYouWantDepositMoney',
+        {
+          fromAccountID: this.currenctAccount + '-' + this.currenctAccountName,
+          toAccountId: this.toAccountId + '-' + this.toAccountName,
+          amount: this.amount
+        }
+      ),
       {
-        modalClass: 'message-alert kendo-dialog-actions-with-95px open-alert'
+        title: 'Deposit Money',
+        lBtn: {btnText: 'Close'},
+        rBtn: {btnText: 'Confirm'},
+        modalClass: 'pop-confirm-btn dialog-confirm popup',
+        callback: response => {
+          console.log(response);
+        }
       }
     );
   }

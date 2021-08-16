@@ -129,7 +129,7 @@ export class ModalService {
     title = '',
     lBtn = {},
     rBtn = {},
-    modalClass = [],
+    modalClass = '',
     callback = (res: any) => {},
     height = 0,
     width = 0,
@@ -144,7 +144,7 @@ export class ModalService {
     const lBtnCallback = _lBtnCallback['callback'] || function() {};
 
     // const rBtnText = rBtn['btnText'] || 'Yes';
-    const _rBtnText = lBtn as any;
+    const _rBtnText = rBtn as any;
     const rBtnText = _rBtnText['btnText'] || 'Yes';
 
 
@@ -174,8 +174,11 @@ export class ModalService {
       minWidth
     });
 
+    $('kendo-dialog ').addClass(modalClass);
     $('kendo-dialog').addClass(modalClass);
-
+    $('kendo-dialog').addClass('add-confirm');
+    $('.add-confirm').eq(-1).addClass('add-pup-confirm');
+    $('.add-pup-confirm').find('kendo-dialog-actions').addClass('confirm-btn');
     dialog.result.subscribe((res) => {
       if (res instanceof DialogCloseResult) {
         callback(false);
