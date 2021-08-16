@@ -9,6 +9,8 @@
       "Register": "Register",
       "Remark":"Remark",
       "Amount":"Amount",
+      "depositMoney":"Deposit Money",
+      "withDrawalMoney":"WithDrawal Money",
       "WithDrawal": {
         "fromAccount":"From Account"
       },

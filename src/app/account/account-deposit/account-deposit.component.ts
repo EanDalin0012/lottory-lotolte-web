@@ -89,6 +89,8 @@ export class AccountDepositComponent implements OnInit {
   }
 
   alertMessage() {
+    const closeText = this.translateService.instant('Common.Button.Close');
+    const confirmText = this.translateService.instant('Common.Button.Confirme');
     this.modalService.confirm(
       this.translateService.instant(
         'Account.Message.DoYouWantDepositMoney',
@@ -99,9 +101,9 @@ export class AccountDepositComponent implements OnInit {
         }
       ),
       {
-        title: 'Deposit Money',
-        lBtn: {btnText: 'Close'},
-        rBtn: {btnText: 'Confirm'},
+        title: this.translateService.instant('Common.Label.depositMoney'),
+        lBtn: {btnText: closeText},
+        rBtn: {btnText: confirmText},
         modalClass: 'pop-confirm-btn dialog-confirm popup',
         callback: response => {
           console.log(response);
