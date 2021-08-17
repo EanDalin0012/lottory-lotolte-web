@@ -30,6 +30,7 @@ export class AccountDetailsComponent implements OnInit {
     index: 0,
     class: 'nav-link'
   }
+
   @ViewChild(DataTableDirective, { static: false })
   dtElement: any;
   public dtOptions: DataTables.Settings = {};

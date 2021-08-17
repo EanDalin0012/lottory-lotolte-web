@@ -12,6 +12,8 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { AccountDepositComponent } from './account-deposit/account-deposit.component';
 import { AccountWithdrawalComponent } from './account-withdrawal/account-withdrawal.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
+import { MyAccountComponent } from './my-account/my-account.component';
+import { AccountSettingComponent } from './account-setting/account-setting.component';
 
 
 
@@ -24,7 +26,9 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
     AccountProfileComponent,
     AccountDepositComponent,
     AccountWithdrawalComponent,
-    AccountDetailsComponent
+    AccountDetailsComponent,
+    MyAccountComponent,
+    AccountSettingComponent
   ],
   imports: [
     CommonModule,

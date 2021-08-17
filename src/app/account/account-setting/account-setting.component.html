@@ -1,0 +1,88 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+
+          <!-- Page Header -->
+          <div class="page-header">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <h3 class="page-title">Account Settings</h3>
+                  </div>
+              </div>
+          </div>
+          <!-- /Page Header -->
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="font-khmer-cursive">
+                  {{'Account.Label.AccountID' | translate}}
+                  <span class="text-danger">*</span>
+                </label>
+                <input disabled  type="text" [ngClass]="accountId? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="accountId" placeholder="{{'Account.Holder.enterAccountID' | translate}}">
+            </div>
+            <div class="form-group col-md-6">
+                <label class="font-khmer-cursive">
+                  {{'Account.Label.AccountName' | translate}}
+                  <span class="text-danger">*</span>
+                </label>
+                <input type="text" [ngClass]="accountName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="accountName" placeholder="{{'Account.Holder.enterAccountName' | translate}}">
+                <div class="in_box">
+                  <button (click)="isEmpty('n')" type="button" [ngClass]="accountName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                </div>
+
+                <div *ngIf="accountName === '' || accountName === null">
+                  <small class="text-danger"> *Account Name is required</small>
+                </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="font-khmer-cursive">
+                  {{'Account.Label.accountBalance' | translate}}
+                  <span class="text-danger">*</span>
+                </label>
+                <input disabled  type="text" [ngClass]="accountBalaceDisplay? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="accountBalaceDisplay" placeholder="{{'Account.Holder.enterAccountBalance' | translate}}">
+            </div>
+            <div class="form-group col-md-6">
+                <label class="font-khmer-cursive">
+                  {{'Account.Label.accountStatus' | translate}}
+                  <span class="text-danger">*</span>
+                </label>
+                <kendo-dropdownlist (valueChange)="onChangeStatus($event)" [data]="accountStatus" [filterable]="true" [textField]="'text'" [valueField]="'value'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="status" [ngModelOptions]="{standalone:
+                  true}" [defaultItem]="defaultAccountStatus">
+                      <ng-template kendoDropDownListValueTemplate let-dataItem>
+                          <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
+                      </ng-template>
+                      <ng-template kendoDropDownListItemTemplate let-dataItem>
+                          <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
+                      </ng-template>
+                  </kendo-dropdownlist>
+                  <div *ngIf="otherStatus === true">
+                    <small class="text-danger"> *Account Status is required</small>
+                  </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label class="font-khmer-cursive">{{'Common.Label.Remark' | translate}}</label>
+              <input  type="text" [ngClass]="remark? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="remark" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
+
+              <div class="in_box">
+                  <button (click)="isEmpty('r')" type="button" [ngClass]="remark? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="submit-section">
+            <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 150px;">
+              <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+              <span class="font-weigh-700 margin-left-5px">Save</span>
+            </button>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- /Page Content -->

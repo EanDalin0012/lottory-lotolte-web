@@ -9,6 +9,9 @@
       "Register": "Register",
       "Remark":"Remark",
       "Amount":"Amount",
+      "active":"Active",
+      "inactive":"Inactive",
+      "otherStatus":"Other Status",
       "depositMoney":"Deposit Money",
       "withDrawalMoney":"WithDrawal Money",
       "WithDrawal": {
@@ -53,13 +56,23 @@
       "AccountID": "Account ID",
       "AccountName":"Account Name",
       "Balance":"Balance",
+      "accountBalance":"Account Balance",
+      "accountStatus":"Account Status",
+      "SelectAccountStatus":"Select Account Status",
       "FromAccount":"From account",
       "FromAccountName":"From Account Name",
       "ToAccount":"To Account"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?"
+    },
+    "Holder": {
+      "enterAccountID": "Enter account ID",
+      "enterAccountName": "Enter account name",
+      "enterAccountBalance": "Enter account balance",
+      "enterAccountStatus": "Enter account status"
     }
+
   },
   "Deposit": {
     "Label": {

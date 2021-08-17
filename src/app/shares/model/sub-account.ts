@@ -1,9 +1,8 @@
-export interface Account {
+export interface SubAccount {
   id: number;
   accountId: string;
   accountName: string;
   accountBalace: number;
   currency: string;
-  accountType: string;
   status: string;
 }

@@ -94,22 +94,25 @@ export class SidebarComponent implements OnInit {
         this.accountType = account_type;
         msg = account_type;
       }
-      switch (msg) {
-        case 'profile':
-          this.urlComplete.mainUrl = 'acc'+message;
-          this.urlComplete.subUrl = message;
-          break;
-        case 'acc':
-          this.urlComplete.mainUrl = 'acc';
-          this.urlComplete.subUrl = account_type;
-          break;
-        default:
-          this.urlComplete.mainUrl = '';
-          this.urlComplete.subUrl = account_type;
-          break;
-      }
-
-
+      this.activeSidebar(msg);
+      // switch (msg) {
+      //   case 'profile':
+      //     this.urlComplete.mainUrl = 'acc'+message;
+      //     this.urlComplete.subUrl = message;
+      //     break;
+      //   case 'acc':
+      //     this.urlComplete.mainUrl = 'acc';
+      //     this.urlComplete.subUrl = account_type;
+      //     break;
+      //   case 'my-account':
+      //     this.urlComplete.mainUrl = 'my-account';
+      //     this.urlComplete.subUrl = 'my-account';
+      //     break;
+      //   default:
+      //     this.urlComplete.mainUrl = '';
+      //     this.urlComplete.subUrl = account_type;
+      //     break;
+      // }
       console.log('this.urlComplete', this.urlComplete);
     });
 
@@ -150,7 +153,34 @@ export class SidebarComponent implements OnInit {
     this.urlComplete.subUrl = accountType.code;
     Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, accountType.code);
     this.dataService.visitParamRouterChange('acc');
-    this.router.navigate(['/acc/']);
+    this.onNavigateRoutor('/acc/');
+  }
+
+  onNavigateRoutor(router: string) {
+    this.router.navigate([router]);
+  }
+
+  activeSidebar(msg: string) {
+    console.log('msg', msg);
+    switch (msg) {
+      case 'profile':
+        this.urlComplete.mainUrl = 'acc'+msg;
+        this.urlComplete.subUrl = msg;
+        break;
+      case 'acc':
+        let account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+        this.urlComplete.mainUrl = 'acc';
+        this.urlComplete.subUrl = account_type;
+        break;
+      case 'my-account':
+        this.urlComplete.mainUrl = 'my-account';
+        this.urlComplete.subUrl = 'my-account';
+        break;
+      default:
+        this.urlComplete.mainUrl = '';
+        this.urlComplete.subUrl = msg;
+        break;
+    }
   }
 
 }

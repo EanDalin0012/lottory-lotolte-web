@@ -1,5 +1,7 @@
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { DeviceInfo } from '../../app/shares/model/device-detector';
+import { SubAccount } from '../../app/shares/model/sub-account';
+import { Account } from '../../app/shares/model/account';
 
 
 export const deviceInfos: DeviceInfo[] = [
@@ -69,6 +71,54 @@ export const deviceInfos: DeviceInfo[] = [
     os_version: "windows-10",
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
   },
+];
+
+export const subAccounts:Account[] = [
+  {
+    id: 1,
+    accountId: '000000021',
+    accountName: 'John Doe',
+    accountBalace: 1111,
+    currency: 'KH',
+    accountType: 'seni',
+    status: 'act'
+  },
+  {
+    id: 2,
+    accountId: '000000022',
+    accountName: 'Richard Miles',
+    accountBalace: 9000,
+    currency: 'KH',
+    accountType: 'seni',
+    status: 'inact'
+  },
+  {
+    id: 3,
+    accountId: '000000023',
+    accountName: 'John Smith',
+    accountBalace: 1111,
+    currency: 'KH',
+    accountType: 'mast',
+    status: 'act'
+  },
+  {
+    id: 4,
+    accountId: '000000024',
+    accountName: 'Mike Litorus',
+    accountBalace: 1111,
+    currency: 'KH',
+    accountType: 'agen',
+    status: 'inact'
+  },
+  {
+    id: 5,
+    accountId: '000000025',
+    accountName: 'Wilmer Deluna',
+    accountBalace: 1111,
+    currency: 'KH',
+    accountType: 'memb',
+    status: 'act'
+  }
 ];
 export class AllModulesData implements InMemoryDbService {
   createDb() {

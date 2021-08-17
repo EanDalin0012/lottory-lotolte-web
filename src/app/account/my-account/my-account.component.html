@@ -1,0 +1,119 @@
+<!-- Page Content -->
+<div class="content container-fluid">
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="page-title">My Account</h3>
+            <ul class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                <li class="breadcrumb-item active">My Account</li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <div class="row">
+    <div class="col-md-6 d-flex">
+      <div class="card profile-box flex-fill">
+          <div class="card-body">
+              <h3 class="card-title">Account Information</h3>
+              <ul class="personal-info">
+                  <li>
+                      <div class="title">Account Name</div>
+                      <div class="text">ICICI Bank</div>
+                  </li>
+                  <li>
+                      <div class="title">Account No.</div>
+                      <div class="text">000-000-001</div>
+                  </li>
+                  <li>
+                      <div class="title">Balance</div>
+                      <div class="text">10,000 KH</div>
+                  </li>
+
+              </ul>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- On Tab -->
+  <div class="card tab-box">
+    <div class="row user-tabs">
+        <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
+            <ul class="nav nav-tabs nav-tabs-bottom">
+                <li class="nav-item">
+                  <a (click)="onTab(0)" [ngClass]="{ 'active' : activeTab.index === 0 }" href="#emp_projects" data-toggle="tab" class="nav-link">All Sub Account</a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="#emp_projects" data-toggle="tab" class="nav-link">Account Deposit Money</a>
+                </li>
+                <li class="nav-item">
+                  <a href="#bank_statutory" data-toggle="tab" class="nav-link">
+                    Account Withdrawal Money
+                    <small class="text-danger">(Admin Only)</small>
+                  </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  <!-- /On Tab -->
+
+  <!-- Tab 0 -->
+  <ng-container *ngIf = "activeTab.index === 0">
+    <div class="card-body padding-0">
+      <div class="table-responsive custom-table-select">
+          <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>{{'Account.Label.AccountID' | translate}}</th>
+                      <th>{{'Account.Label.AccountName' | translate}}</th>
+                      <th class="text-center">{{'Account.Label.Balance' | translate}}</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of subAccounts;let i = index;">
+                      <td>{{i+1}}</td>
+                      <td>{{item.accountId | account}}</td>
+                      <td>{{item.accountName}}</td>
+                      <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
+                      <td style="width: 90px;">
+                        <div [innerHTML] = 'item.status | accountStatus'>
+                        </div>
+                      </td>
+                      <td class="text-right" style="width: 100px;">
+                        <div class="dropdown dropdown-action">
+                            <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
+                              <i class="material-icons">more_vert</i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="setting(item)">
+                                  <i class="la la-cog m-r-5"></i>
+                                  Setting
+                                </a>
+                                <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime">
+                                  <i class="fa fa-pencil m-r-5"></i>
+                                  Deposit
+                                </a>
+
+                            </div>
+                        </div>
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
+</ng-container>
+<!-- /Tab 0 -->
+
+</div>
+<!-- /Page Content -->

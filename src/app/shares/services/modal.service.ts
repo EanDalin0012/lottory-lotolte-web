@@ -12,7 +12,7 @@ import { AlertDialogComponent } from '../component/alert-dialog/alert-dialog.com
   providedIn: 'root'
 })
 export class ModalService {
-  store = new StoreUtil();
+  // store = new StoreUtil();
   dialogRefList: DialogRef[] = [];
   i = 0;
   constructor(
@@ -210,7 +210,7 @@ export class ModalService {
       content
     });
     this.dialogRefList.push(dialog);
-    this.store.set(MODAL_STORE_KEY.MODAL_STORE_KEY, this.dialogRefList);
+    StoreUtil.set(MODAL_STORE_KEY.MODAL_STORE_KEY, this.dialogRefList);
     this.i++;
     $('kendo-dialog').addClass(modalClass);
     $('body').addClass('overHidden');
@@ -220,7 +220,7 @@ export class ModalService {
       callback,
       opener,
       close: (res: any) => {
-        const modalStoreKey = this.store.get(MODAL_STORE_KEY.MODAL_STORE_KEY);
+        const modalStoreKey = StoreUtil.get(MODAL_STORE_KEY.MODAL_STORE_KEY);
         modalStoreKey.splice(this.i - 1);
         dialog.close(res);
         $('body').removeClass('overHidden');
@@ -265,7 +265,7 @@ export class ModalService {
   }
 
   closeAllDialog() {
-    const modalStore = this.store.get(MODAL_STORE_KEY.MODAL_STORE_KEY) as DialogRef[];
+    const modalStore = StoreUtil.get(MODAL_STORE_KEY.MODAL_STORE_KEY) as DialogRef[];
     if (modalStore) {
       if (modalStore.length > 0) {
         modalStore.forEach((element, index) => {
@@ -287,7 +287,7 @@ export class ModalService {
       content: AlertDialogComponent
     });
     this.dialogRefList.push(dialog);
-    this.store.set(MODAL_STORE_KEY.MODAL_STORE_KEY, this.dialogRefList);
+    StoreUtil.set(MODAL_STORE_KEY.MODAL_STORE_KEY, this.dialogRefList);
     this.i++;
     $('kendo-dialog').addClass(modalClass);
     $('body').addClass('overHidden');
@@ -297,7 +297,7 @@ export class ModalService {
       callback,
       opener,
       close: (res: any) => {
-        const modalStoreKey = this.store.get(MODAL_STORE_KEY.MODAL_STORE_KEY);
+        const modalStoreKey = StoreUtil.get(MODAL_STORE_KEY.MODAL_STORE_KEY);
         modalStoreKey.splice(this.i - 1);
         dialog.close(res);
         $('body').removeClass('overHidden');
