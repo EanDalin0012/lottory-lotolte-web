@@ -124,4 +124,9 @@ export class AccountListComponent implements OnInit {
     this.router.navigate(['/acc/details']);
   }
 
+  setting(item: any) {
+    Utils.setSecureStorage('account-setting', item);
+    StoreUtil.set('account-setting', item);
+    this.router.navigate(['/acc/account-setting']);
+  }
 }

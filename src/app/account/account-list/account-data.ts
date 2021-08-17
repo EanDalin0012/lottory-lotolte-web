@@ -8,7 +8,7 @@ export const accountDatas: Account[] = [
     accountBalace: 90.00,
     currency: 'USD',
     accountType: 'adm',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'adm',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'adm',
-    status: 'Active',
+    status: 'act',
   },
 // admi
 
@@ -37,7 +37,7 @@ export const accountDatas: Account[] = [
     accountBalace: 90.00,
     currency: 'USD',
     accountType: 'seni',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 8,
@@ -46,7 +46,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'seni',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 9,
@@ -55,7 +55,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'seni',
-    status: 'Active',
+    status: 'act',
   },
   // seni
   {
@@ -65,7 +65,7 @@ export const accountDatas: Account[] = [
     accountBalace: 90.00,
     currency: 'USD',
     accountType: 'mast',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 5,
@@ -74,7 +74,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'mast',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 6,
@@ -83,7 +83,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'mast',
-    status: 'Active',
+    status: 'act',
   },
 // agent
   {
@@ -93,7 +93,7 @@ export const accountDatas: Account[] = [
     accountBalace: 90.00,
     currency: 'USD',
     accountType: 'agen',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 11,
@@ -102,7 +102,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'agen',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 12,
@@ -111,7 +111,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'agen',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 13,
@@ -120,7 +120,7 @@ export const accountDatas: Account[] = [
     accountBalace: 90.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 14,
@@ -129,7 +129,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'inact',
   },
   {
     id: 15,
@@ -138,7 +138,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 16,
@@ -147,7 +147,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 17,
@@ -156,7 +156,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 18,
@@ -165,7 +165,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 19,
@@ -174,7 +174,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 20,
@@ -183,7 +183,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 21,
@@ -192,7 +192,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'inact',
   },
   {
     id: 22,
@@ -201,7 +201,7 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   },
   {
     id: 23,
@@ -210,6 +210,6 @@ export const accountDatas: Account[] = [
     accountBalace: 190.00,
     currency: 'USD',
     accountType: 'memb',
-    status: 'Active',
+    status: 'act',
   }
 ];

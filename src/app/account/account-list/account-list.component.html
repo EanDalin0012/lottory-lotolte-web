@@ -76,12 +76,9 @@
                           <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
-                          <td class="text-center">
-                              <div class="action-label">
-                                  <a class="btn btn-white btn-sm btn-rounded">
-                                      <i class="fa fa-dot-circle-o text-purple"></i>{{item.status || statusValue}}
-                                  </a>
-                              </div>
+                          <td class="text-center" style="width: 90px;">
+                            <div [innerHTML] = 'item.status | accountStatus'>
+                            </div>
                           </td>
                           <td class="text-right" style="width: 100px;">
                               <div class="dropdown dropdown-action">
@@ -89,21 +86,25 @@
                                     <i class="material-icons">more_vert</i>
                                   </a>
                                   <div class="dropdown-menu dropdown-menu-right">
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="edit(item.id)">
+                                      <a (click)="setting(item)" class="dropdown-item" href="javascript:">
+                                        <i class="fa fa-pencil m-r-5"></i>
+                                        {{'Common.Label.setting' | translate}}
+                                      </a>
+                                      <a class="dropdown-item" href="javascript:" (click)="edit(item.id)">
                                         <i class="fa fa-pencil m-r-5"></i>
                                         Edit
                                       </a>
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="deposit(item)">
+                                      <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
                                         <i class="fa fa-pencil m-r-5"></i>
                                         Deposit
                                       </a>
 
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="withdrawal(item)">
+                                      <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
                                         <i class="fa fa-pencil m-r-5"></i>
                                         Withdrawal
                                       </a>
 
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="details(item)">
+                                      <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
                                         <i class="fa fa-trash-o m-r-5"></i>
                                         Details
                                       </a>

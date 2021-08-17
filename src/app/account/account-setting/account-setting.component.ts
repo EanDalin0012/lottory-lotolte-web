@@ -30,7 +30,7 @@ export class AccountSettingComponent implements OnInit {
     value: ''
   };
   defaultAccountStatus:StatusAccount = {
-    text: this.translateService.instant('Account.Label.SelectAccountStatus'),
+    text: this.translateService.instant('Account.Label.selectAccountStatus'),
     value: ''
   };
   filterSettings: DropDownFilterSettings = {
