@@ -13,6 +13,10 @@
       "inactive":"Inactive",
       "otherStatus":"Other Status",
       "depositMoney":"Deposit Money",
+      "status":"Status",
+      "action":"Action",
+      "setting":"Setting",
+      "dashboard":"Dashboard",
       "withDrawalMoney":"WithDrawal Money",
       "WithDrawal": {
         "fromAccount":"From Account"
@@ -53,15 +57,15 @@
   "Account": {
     "Label": {
       "Id": "Id",
-      "AccountID": "Account ID",
-      "AccountName":"Account Name",
-      "Balance":"Balance",
+      "accountID": "Account ID",
+      "accountName":"Account Name",
+      "nalance":"Balance",
       "accountBalance":"Account Balance",
       "accountStatus":"Account Status",
-      "SelectAccountStatus":"Select Account Status",
-      "FromAccount":"From account",
-      "FromAccountName":"From Account Name",
-      "ToAccount":"To Account"
+      "selectAccountStatus":"Select Account Status",
+      "fromAccount":"From account",
+      "fromAccountName":"From Account Name",
+      "toAccount":"To Account"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?"
@@ -95,6 +99,12 @@
       "browserVersion":"Browser Version",
       "deviceType":"Device Type",
       "orientation":"Orientation"
+    }
+  },
+  "MyAccount": {
+    "Label": {
+      "myAccount":"My Account",
+      "accountInformation":"Account Information"
     }
   }
 }

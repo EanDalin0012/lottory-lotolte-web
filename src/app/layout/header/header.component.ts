@@ -14,6 +14,7 @@ import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 export class HeaderComponent implements OnInit {
 
   langCode  = this.translate.currentLang;
+  langText  = 'English';
   langData          = {
     en: { class: "eng", text: "English"},
     kh: { class: "khmer", text: "ខ្មែរ"},
@@ -33,9 +34,20 @@ export class HeaderComponent implements OnInit {
     private headerService: HeaderService, private router: Router) {}
 
   ngOnInit() {
-    // this.getDatas("notification");
-    // this.getDatas("message");
-
+     switch(this.langCode) {
+       case 'en':
+        this.flags = 'assets/img/flags/us.png';
+        this.langText = 'English';
+         break;
+      case 'kh':
+        this.flags = 'assets/img/flags/kh.png';
+        this.langText = 'ខ្មែរ';
+        break;
+      case 'ch':
+        this.flags = 'assets/img/flags/cn.png';
+        this.langText = '中文';
+        break;
+     }
     this.notifications = [
       {
         message: "Patient appointment booking",
@@ -126,10 +138,13 @@ export class HeaderComponent implements OnInit {
     this.langCode = code;
     if(code == 'en') {
       this.flags = 'assets/img/flags/us.png';
+      this.langText = 'English';
     } else if (code == 'kh') {
       this.flags = 'assets/img/flags/kh.png';
+      this.langText = 'ខ្មែរ';
     } else if (code == 'ch') {
       this.flags = 'assets/img/flags/cn.png';
+      this.langText = '中文';
     }
     console.log(this.langCode, localStorage.I18N, code);
     Utils.setSecureStorage(LOCAL_STORAGE.I18N, this.langCode );
