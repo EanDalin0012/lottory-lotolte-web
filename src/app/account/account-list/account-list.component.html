@@ -5,16 +5,16 @@
   <div class="page-header">
       <div class="row align-items-center">
           <div class="col">
-              <h3 class="page-title">Account</h3>
+              <h3 class="page-title">{{'Account.Label.account' | translate}}</h3>
               <ul class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                  <li class="breadcrumb-item active">Account</li>
+                  <li class="breadcrumb-item active"><a href="javascript:">{{'Account.Label.account' | translate}}</a></li>
+                  <!-- <li class="breadcrumb-item active">Account</li> -->
               </ul>
           </div>
           <div class="col-auto float-right ml-auto" style="margin-right: 10px;" (click)="newAccount()">
-            <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 150px;">
+            <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px;">
               <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
-              <span class="font-weigh-700 margin-left-5px">New Account</span>
+              <span class="font-weigh-700 margin-left-5px">{{'Account.Label.newSeniarAccount' | translate}}</span>
             </button>
 
               <!-- <a class="btn add-btn" data-toggle="modal" data-target="#add_overtime">
@@ -26,35 +26,6 @@
   </div>
   <!-- /Page Header -->
 
-  <!-- Overtime Statistics -->
-  <!-- <div class="row">
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="stats-info">
-              <h6>Overtime Employee</h6>
-              <h4>12 <span>this month</span></h4>
-          </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="stats-info">
-              <h6>Overtime Hours</h6>
-              <h4>118 <span>this month</span></h4>
-          </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="stats-info">
-              <h6>Pending Request</h6>
-              <h4>23</h4>
-          </div>
-      </div>
-      <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
-          <div class="stats-info">
-              <h6>Rejected</h6>
-              <h4>5</h4>
-          </div>
-      </div>
-  </div> -->
-  <!-- /Overtime Statistics -->
-
   <div class="row">
       <div class="col-md-12">
           <div class="table-responsive custom-table-select">
@@ -63,11 +34,12 @@
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>{{'Account.Label.AccountID' | translate}}</th>
-                          <th>{{'Account.Label.AccountName' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.Balance' | translate}}</th>
-                          <th class="text-center">Status</th>
-                          <th class="text-right">Actions</th>
+                          <th>{{'Account.Label.accountID' | translate}}</th>
+                          <th>{{'Account.Label.accountName' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.accountType' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
+                          <th class="text-center">{{'Common.Label.status' | translate}}</th>
+                          <th class="text-right">{{'Common.Label.action' | translate}}</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -75,44 +47,44 @@
                           <td>{{i + 1}}</td>
                           <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
+                          <td>
+                            <div [innerHTML] = 'item.accountType | accountType'>
+                            </div>
+                          </td>
                           <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
                           <td class="text-center" style="width: 90px;">
                             <div [innerHTML] = 'item.status | accountStatus'>
                             </div>
                           </td>
                           <td class="text-right" style="width: 100px;">
-                              <div class="dropdown dropdown-action">
+                              <div class="dropdown dropdown-action" >
                                   <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
                                     <i class="material-icons">more_vert</i>
                                   </a>
-                                  <div class="dropdown-menu dropdown-menu-right">
+                                  <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
                                       <a (click)="setting(item)" class="dropdown-item" href="javascript:">
-                                        <i class="fa fa-pencil m-r-5"></i>
+                                        <i class="la la-cog font-size-1-50rem"></i>
                                         {{'Common.Label.setting' | translate}}
                                       </a>
-                                      <a class="dropdown-item" href="javascript:" (click)="edit(item.id)">
-                                        <i class="fa fa-pencil m-r-5"></i>
-                                        Edit
-                                      </a>
+
                                       <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
-                                        <i class="fa fa-pencil m-r-5"></i>
-                                        Deposit
+                                        <i class="pi pi-wallet font-size-1-50rem"></i>
+                                        {{'Common.Label.depositMoney' | translate}}
                                       </a>
 
                                       <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
-                                        <i class="fa fa-pencil m-r-5"></i>
-                                        Withdrawal
+                                        <i class="pi pi-wallet font-size-1-50rem"></i>
+                                        {{'Common.Label.withDrawalMoney' | translate}}
                                       </a>
 
                                       <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
-                                        <i class="fa fa-trash-o m-r-5"></i>
-                                        Details
+                                        <i class="pi pi-info-circle font-size-1-50rem"></i>
+                                        {{'Common.Label.details' | translate}}
                                       </a>
 
-
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="tempId = item.id">
-                                        <i class="fa fa-trash-o m-r-5"></i>
-                                          Delete
+                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="onSeniar(item)">
+                                        <i class="pi pi-users font-size-1-50rem"></i>
+                                        {{'Account.Label.subSeniarAccount' | translate}}
                                       </a>
 
                                   </div>

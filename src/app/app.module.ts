@@ -1,4 +1,4 @@
-import { AgGridModule } from 'ag-grid-angular';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +27,7 @@ export function createTranslateLoader(http: HttpClient) {
     MlayoutComponent,
     LayoutBlankComponent,
     Error404Component,
-    Error405Component,
+    Error405Component
   ],
   imports: [
     MLayoutModule,

@@ -10,7 +10,8 @@ import { Utils } from '../../shares/utils/utils.static';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  userName: string = '';
+  password: string = '';
   constructor(
     private dataService: DataService,
     private router: Router) { }
@@ -22,7 +23,14 @@ export class LoginComponent implements OnInit {
   routors() {
     Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, AccountTypeCode.Admin);
     this.dataService.visitParamRouterChange(AccountTypeCode.Admin);
-    this.router.navigate(['/acc']);
+    this.router.navigate(['/acc/my-account']);
   }
 
+  isEmpty(value: string) {
+    switch (value) {
+      case 'u':
+        this.userName = '';
+        break;
+    }
+  }
 }

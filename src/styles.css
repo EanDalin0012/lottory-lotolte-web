@@ -9345,5 +9345,224 @@ kendo-dropdownlist {
 
 .k-list{
     font-size: 1.50rem !important;
-  }
+}
+.active-input {
+  padding: 3px 10px;
+  border-bottom: 2px solid #3f496d !important;
+}
+
+
+.fa,
+.far,
+.fas {
+    font-family: "FontAwesome" !important;
+    font-style: normal !important;
+}
+
+.font-size-1-50rem{
+  font-size: 1.50rem !important;
+
+}
+
+.width-100p {
+  width: 100%;
+}
+.float-right {
+  float: right;
+}
+
+
+kendo-datepicker {
+  width: 100% !important;
+  height: 40px !important;
+  border-bottom: 1px solid #afa79d !important;
+  border-radius: 4px !important;
+}
+
+kendo-datepicker:focus {
+  border-bottom: 2px solid #3f496d !important;
+}
+
+kendo-datepicker .k-picker-wrap .k-dateinput-wrap kendo-dateinput input {
+  border-bottom: 1px solid #afa79d !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  display: inline-block !important;
+  border-radius: 4px !important;
+  width: 100%;
+  background-color: red !important;
+}
+
+
+.k-dateinput .k-dateinput-wrap .k-input,
+.k-dateinput .k-picker-wrap .k-input,
+.k-datepicker .k-dateinput-wrap .k-input,
+.k-datepicker .k-picker-wrap .k-input,
+.k-datetimepicker .k-dateinput-wrap .k-input,
+.k-datetimepicker .k-picker-wrap .k-input,
+.k-timepicker .k-dateinput-wrap .k-input,
+.k-timepicker .k-picker-wrap .k-input {
+    height: 40px !important;
+    border-bottom: none !important;
+}
+
+.k-dateinput .k-dateinput-wrap .k-input,
+.k-dateinput .k-picker-wrap .k-input,
+.k-datepicker .k-dateinput-wrap .k-input,
+.k-datepicker .k-picker-wrap .k-input,
+.k-datetimepicker .k-dateinput-wrap .k-input,
+.k-datetimepicker .k-picker-wrap .k-input,
+.k-timepicker .k-dateinput-wrap .k-input,
+.k-timepicker .k-picker-wrap .k-input {
+    height: 40px !important;
+    background-color: rgb(232, 240, 254) !important;
+}
+
+div.in_box button {
+    display: none;
+}
+
+.kendo-datepicker-value {
+    border-bottom: 2px solid #3f496d !important;
+    border-radius: 4px !important;
+}
+
+.overHidden {
+    overflow: hidden;
+}
+
+
+/***** Calendar *****/
+
+input.inp_cal {
+  padding-right: 35px;
+  background-image: url("assets/img/ico_calendar01.png");
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-color: rgb(232, 240, 254) !important
+}
+
+input.inp_cal:focus {
+  padding-right: 33px !important;
+  background-position: right -2px center;
+}
+
+.k-datepicker:only-child {
+  width: 100%;
+}
+
+.k-datepicker .k-picker-wrap {
+  border: none;
+  box-shadow: none;
+}
+
+.k-dateinput {
+  margin: 0 !important;
+  font-size: 1.50rem !important;
+}
+
+.k-dateinput .k-dateinput-wrap {
+  background: #eff2f5;
+  border-radius: 4px 0 0 4px;
+}
+
+.k-dateinput-wrap .k-input {
+  height: 40px;
+  padding: 4px 12px;
+  font-size: 1.50rem !important;
+}
+
+.k-dateinput-wrap .k-input:focus {
+  padding: 0 10px;
+}
+
+.k-datepicker .k-select,
+.k-datepicker .k-state-focused .k-select {
+  width: 40px;
+  background: #e8f0fe url("assets/img/ico_calendar01.png") no-repeat right center !important;
+  border-radius: 0 4px 4px 0;
+}
+
+.k-datepicker .k-select .k-icon {
+  opacity: 0 !important;
+}
+
+.k-calendar-infinite .k-calendar-view {
+  width: 366px;
+  min-height: 350px !important;
+  padding: 0 24px;
+  font-size: 1.50rem !important;
+}
+
+.k-calendar-header {
+  font-size: 1.50rem;
+  color: #000;
+}
+
+.k-calendar .k-calendar-header .k-title {
+  padding: 4px 15px 4px 15px;
+  background: url("assets/img/ico_down05.png") no-repeat right center !important;
+}
+
+.k-calendar .k-footer .k-nav-today:hover,
+.k-calendar .k-calendar-header .k-today:hover {
+  font-weight: 700;
+}
+
+.k-calendar th {
+  font-size: 1.50rem;
+  color: #020219;
+  line-height: 1.5;
+}
+
+.k-calendar .k-content th {
+  padding-left: 15px;
+  color: #020219;
+}
+
+.k-calendar .k-calendar-monthview td:first-child {
+  color: #ff464d;
+}
+
+.k-calendar .k-calendar-monthview td:last-child {
+  color: #1d6cde;
+}
+
+.k-calendar .k-calendar-monthview .k-link {
+  width: 53px;
+  height: 42px;
+}
+
+.k-calendar .k-calendar-monthview .k-today {
+  font-weight: 700;
+  color: #7a6d5c;
+}
+
+.k-calendar .k-calendar-monthview .k-today:hover {
+  font-weight: 700;
+  color: #7a6d5c;
+}
+
+.k-calendar .k-footer .k-nav-today,
+.k-calendar .k-calendar-header .k-today {
+  font-size: .875rem;
+  color: #514432;
+}
+
+.k-calendar .k-state-selected .k-link {
+  background: #7a6d5c;
+  border-radius: 20px;
+}
+
+.calendar_footer {
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.calendar_footer button {
+  min-width: 128px;
+}
+
 

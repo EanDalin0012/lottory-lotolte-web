@@ -111,4 +111,14 @@ export class AccountDepositComponent implements OnInit {
       }
     );
   }
+  isEmpty(code: string) {
+    switch (code) {
+      case 'amount':
+        this.amount = 0;
+        break;
+      case 'r':
+        this.description ='';
+        break;
+    }
+  }
 }

@@ -17,7 +17,14 @@
       "action":"Action",
       "setting":"Setting",
       "dashboard":"Dashboard",
+      "master":"Master",
+      "agent":"Agent",
+      "seniar":"Seniar",
+      "member":"Member",
+      "deposit":"Deposit",
+      "newMasterAccount":"New Master Account",
       "withDrawalMoney":"WithDrawal Money",
+      "details":"Details",
       "WithDrawal": {
         "fromAccount":"From Account"
       },
@@ -56,25 +63,47 @@
   },
   "Account": {
     "Label": {
+      "account":"Account",
+      "subAccount":"Sub Account",
       "Id": "Id",
       "accountID": "Account ID",
       "accountName":"Account Name",
       "nalance":"Balance",
       "accountBalance":"Account Balance",
       "accountStatus":"Account Status",
+      "accountType":"Account Type",
       "selectAccountStatus":"Select Account Status",
       "fromAccount":"From account",
       "fromAccountName":"From Account Name",
-      "toAccount":"To Account"
+      "toAccount":"To Account",
+      "accountSettings":"Account Settings",
+      "newSeniarAccount":"New Seniar Account",
+      "newAgentAccount":"New Agent Account",
+      "subSeniarAccount":"Sub Seniar Account",
+      "subMasterAccount":"Sub Master Account",
+      "subAgentAccount":"Sub Agent Account",
+      "firstName":"First Name",
+      "lastName":"Last Name",
+      "gender":"Gender",
+      "dateBirth":"Date of Birth"
     },
     "Message": {
-      "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?"
+      "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
+      "accountNameRequired":"*Account Name is required",
+      "accountStatusRequired":"*Account Status is required",
+      "firstNameRequired":"*First Name is required",
+      "lastNameRequired":"*Last Name is required",
+      "genderRequired":"*Gender is required",
+      "dateBirthRequired":"*Date of birth is required"
     },
     "Holder": {
       "enterAccountID": "Enter account ID",
       "enterAccountName": "Enter account name",
       "enterAccountBalance": "Enter account balance",
-      "enterAccountStatus": "Enter account status"
+      "enterAccountStatus": "Enter account status",
+      "enterFirstName": "Enter first name",
+      "enterLastName": "Enter last name",
+      "enterDateBirth": "Enter date of birth"
     }
 
   },

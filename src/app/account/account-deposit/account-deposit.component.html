@@ -13,18 +13,10 @@
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">From Account</label>
                   <input disabled  type="text" [ngClass]="currenctAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
-
-                  <!-- <div class="in_box">
-                      <button type="button" [ngClass]="currenctAccount? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div> -->
               </div>
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">From Account Name</label>
                   <input disabled type="text" [ngClass]="currenctAccountName? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="currenctAccountName" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
-
-                  <!-- <div class="in_box">
-                      <button type="button" [ngClass]="currenctAccountName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div> -->
 
               </div>
             </div>
@@ -36,10 +28,10 @@
               </div>
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">Amount</label>
-                  <input type="text" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'Common.Holder.EnterAmount' | translate}}">
+                  <input type="number" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'Common.Holder.EnterAmount' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="amount? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      <button type="button" [ngClass]="amount? 'btn_del' : ''" (click)="isEmpty('amount')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
 
               </div>
@@ -51,7 +43,7 @@
                       <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
 
                       <div class="in_box">
-                          <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                          <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="isEmpty('r')" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                       </div>
 
                   </div>

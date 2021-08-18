@@ -23,11 +23,13 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '../component/modal/modal.component';
 import { AccountPipe } from '../pipe/account.pipe';
 import { AccountStatusPipe } from '../pipe/account-status.pipe';
+import { AccountTypePipe } from '../pipe/account-type.pipe';
 @NgModule({
   declarations: [
     ModalComponent,
     AccountPipe,
-    AccountStatusPipe
+    AccountStatusPipe,
+    AccountTypePipe
   ],
   imports: [
     // InputsModule,
@@ -73,7 +75,8 @@ import { AccountStatusPipe } from '../pipe/account-status.pipe';
     UploadModule,
     // pipe
     AccountPipe,
-    AccountStatusPipe
+    AccountStatusPipe,
+    AccountTypePipe
   ],
   entryComponents: [
     ModalComponent,

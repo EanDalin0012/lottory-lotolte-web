@@ -35,9 +35,9 @@ export enum LANGUAGE {
 
 export enum AccountTypeCode {
   Admin = 'adm',
-  Senair = 'seni',
+  Seniar = 'seni',
   Master = 'mast',
-  Agentcy = 'agen',
+  Agent = 'agen',
   Member = 'memb'
 }
 

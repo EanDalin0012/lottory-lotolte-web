@@ -9,6 +9,78 @@
           <!-- //header -->
           <div class="web_Wrap">
 
+            <kendo-stepper
+                        [steps]="stepsIcons"
+                        [stepType]="'full'"
+                        class="ONTesting defualt-font"
+                        (activate)="onStepActivate($event)"
+                        [(currentStep)]="currentStep">
+            </kendo-stepper>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">{{'Account.Label.firstName' | translate}}</label>
+                  <span class="text-danger">*</span>
+                  <input  type="text" [ngClass]="firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="firstName" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
+
+                  <div class="in_box">
+                      <button type="button" [ngClass]="currenctAccount? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div>
+                  <div *ngIf="firstName === '' || firstName === null">
+                    <small class="text-danger">{{'Account.Message.firstNameRequired' | translate}}</small>
+                  </div>
+
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
+                  <span class="text-danger">*</span>
+                  <input type="text" [ngClass]="lastName? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="lastName" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+
+                  <div class="in_box">
+                      <button type="button" [ngClass]="lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div>
+                  <div *ngIf="lastName === '' || lastName === null">
+                    <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
+                  </div>
+
+              </div>
+            </div>
+
+            <div class="form-row">
+
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">{{'Account.Label.gender' | translate}}</label>
+                  <span class="text-danger">*</span>
+                  <kendo-dropdownlist [data]="accounts" [filterable]="true" [textField]="'accountName'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="account" [ngModelOptions]="{standalone:
+                    true}" [defaultItem]="defaultAccount">
+                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                            <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
+                        </ng-template>
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                            <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
+                        </ng-template>
+                  </kendo-dropdownlist>
+
+                  <div *ngIf="firstName === '' || firstName === null">
+                    <small class="text-danger">{{'Account.Message.genderRequired' | translate}}</small>
+                  </div>
+              </div>
+
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">{{'Account.Label.dateBirth' | translate}}</label>
+                  <span class="text-danger">*</span>
+                  <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="dateBirth" required>
+                  </kendo-datepicker>
+                  <div class="in_box">
+                      <button type="button" [ngClass]="lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div>
+                  <div *ngIf="lastName === '' || lastName === null">
+                    <small class="text-danger">{{'Account.Message.dateBirthRequired' | translate}}</small>
+                  </div>
+
+              </div>
+            </div>
+
             <div class="form-row">
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">Your Currenct Account</label>
@@ -67,6 +139,25 @@
 
 
           </div>
+
+          <div class="width-100p float-right right-0">
+            <span class="page width-100p float-right right-0 text-align-right">Steps {{ currentStep + 1 }} of 4</span>
+
+            <div class="float-right right-0">
+
+                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00 margin-right-15px" *ngIf="currentStep !== 0" (click)="prev()">
+                    <i class="fas fa-arrow-circle-left font-size-20px"></i>
+                    <span class="margin-left-5px">{{'Common.Button.Previous' | translate}}</span>
+                </button>
+
+                <button class="k-button btn-w100px-h35px font-khmer-cursive btn-add-00" (click)="next(currentStep)" *ngIf="currentStep !== 1">
+                    <i class="fas fa-arrow-circle-right font-size-20px"></i>
+                    <span class="margin-left-5px">{{'Common.Button.Next' | translate}}</span>
+                </button>
+
+            </div>
+
+        </div>
 
       </div>
 

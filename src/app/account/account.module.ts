@@ -14,6 +14,7 @@ import { AccountWithdrawalComponent } from './account-withdrawal/account-withdra
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { SubAccountComponent } from './sub-account/sub-account.component';
 
 
 
@@ -28,7 +29,8 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
     AccountWithdrawalComponent,
     AccountDetailsComponent,
     MyAccountComponent,
-    AccountSettingComponent
+    AccountSettingComponent,
+    SubAccountComponent
   ],
   imports: [
     CommonModule,

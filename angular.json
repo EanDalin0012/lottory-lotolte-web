@@ -44,6 +44,7 @@
               "src/assets/bower_components/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/kendo-theme/default-4.24.0/all.css",
               "src/assets/kendo-theme/bootstrap-4.22.0/all.css",
+              "node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css",
               "node_modules/morris.js/morris.css",
               "node_modules/datatables.net-bs4/css/dataTables.bootstrap4.css",

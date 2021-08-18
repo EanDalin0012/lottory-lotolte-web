@@ -4,6 +4,8 @@ import { Account } from '../../shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE, BTN_ROLES } from '../../shares/constants/common.const';
 import { accountDatas } from '../account-list/account-data';
+import { TranslateService } from '@ngx-translate/core';
+import { StepperActivateEvent } from '@progress/kendo-angular-layout';
 
 @Component({
   selector: 'app-add-account',
@@ -30,7 +32,27 @@ export class AddAccountComponent implements OnInit {
   accounts:Account[] = [];
   account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalace: 0};
   accountDisplay:Account[] = [];
-  constructor() { }
+
+  public stepsIcons = [
+    {
+      label: '',
+      isValid: false
+    }
+  ];
+  public currentStep = 0;
+  firstName:string = '';
+  lastName: string = '';
+  gender:string = '';
+  dateBirth: Date = new Date();
+
+  constructor(
+    private translateService: TranslateService
+  ) {
+    this.stepsIcons = [
+      { label: 'Info',  isValid: true },
+      { label: 'Info2', isValid: true }
+    ];
+   }
 
   ngOnInit(): void {
     console.log();
@@ -57,5 +79,36 @@ export class AddAccountComponent implements OnInit {
 
   onClickBtndescription() {
     this.description = '';
+  }
+
+  public onStepActivate(ev: StepperActivateEvent): void {
+    if (ev.index === this.stepsIcons.length - 1) {
+        ev.preventDefault();
+        this.currentStep =  this.stepsIcons.length - 1;
+        console.log('Please fill previous steps');
+    }
+    console.log(`Step ${ev.index} was activated`);
+    console.log(ev);
+  }
+
+    // end file select function
+  public prev(): void {
+    this.currentStep -= 1;
+  }
+
+  public next(value: number): void {
+    console.log(value);
+    this.currentStep += 1;
+    if(value === 0) {
+      // if(this.checkUserInfo()) {
+      //   this.stepsIcons[0].isValid =  true;
+      //   this.stepsIcons[1].isValid =  true;
+      //   this.currentStep += 1;
+      // } else {
+      //   this.stepsIcons[0].isValid =  false;
+      // }
+    } else if (value === 1) {
+      this.currentStep += 1;
+    }
   }
 }

@@ -187,33 +187,50 @@ export class SidebarComponent implements OnInit {
 
 export const accountTypes: AccountType[] = [
   {
-    id: 1,
-    code: AccountTypeCode.Admin,
-    name: 'Admin',
-    remark: 'A'
-  },
-  {
     id: 2,
-    code: AccountTypeCode.Senair,
+    code: AccountTypeCode.Seniar,
     name: 'Senair',
     remark: 'A'
   },
+];
+
+export const accountSenairTypes: AccountType[] = [
   {
     id: 3,
-    code: AccountTypeCode.Master,
+    code: AccountTypeCode.Seniar,
     name: 'Master',
     remark: 'A'
   },
   {
     id: 4,
-    code: AccountTypeCode.Agentcy,
+    code: AccountTypeCode.Seniar,
     name: 'Agent',
-    remark: 'A'
+    remark: 'Agent'
+  },
+];
+
+
+export const accountMasterTypes: AccountType[] = [
+  {
+    id: 3,
+    code: AccountTypeCode.Seniar,
+    name: 'Agent',
+    remark: 'Agent'
   },
   {
-    id: 5,
-    code: AccountTypeCode.Member,
+    id: 4,
+    code: AccountTypeCode.Seniar,
     name: 'Member',
-    remark: 'A'
-  }
+    remark: 'Member'
+  },
+];
+
+
+export const accountAgentTypes: AccountType[] = [
+  {
+    id: 4,
+    code: AccountTypeCode.Seniar,
+    name: 'Member',
+    remark: 'Member'
+  },
 ];

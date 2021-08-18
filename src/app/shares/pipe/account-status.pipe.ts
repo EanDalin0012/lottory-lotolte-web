@@ -19,7 +19,7 @@ export class AccountStatusPipe implements PipeTransform {
       case AccountStatus.Active:
         console.log('OK');
         //this.translateService.instant('Common.Label.active')
-        return '<span class="badge bg-inverse-success"> Active </span>';
+        return '<span class="badge bg-inverse-success">'+this.translateService.instant('Common.Label.active')+' </span>';
       case AccountStatus.Inactive:
         return '<span class="badge bg-inverse-danger">' + this.translateService.instant('Common.Label.inactive') + '</span>';
       default:

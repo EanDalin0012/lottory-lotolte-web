@@ -18,6 +18,13 @@
                   <div class="form-group">
                       <label>Email Address</label>
                       <input class="form-control" type="text">
+                      <div class="in_box">
+                        <button (click)="isEmpty('u')" type="button" [ngClass]="userName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      </div>
+
+                      <div *ngIf="userName === '' || userName === null">
+                        <small class="text-danger"> *Account Name is required</small>
+                      </div>
                   </div>
                   <div class="form-group">
                       <div class="row">

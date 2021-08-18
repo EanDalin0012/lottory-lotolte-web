@@ -6,6 +6,7 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
+import { SubAccountComponent } from './sub-account/sub-account.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
       {path: 'profile', component: AccountProfileComponent},
       {path: 'details', component: AccountDetailsComponent},
       {path: 'my-account', component: MyAccountComponent},
-      {path: 'account-setting', component: AccountSettingComponent}
+      {path: 'account-setting', component: AccountSettingComponent},
+      {path: 'sub-account', component: SubAccountComponent}
     ]
   }
 ];

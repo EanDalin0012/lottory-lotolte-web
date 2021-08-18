@@ -21,6 +21,7 @@ declare const $: any;
   styleUrls: ['./account-list.component.css']
 })
 export class AccountListComponent implements OnInit {
+
   storeUtil = new StoreUtil();
   accounts: Account[] = [];
   @ViewChild(DataTableDirective, { static: false })
@@ -37,7 +38,9 @@ export class AccountListComponent implements OnInit {
   public tempId: any;
   public editId: any;
   accountType = '';
+
   accountDisplay: Account[] = [];
+
   i = 1;
   constructor(
     private modalService: ModalService,
@@ -129,4 +132,10 @@ export class AccountListComponent implements OnInit {
     StoreUtil.set('account-setting', item);
     this.router.navigate(['/acc/account-setting']);
   }
+
+  onSeniar(item: any) {
+    Utils.setSecureStorage('sub-account', item);
+    this.router.navigate(['/acc/sub-account']);
+  }
+
 }
