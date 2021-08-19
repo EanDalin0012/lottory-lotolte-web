@@ -25,6 +25,9 @@
       "newMasterAccount":"New Master Account",
       "withDrawalMoney":"WithDrawal Money",
       "details":"Details",
+      "fileName":"File Name",
+      "fileSize":"File Size {{value}}",
+      "previewSelectedImages":"Preview Selected Images",
       "WithDrawal": {
         "fromAccount":"From Account"
       },
@@ -85,7 +88,8 @@
       "firstName":"First Name",
       "lastName":"Last Name",
       "gender":"Gender",
-      "dateBirth":"Date of Birth"
+      "dateBirth":"Date of Birth",
+      "phoneNumber":"Phone Number"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
@@ -94,7 +98,8 @@
       "firstNameRequired":"*First Name is required",
       "lastNameRequired":"*Last Name is required",
       "genderRequired":"*Gender is required",
-      "dateBirthRequired":"*Date of birth is required"
+      "dateBirthRequired":"*Date of birth is required",
+      "phoneNumberRequired":"*Phone number is required"
     },
     "Holder": {
       "enterAccountID": "Enter account ID",
@@ -103,7 +108,8 @@
       "enterAccountStatus": "Enter account status",
       "enterFirstName": "Enter first name",
       "enterLastName": "Enter last name",
-      "enterDateBirth": "Enter date of birth"
+      "enterDateBirth": "Enter date of birth",
+      "enterPhoneNumber": "Enter phone number"
     }
 
   },

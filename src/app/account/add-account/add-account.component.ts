@@ -6,6 +6,8 @@ import { LOCAL_STORAGE, BTN_ROLES } from '../../shares/constants/common.const';
 import { accountDatas } from '../account-list/account-data';
 import { TranslateService } from '@ngx-translate/core';
 import { StepperActivateEvent } from '@progress/kendo-angular-layout';
+import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-account',
@@ -44,6 +46,12 @@ export class AddAccountComponent implements OnInit {
   lastName: string = '';
   gender:string = '';
   dateBirth: Date = new Date();
+
+  public fileRestrictions: FileRestrictions = {
+    allowedExtensions: ['.jpg', '.png']
+  };
+  image_uploaded: boolean = false;
+  public imagePreviews: any[] = [];
 
   constructor(
     private translateService: TranslateService
@@ -111,4 +119,92 @@ export class AddAccountComponent implements OnInit {
       this.currentStep += 1;
     }
   }
+
+  // file select function
+  public selectEventHandler(e: SelectEvent): void {
+    this.image_uploaded = false;
+
+    const that = this;
+    e.files.forEach((file: any) => {
+
+    if (!file.validationErrors) {
+        const reader = new FileReader();
+        reader.onload = function (ev:any) {
+
+        const image = {
+            src: ev.target['result']+"",
+            uid: file.uid,
+            id: file.uid +"-"+moment().format('YYYYMMDDhhmmss'),
+            name: file.name,
+            size: file.size,
+            type: file.rawFile.type,
+            extension: file.extension
+        };
+        that.imagePreviews.push(image);
+
+        };
+        reader.readAsDataURL(file.rawFile);
+
+    }
+
+    });
+  }
+
+  public showButton(state: FileState): boolean {
+    return (state === FileState.Selected) ? true : false;
+  }
+
+  public remove(fileSelect:any, uid: string) {
+    this.image_uploaded = false;
+    fileSelect.removeFileByUid(uid);
+    if(this.imagePreviews.length > 0) {
+      this.imagePreviews.forEach((element,index) =>{
+        if(element.uid === uid) {
+            console.log("call add function", element, index);
+            this.imagePreviews.splice(index, 1);
+        }
+      });
+    }
+  }
+
+  upload(state:any, value: string): boolean {
+    console.log(this.imagePreviews);
+    if(value === 'f'){
+      return false;
+    } else if(value === 't') {
+      if(this.imagePreviews.length > 0) {
+        this.imagePreviews.forEach(element =>{
+          if(element.uid === state) {
+              let splitted = element.src.split(',');
+              // const base64WriteImage = new Base64WriteImage();
+              console.log('splitted', splitted)
+              // if(splitted[1]) {
+              //   base64WriteImage.id         = element.id;
+              //   base64WriteImage.base64     = splitted[1];
+              //   base64WriteImage.file_name  = element.name;
+              //   base64WriteImage.file_type  = element.type;
+              //   base64WriteImage.file_size  = element.size;
+              //   base64WriteImage.file_extension = element.extension;
+              //   this.uploadService.upload(base64WriteImage).then(resp=>{
+              //     if(resp === true) {
+              //       this.resource_img_id_list.push({resource_id: base64WriteImage.id});
+              //       console.log('resource_img_id', this.resource_img_id_list);
+              //       this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
+              //      return true;
+              //     }
+              //   });
+              // }
+          }
+        });
+      } else {
+        return false;
+      }
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+
 }

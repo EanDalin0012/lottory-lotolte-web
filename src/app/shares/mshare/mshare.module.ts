@@ -17,7 +17,7 @@ import { SchedulerModule } from '@progress/kendo-angular-scheduler';
 import { ScrollViewModule } from '@progress/kendo-angular-scrollview';
 import { SortableModule } from '@progress/kendo-angular-sortable';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
-import { UploadModule } from '@progress/kendo-angular-upload';
+import { UploadModule, UploadsModule } from '@progress/kendo-angular-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ModalComponent } from '../component/modal/modal.component';
@@ -73,6 +73,7 @@ import { AccountTypePipe } from '../pipe/account-type.pipe';
     SortableModule,
     TooltipModule,
     UploadModule,
+    UploadsModule,
     // pipe
     AccountPipe,
     AccountStatusPipe,
