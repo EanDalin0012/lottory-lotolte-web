@@ -28,7 +28,7 @@
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">{{'Account.Label.firstName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input  type="text" formControlName="firstName" [ngClass]="personalInformation.firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
+                  <input #firstName type="text" formControlName="firstName" [ngClass]="personalInformation.firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="personalInformation.firstName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -42,14 +42,14 @@
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input type="text" [ngClass]="personalInformation.lastName? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+                  <input #lastName formControlName="lastName" type="text" [ngClass]="personalInformation.lastName? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="personalInformation.lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()"  class="btn"></button>
                   </div>
 
-                  <ng-container *ngIf="personalInformation.lastName === '' || personalInformation.lastName === null">
-                    <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
+                  <ng-container *ngIf="submitted && f.lastName.errors">
+                    <small class="text-danger font-weight-700">{{'Account.Message.lastNameRequired' | translate}}</small>
                   </ng-container>
 
               </div>
@@ -71,7 +71,7 @@
                     </kendo-dropdownlist>
 
                     <ng-container *ngIf="gender.code === ''">
-                      <span class="text-danger">{{'Account.Message.genderRequired' | translate}}</span>
+                      <span class="text-danger font-weight-700">{{'Account.Message.genderRequired' | translate}}</span>
                     </ng-container>
                 </div>
 
@@ -82,7 +82,7 @@
                     </kendo-datepicker>
 
                     <ng-container *ngIf="dateBirth === null">
-                      <span class="text-danger">{{'Account.Message.dateBirthRequired' | translate}}</span>
+                      <span class="text-danger font-weight-700">{{'Account.Message.dateBirthRequired' | translate}}</span>
                     </ng-container>
 
                 </div>
@@ -92,28 +92,26 @@
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">{{'Account.Label.phoneNumber' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <input  type="text" [ngClass]="personalInformation.phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+                    <input #phoneNumber formControlName="phoneNumber" type="text" [ngClass]="personalInformation.phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="personalInformation.phoneNumber? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                     </div>
 
-                    <ng-container *ngIf="personalInformation.phoneNumber === ''">
-                      <small class="text-danger">{{'Account.Message.phoneNumberRequired' | translate}}</small>
+                    <ng-container *ngIf="submitted && f.phoneNumber.errors">
+                      <small class="text-danger font-weight-700">{{'Account.Message.phoneNumberRequired' | translate}}</small>
                     </ng-container>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">Other Phone</label>
                     <span class="text-danger">*</span>
-                    <input type="text" [ngClass]="personalInformation.otherPhone? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+                    <input formControlName="otherPhoneNumber" type="text" [ngClass]="personalInformation.otherPhone? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="personalInformation.otherPhone? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()"></button>
                     </div>
-                    <ng-container *ngIf="personalInformation.otherPhone === '' || personalInformation.otherPhone === null">
-                      <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
-                    </ng-container>
+
 
                 </div>
             </div>
@@ -129,7 +127,7 @@
               <div class="form-group col-md-12">
                   <label class="font-khmer-cursive">User Name</label>
                   <span class="text-danger">*</span>
-                  <input  type="text" [ngClass]="userAccount.userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+                  <input #userName type="text" formControlName="userName" [ngClass]="userAccount.userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="userAccount.userName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -165,6 +163,10 @@
                   </div>
                   <div *ngIf="confirmPawword === '' || confirmPawword === null">
                     <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
+                  </div>
+
+                  <div *ngIf="f.confirmPassword.errors?.matching">
+                    Confirm Password does not match
                   </div>
 
               </div>
@@ -302,7 +304,7 @@
               <span class="font-weigh-700 margin-left-5px">Close</span>
           </button>
 
-          <button (click)="showNotification()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+          <button (click)="save()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
               <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
               <span class="font-weigh-700 margin-left-5px">Save</span>
           </button>

@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { Account } from '../../shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
@@ -16,6 +16,7 @@ import { UserAccount } from '../../shares/model/user-account';
 import { IdentifyInformation } from '../../shares/model/identify-information';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '@progress/kendo-angular-notification';
+import ValidationForm from '../../shares/utils/validation-from';
 
 @Component({
   selector: 'app-add-account',
@@ -23,6 +24,14 @@ import { NotificationService } from '@progress/kendo-angular-notification';
   styleUrls: ['./add-account.component.css']
 })
 export class AddAccountComponent implements OnInit {
+
+  @ViewChild("firstName") inputFirstName: any;
+  @ViewChild("lastName") inputLastName: any;
+  @ViewChild("phoneNumber") inputPhoneNumber: any;
+  @ViewChild("otherPhoneNumber") inputOtherPhoneNumber: any;
+  @ViewChild("userName") inputUserName: any;
+
+
 
   modal:any;
   public horizontal = "right";
@@ -109,11 +118,19 @@ export class AddAccountComponent implements OnInit {
     private notificationService: NotificationService
   ) {
     this.form as FormGroup;
+    this.inputFirstName as ElementRef;
+    this.inputLastName as ElementRef;
+    this.inputPhoneNumber as ElementRef;
+    this.inputOtherPhoneNumber as ElementRef;
+    this.inputUserName as ElementRef;
+
     this.form = this.formBuilder.group(
       {
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
-        username: [
+        phoneNumber: ['', Validators.required],
+        otherPhoneNumber: ['', Validators.required],
+        userName: [
           '',
           [
             Validators.required,
@@ -121,7 +138,6 @@ export class AddAccountComponent implements OnInit {
             Validators.maxLength(20)
           ]
         ],
-        email: ['', [Validators.required, Validators.email]],
         password: [
           '',
           [
@@ -133,9 +149,9 @@ export class AddAccountComponent implements OnInit {
         confirmPassword: ['', Validators.required],
         acceptTerms: [false, Validators.requiredTrue]
       },
-      // {
-      //   validators: [Validation.match('password', 'confirmPassword')]
-      // }
+      {
+        validators: [ValidationForm.match('password', 'confirmPassword')]
+      }
     );
 
     this.stepsIcons = [
@@ -376,6 +392,19 @@ export class AddAccountComponent implements OnInit {
 
   save() {
     this.submitted = true;
+    if(this.f.firstName.errors) {
+      this.inputFirstName.nativeElement.focus();
+    } else if (this.f.lastName.errors) {
+      this.inputLastName.nativeElement.focus();
+    } else if (this.f.phoneNumber.errors) {
+      this.inputPhoneNumber.nativeElement.focus();
+    } else if (this.f.otherPhoneNumber.errors) {
+      this.inputOtherPhoneNumber.nativeElement.focus();
+    } else if (this.f.userName.errors) {
+      this.inputUserName.nativeElement.focus();
+    }
+
+
     const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector(
       ".ng-invalid"
     );
@@ -418,12 +447,14 @@ export class AddAccountComponent implements OnInit {
   }
 
   public showNotification(): void {
-    this.notificationService.show({
-      content: `Hi! I am info notification with position set to { horizontal: ${this.horizontal}, vertical: ${this.vertical} }`,
-      animation: { type: "fade", duration: 8000000000 },
-      type: { style: "info", icon: true },
-      position: { horizontal: 'right', vertical: 'bottom' },
-    });
+    this.inputFirstName.nativeElement.focus();
+
+    // this.notificationService.show({
+    //   content: `Hi! I am info notification with position set to { horizontal: ${this.horizontal}, vertical: ${this.vertical} }`,
+    //   animation: { type: "fade", duration: 8000000000 },
+    //   type: { style: "info", icon: true },
+    //   position: { horizontal: 'right', vertical: 'bottom' },
+    // });
   }
 
 }
