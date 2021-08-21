@@ -9570,3 +9570,40 @@ input.inp_cal:focus {
 }
 
 
+.table02 {
+  margin: 10px 0;
+  font-size: .875rem;
+  border-top: 1px solid #afa79d;
+}
+
+.table02:first-child {
+  margin-top: 0;
+}
+
+.table02:last-child {
+  margin-bottom: 0;
+}
+
+.table02 tr {
+  border-bottom: 1px solid #e0dcd7;
+}
+
+.table02 th {
+  height: 32px;
+  padding: 8px 17px;
+  font-weight: normal;
+  text-align: left;
+  background: #f3f1ee;
+}
+
+.table02 td {
+  height: 32px;
+  padding: 8px 17px;
+  font-weight: normal;
+  font-size: .9375rem;
+  color: #696f79;
+  text-align: left;
+}
+.font-weight-700 {
+  font-weight: 700;
+}

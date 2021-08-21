@@ -16,6 +16,8 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Utils } from './shares/utils/utils.static';
 import { LOCAL_STORAGE } from './shares/constants/common.const';
+import { InvalidControlScrollContainerDirective } from './shares/directive/invalid-control-scroll-container.directive';
+import { InvalidControlScrollDirective } from './shares/directive/invalid-control-scroll.directive';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -27,7 +29,9 @@ export function createTranslateLoader(http: HttpClient) {
     MlayoutComponent,
     LayoutBlankComponent,
     Error404Component,
-    Error405Component
+    Error405Component,
+    InvalidControlScrollContainerDirective,
+    InvalidControlScrollDirective
   ],
   imports: [
     MLayoutModule,

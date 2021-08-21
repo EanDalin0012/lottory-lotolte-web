@@ -16,141 +16,227 @@
                         (activate)="onStepActivate($event)"
                         [(currentStep)]="currentStep">
             </kendo-stepper> -->
+            <form [formGroup]="form" (ngSubmit)="save()" ngxScrollToFirstInvalid>
 
-            <div class="form-row">
+            <div class="form-row row">
               <div class="form-group col-md-12">
                 <h1 class="font-khmer-cursive" style="font-weight: bold;">Personal Informations</h1>
               </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row row">
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">{{'Account.Label.firstName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input  type="text" [ngClass]="firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="firstName" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
+                  <input  type="text" formControlName="firstName" [ngClass]="personalInformation.firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="firstName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div>
-                  <div *ngIf="firstName === '' || firstName === null">
-                    <small class="text-danger">{{'Account.Message.firstNameRequired' | translate}}</small>
+                      <button type="button" [ngClass]="personalInformation.firstName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
 
+                  <ng-container *ngIf="submitted && f.firstName.errors">
+                    <small class="text-danger font-weight-700">{{'Account.Message.firstNameRequired' | translate}}</small>
+                  </ng-container>
               </div>
+
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input type="text" [ngClass]="lastName? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="lastName" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+                  <input type="text" [ngClass]="personalInformation.lastName? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      <button type="button" [ngClass]="personalInformation.lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()"  class="btn"></button>
                   </div>
-                  <div *ngIf="lastName === '' || lastName === null">
+
+                  <ng-container *ngIf="personalInformation.lastName === '' || personalInformation.lastName === null">
                     <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
-                  </div>
+                  </ng-container>
 
               </div>
             </div>
 
-            <div class="form-row">
 
-              <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.gender' | translate}}</label>
-                  <span class="text-danger">*</span>
-                  <kendo-dropdownlist [data]="accounts" [filterable]="true" [textField]="'accountName'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="account" [ngModelOptions]="{standalone:
-                    true}" [defaultItem]="defaultAccount">
-                        <ng-template kendoDropDownListValueTemplate let-dataItem>
-                            <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                        </ng-template>
-                        <ng-template kendoDropDownListItemTemplate let-dataItem>
-                            <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                        </ng-template>
-                  </kendo-dropdownlist>
+            <div class="form-row row">
 
-                  <div *ngIf="firstName === '' || firstName === null">
-                    <small class="text-danger">{{'Account.Message.genderRequired' | translate}}</small>
-                  </div>
-              </div>
+                <div class="form-group col-md-6">
+                    <label class="font-khmer-cursive">{{'Account.Label.gender' | translate}}</label>
+                    <span class="text-danger">*</span>
+                    <kendo-dropdownlist [data]="genders" [textField]="'text'" [valueField]="'code'"  [defaultItem]="defaultGender">
+                          <ng-template kendoDropDownListValueTemplate let-dataItem>
+                              <span class="template font-khmer-cursive">{{ dataItem.text}} </span>
+                          </ng-template>
+                          <ng-template kendoDropDownListItemTemplate let-dataItem>
+                              <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
+                          </ng-template>
+                    </kendo-dropdownlist>
 
-              <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.dateBirth' | translate}}</label>
-                  <span class="text-danger">*</span>
-                  <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="dateBirth" required>
-                  </kendo-datepicker>
-                  <div class="in_box">
-                      <button type="button" [ngClass]="lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div>
-                  <div *ngIf="lastName === '' || lastName === null">
-                    <small class="text-danger">{{'Account.Message.dateBirthRequired' | translate}}</small>
-                  </div>
+                    <ng-container *ngIf="gender.code === ''">
+                      <span class="text-danger">{{'Account.Message.genderRequired' | translate}}</span>
+                    </ng-container>
+                </div>
 
+                <div class="form-group col-md-6">
+                    <label class="font-khmer-cursive">{{'Account.Label.dateBirth' | translate}}</label>
+                    <span class="text-danger">*</span>
+                    <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="dateBirth" required>
+                    </kendo-datepicker>
+
+                    <ng-container *ngIf="dateBirth === null">
+                      <span class="text-danger">{{'Account.Message.dateBirthRequired' | translate}}</span>
+                    </ng-container>
+
+                </div>
+            </div>
+
+            <div class="form-row row">
+                <div class="form-group col-md-6">
+                    <label class="font-khmer-cursive">{{'Account.Label.phoneNumber' | translate}}</label>
+                    <span class="text-danger">*</span>
+                    <input  type="text" [ngClass]="personalInformation.phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+
+                    <div class="in_box">
+                        <button type="button" [ngClass]="personalInformation.phoneNumber? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                    </div>
+
+                    <ng-container *ngIf="personalInformation.phoneNumber === ''">
+                      <small class="text-danger">{{'Account.Message.phoneNumberRequired' | translate}}</small>
+                    </ng-container>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label class="font-khmer-cursive">Other Phone</label>
+                    <span class="text-danger">*</span>
+                    <input type="text" [ngClass]="personalInformation.otherPhone? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+
+                    <div class="in_box">
+                        <button type="button" [ngClass]="personalInformation.otherPhone? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()"></button>
+                    </div>
+                    <ng-container *ngIf="personalInformation.otherPhone === '' || personalInformation.otherPhone === null">
+                      <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
+                    </ng-container>
+
+                </div>
+            </div>
+
+
+            <div class="form-row row">
+              <div class="form-group col-md-12">
+                <h1 class="font-khmer-cursive" style="font-weight: bold;">User Account</h1>
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.phoneNumber' | translate}}</label>
+            <div class="form-row row">
+              <div class="form-group col-md-12">
+                  <label class="font-khmer-cursive">User Name</label>
                   <span class="text-danger">*</span>
-                  <input  type="text" [ngClass]="firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="firstName" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+                  <input  type="text" [ngClass]="userAccount.userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="firstName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      <button type="button" [ngClass]="userAccount.userName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
-                  <div *ngIf="firstName === '' || firstName === null">
+                  <div *ngIf="userAccount.userName === '' || userAccount.userName === null">
+                    <small class="text-danger">{{'Account.Message.phoneNumberRequired' | translate}}</small>
+                  </div>
+              </div>
+            </div>
+
+            <div class="form-row row">
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">Password</label>
+                  <span class="text-danger">*</span>
+                  <input  type="password"  [ngClass]="password? 'active-input' : ''" class=" form-control font-khmer-cursive"  placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+
+                  <div class="in_box">
+                      <button type="button" [ngClass]="password? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  </div>
+                  <div *ngIf="password === '' || password === null">
                     <small class="text-danger">{{'Account.Message.phoneNumberRequired' | translate}}</small>
                   </div>
 
               </div>
+
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
+                  <label class="font-khmer-cursive">Confirm Password</label>
                   <span class="text-danger">*</span>
-                  <input type="text" [ngClass]="lastName? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="lastName" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+                  <input type="password" [ngClass]="confirmPawword? 'active-input' : ''" class="form-control font-khmer-cursive"  placeholder="{{'Account.Holder.enterLastName' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="lastName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      <button type="button" [ngClass]="confirmPawword? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
-                  <div *ngIf="lastName === '' || lastName === null">
+                  <div *ngIf="confirmPawword === '' || confirmPawword === null">
                     <small class="text-danger">{{'Account.Message.lastNameRequired' | translate}}</small>
                   </div>
 
               </div>
             </div>
 
-            <br/>
 
-            <div class="form-row">
+            <div class="form-row row">
+              <div class="form-group col-md-12">
+                <label class="font-khmer-cursive">Profile</label>
+
+                <kendo-fileselect
+                                  [restrictions]="fileRestrictions"
+                                  [multiple] = "true"
+                                  class="font-khmer-cursive kendo-fileselect-t"
+                                  (select)="selectEventHandler($event)"
+                                          #myFileSelect="kendoFileSelect">
+                                          <ng-template kendoFileSelectFileTemplate let-files let-state="state">
+                                              <div class="font-khmer-cursive">
+                                                  {{'Common.Label.fileName' | translate: {'value': files[0].name} }}
+                                                   <strong class="chipe-00">
+                                                       {{'Common.Label.fileSize' | translate: {'value': files[0].size} }}
+                                                  </strong>
+                                              </div>
+                                              <!-- [ngClass]="{right0px: showButton(state) == false}" -->
+                                              <!-- *ngIf = "upload(files[0].uid, 'f') == false" -->
+                                              <button  class="k-button"  style="position: absolute; right: 6.2em; height: 30px;"   kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'Common.Button.Remove' | translate}}</button>
+                                              <button  class="k-button"  style="position: absolute; right: .2em; height: 30px;"  kendoButton (click)="upload(files[0].uid, 't');" [icon]="'upload'" [look]="'outline'">{{'Common.Button.Upload' | translate}}</button>
+                                          </ng-template>
+                  </kendo-fileselect>
+                  <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                    <h3 class="font-khmer-cursive">{{'Common.Label.previewSelectedImages' | translate}}</h3>
+                    <img *ngFor="let image of imagePreviews"
+                    [src]="image.src"
+                    alt="image preview"
+                    style="width: 200px; margin: 10px;" />
+                </div>
+
+
+            </div>
+            </div>
+
+            <div class="form-row row">
               <div class="form-group col-md-12">
                 <h1 class="font-khmer-cursive" style="font-weight: bold;">Identify Informations</h1>
               </div>
             </div>
 
 
-            <div class="form-row">
+            <div class="form-row row">
               <div class="form-group col-md-6">
                   <label class="font-khmer-cursive">Identify ID</label>
-                  <span class="text-danger">*</span>
-                  <input  type="text" [ngClass]="firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="firstName" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+                  <input  type="text" [ngClass]="identifyInformation.identifyID? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
 
                   <div class="in_box">
-                      <button type="button" [ngClass]="firstName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                      <button type="button" [ngClass]="identifyInformation.identifyID? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
-                  <div *ngIf="firstName === '' || firstName === null">
+                  <div *ngIf="identifyInformation.identifyID === '' || identifyInformation.identifyID === null">
                     <small class="text-danger">{{'Account.Message.phoneNumberRequired' | translate}}</small>
                   </div>
 
               </div>
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
-                  <span class="text-danger">*</span>
+                  <label class="font-khmer-cursive">Image of Identify</label>
 
                   <kendo-fileselect
                                     [restrictions]="fileRestrictions"
-                                    [multiple] = "true"
+                                    [multiple] = "false"
                                     class="font-khmer-cursive kendo-fileselect-t"
-                                    (select)="selectEventHandler($event)"
-                                            #myFileSelect="kendoFileSelect">
+                                    (select)="selectIdentifyEventHandler($event)"
+                                            #myFileSelect1="kendoFileSelect">
                                             <ng-template kendoFileSelectFileTemplate let-files let-state="state">
-                                                <div class="font-khmer-cursive">
+                                                <div class="font-khmer-cursive" *ngIf = "files[0].size > 0">
                                                     {{'Common.Label.fileName' | translate: {'value': files[0].name} }}
                                                      <strong class="chipe-00">
                                                          {{'Common.Label.fileSize' | translate: {'value': files[0].size} }}
@@ -158,13 +244,13 @@
                                                 </div>
                                                 <!-- [ngClass]="{right0px: showButton(state) == false}" -->
                                                 <!-- *ngIf = "upload(files[0].uid, 'f') == false" -->
-                                                <button  class="k-button"  style="position: absolute; right: 6.2em; height: 30px;"   kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'Common.Button.Remove' | translate}}</button>
-                                                <button  class="k-button"  style="position: absolute; right: .2em; height: 30px;"  kendoButton (click)="upload(files[0].uid, 't');" [icon]="'upload'" [look]="'outline'">{{'Common.Button.Upload' | translate}}</button>
+                                                <button  class="k-button"  style="position: absolute; right: 6.2em; height: 30px;"   kendoButton (click)="removeIdentify(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'Common.Button.Remove' | translate}}</button>
+                                                <button  class="k-button"  style="position: absolute; right: .2em; height: 30px;"  kendoButton (click)="uploadIdentifyImage(files[0].uid, 't');" [icon]="'upload'" [look]="'outline'">{{'Common.Button.Upload' | translate}}</button>
                                             </ng-template>
                     </kendo-fileselect>
-                    <div *ngIf="imagePreviews.length" class="img-preview example-config">
+                    <div *ngIf="identifyImagePreviews.length" class="img-preview example-config">
                       <h3 class="font-khmer-cursive">{{'Common.Label.previewSelectedImages' | translate}}</h3>
-                      <img *ngFor="let image of imagePreviews"
+                      <img *ngFor="let image of identifyImagePreviews"
                       [src]="image.src"
                       alt="image preview"
                       style="width: 200px; margin: 10px;" />
@@ -174,34 +260,10 @@
               </div>
             </div>
 
-            <div class="form-row">
-              <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">To Account</label>
-                <kendo-dropdownlist [data]="accounts" [filterable]="true" [textField]="'accountName'" [valueField]="'id'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="account" [ngModelOptions]="{standalone:
-                  true}" [defaultItem]="defaultAccount">
-                      <ng-template kendoDropDownListValueTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                      </ng-template>
-                      <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.accountId}} - {{ dataItem.accountName}}</span>
-                      </ng-template>
-                </kendo-dropdownlist>
-              </div>
-              <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">Amount</label>
-                  <input type="text" [ngClass]="amount? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="amount" placeholder="{{'RegiPro.Holder.Enter_Product_Name' | translate}}">
-
-                  <!-- <div class="in_box">
-                      <button type="button" [ngClass]="currenctAccountName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                  </div> -->
-
-              </div>
-            </div>
-
-              <div class="form-row">
+              <div class="form-row row">
                   <div class="form-group col-md-12">
                       <label>Remark</label>
-                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" [(ngModel)]="categoryName" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
+                      <input type="text" [ngClass]="categoryName? 'active-input' : ''" class="form-control" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
 
                       <div class="in_box">
                           <button type="button" [ngClass]="categoryName? 'btn_del' : ''" (click)="onClickBtnMainCategoryName()" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
@@ -209,11 +271,11 @@
 
                   </div>
               </div>
-
-
+              </form>
+<!-- Form -->
           </div>
 
-          <div class="width-100p float-right right-0">
+          <!-- <div class="width-100p float-right right-0">
             <span class="page width-100p float-right right-0 text-align-right">Steps {{ currentStep + 1 }} of 4</span>
 
             <div class="float-right right-0">
@@ -227,10 +289,8 @@
                     <i class="fas fa-arrow-circle-right font-size-20px"></i>
                     <span class="margin-left-5px">{{'Common.Button.Next' | translate}}</span>
                 </button>
-
             </div>
-
-        </div>
+          </div> -->
 
       </div>
 
@@ -242,7 +302,7 @@
               <span class="font-weigh-700 margin-left-5px">Close</span>
           </button>
 
-          <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+          <button (click)="showNotification()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
               <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
               <span class="font-weigh-700 margin-left-5px">Save</span>
           </button>

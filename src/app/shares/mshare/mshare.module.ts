@@ -24,6 +24,7 @@ import { ModalComponent } from '../component/modal/modal.component';
 import { AccountPipe } from '../pipe/account.pipe';
 import { AccountStatusPipe } from '../pipe/account-status.pipe';
 import { AccountTypePipe } from '../pipe/account-type.pipe';
+import {NgxScrollToFirstInvalidModule} from '@ismaestro/ngx-scroll-to-first-invalid';
 @NgModule({
   declarations: [
     ModalComponent,
@@ -50,6 +51,7 @@ import { AccountTypePipe } from '../pipe/account-type.pipe';
     // SortableModule,
     // TooltipModule,
     // UploadModule,
+    NgxScrollToFirstInvalidModule
   ],
   exports: [
     FormsModule,

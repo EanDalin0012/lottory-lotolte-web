@@ -36,8 +36,8 @@
                           <th>#</th>
                           <th>{{'Account.Label.accountID' | translate}}</th>
                           <th>{{'Account.Label.accountName' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountType' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
+                          <th class="text-center" width = "150px">{{'Account.Label.accountType' | translate}}</th>
+                          <th class="text-center" width = "150px">{{'Account.Label.accountBalance' | translate}}</th>
                           <th class="text-center">{{'Common.Label.status' | translate}}</th>
                           <th class="text-right">{{'Common.Label.action' | translate}}</th>
                       </tr>
@@ -47,7 +47,7 @@
                           <td>{{i + 1}}</td>
                           <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
-                          <td>
+                          <td class="text-center">
                             <div [innerHTML] = 'item.accountType | accountType'>
                             </div>
                           </td>

@@ -1,0 +1,94 @@
+<div class="contentsWrap">
+  <div class="container01" style="margin-top: 35px;">
+      <div class="web_container">
+        <!-- Header -->
+        <div class="pop_header">
+          <h1>Bank Information</h1>
+          <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
+        </div>
+        <!-- /Header -->
+
+        <div class="web_Wrap">
+
+
+          <table class="table02">
+            <colgroup>
+                <col style="width:16.666%;" span="6" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <th class = "font-size-1-50rem" scope="row">Account Name</th>
+                    <td colspan="5"><strong class = "font-size-1-50rem">cardIdentify?.card_id</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th class = "font-size-1-50rem" scope="row">Account ID</th>
+                    <td>
+                        <span class = "font-size-1-50rem">cardIdentify?.font_image_id</span>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <tr>
+                  <th class = "font-size-1-50rem" scope="row">Account Banlance</th>
+                  <td>
+                      <span class = "font-size-1-50rem">110 KHR</span>
+                  </td>
+                  <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- <table class="table02">
+          <colgroup>
+              <col style="width:16.666%;" span="6" />
+          </colgroup>
+          <tbody>
+              <tr>
+                  <th class = "font-size-1-50rem" scope="row">{{'UserMngUserInfo.Label.Kh_Id' | translate}}</th>
+                  <td colspan="5"><strong class = "font-size-1-50rem">cardIdentify?.card_id</strong></td>
+              </tr>
+              <tr>
+                  <th class = "font-size-1-50rem" scope="row">{{'UserMngUserInfo.Label.Card_Identify_Image_Front' | translate}}</th>
+                  <td>
+                      <span>cardIdentify?.font_image_id</span>
+                  </td>
+                  <th class = "font-size-1-50rem" scope="row">{{'UserMngUserInfo.Label.Card_Identify_Image_Rear' | translate}}</th>
+                  <td>
+                      <span>cardIdentify?.rear_image_id</span>
+                  </td>
+              </tr>
+              <tr>
+                  <th scope="row" colspan="2">
+                      Image
+                  </th>
+
+                  <th scope="row" colspan="2">
+                      image
+                  </th>
+
+              </tr>
+
+      </table> -->
+
+        </div>
+
+      </div>
+
+
+      <div class="c_btn">
+
+        <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+            <span class="k-icon k-i-close-circle k-i-x-circle margin-top-1px font-size-20px"></span>
+            <span class="font-weigh-700 margin-left-5px">Close</span>
+        </button>
+
+        <!-- <button (click)="save()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+            <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
+            <span class="font-weigh-700 margin-left-5px">Save</span>
+        </button> -->
+
+    </div>
+
+  </div>
+</div>
