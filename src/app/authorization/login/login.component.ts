@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AccountTypeCode, LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { DataService } from '../../shares/services/data.service';
 import { Utils } from '../../shares/utils/utils.static';
+import { AuthentcatiionService, AuthentcatiionRequest } from '../../shares/services/authentcatiion.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   constructor(
     private dataService: DataService,
+    private authentcatiionService: AuthentcatiionService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -32,5 +34,19 @@ export class LoginComponent implements OnInit {
         this.userName = '';
         break;
     }
+  }
+
+  onLogin() {
+    const logInfo: AuthentcatiionRequest = {
+      user_name: 'admin@gmail.com',
+      password: 'admin123'
+    };
+    this.authentcatiionService.login(logInfo).then((result: any) => {
+      console.log(result);
+
+    }).catch((err: any) => {
+        console.log(err);
+
+    });
   }
 }

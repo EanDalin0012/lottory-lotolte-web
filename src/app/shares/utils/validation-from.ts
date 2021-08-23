@@ -10,7 +10,7 @@ export default class ValidationForm {
         return null;
       }
 
-      if (control !==null && control.value !== checkControl!.value && controls !== null) {
+      if (control !==null && checkControl !== null && control.value !== checkControl.value) {
         controls.get(checkControlName)?.setErrors({ matching: true });
         return { matching: true };
       } else {

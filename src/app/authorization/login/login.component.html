@@ -31,20 +31,19 @@
                           <div class="col">
                               <label>Password</label>
                           </div>
-                          <div class="col-auto">
-                              <a class="text-muted" routerLink = "/login/forgot">
-                                  Forgot password?
-                              </a>
-                          </div>
+
                       </div>
                       <input class="form-control" type="password">
                   </div>
                   <div class="form-group text-center">
+                    <!-- <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px;">
+                      <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
+                      <span class="font-weigh-700 margin-left-5px">{{'Account.Label.newSeniarAccount' | translate}}</span>
+                    </button> -->
+
                       <button class="btn btn-primary account-btn" type="button" (click)="routors()">Login</button>
                   </div>
-                  <div class="account-footer">
-                      <p>Don't have an account yet? <a routerLink = "/login/register">Register</a></p>
-                  </div>
+
               </form>
               <!-- /Account Form -->
 

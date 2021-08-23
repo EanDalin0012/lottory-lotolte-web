@@ -116,6 +116,10 @@ export class AccountListComponent implements OnInit {
     this.modalService.open(
       AddAccountComponent,
       {
+      message: {
+        accountID: '999999999',
+        acountName: 'Compay Account'
+      },
       callback: _response => {
 
       }

@@ -89,7 +89,19 @@
       "lastName":"Last Name",
       "gender":"Gender",
       "dateBirth":"Date of Birth",
-      "phoneNumber":"Phone Number"
+      "phoneNumber":"Phone Number",
+      "otherPhoneNumber":"Other Phone Number",
+      "createNewSeniarAccount":"Create New Seniar Account",
+      "personalInformations":"Personal Informations",
+      "userAccount":"User Account",
+      "userName":"User Name",
+      "password":"Password",
+      "confirmPassword":"Confirm Password",
+      "profile":"Profile",
+      "identifyInformations":"Identify Informations",
+      "identifyID":"Identify ID",
+      "imageIdentify":"Image of Identify",
+      "mainAccount":"Main Account : {{account}}"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
@@ -99,7 +111,10 @@
       "lastNameRequired":"*Last Name is required",
       "genderRequired":"*Gender is required",
       "dateBirthRequired":"*Date of birth is required",
-      "phoneNumberRequired":"*Phone number is required"
+      "phoneNumberRequired":"*Phone number is required",
+      "userNameRequired":"*User Name is required",
+      "passwordNoteFirstTime":"Password is generate by system. When user login first time need to change password again. thank",
+      "confirmPasswordRequired":"*Confirm Password is required"
     },
     "Holder": {
       "enterAccountID": "Enter account ID",
@@ -109,7 +124,12 @@
       "enterFirstName": "Enter first name",
       "enterLastName": "Enter last name",
       "enterDateBirth": "Enter date of birth",
-      "enterPhoneNumber": "Enter phone number"
+      "enterPhoneNumber": "Enter phone number",
+      "enterOtherPhoneNumber": "Enter other phone number",
+      "enterUserName": "Enter user name",
+      "enterPassword": "Enter password",
+      "enterConfirmPassword": "Enter confirm password",
+      "enterIdentifyID": "Enter identify ID"
     }
 
   },

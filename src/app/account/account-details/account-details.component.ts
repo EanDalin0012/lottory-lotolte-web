@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { StoreUtil } from '../../shares/utils/store';
 import { Account } from 'src/app/shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';

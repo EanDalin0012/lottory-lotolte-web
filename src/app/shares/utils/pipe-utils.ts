@@ -1,5 +1,6 @@
 export class PipeUtils {
   public static account(value: string ) {
+
     if(value.length == 9 ) {
       const pipe0 = value.substr(0, 3);
       const pipe1 = value.substr(3, 3);

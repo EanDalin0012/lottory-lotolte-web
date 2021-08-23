@@ -9607,3 +9607,66 @@ input.inp_cal:focus {
 .font-weight-700 {
   font-weight: 700;
 }
+
+.k-upload {
+  background-color: rgb(232, 240, 254) !important;
+}
+.k-upload .k-dropzone {
+  background-color: rgb(232, 240, 254) !important;
+}
+
+.login {
+  width: 35px;
+  height: 35px;
+  float: right;
+  opacity: 2;
+}
+.my-disable {
+  background-color: rgb(232, 240, 254) !important;
+  color: #000 !important;
+}
+
+.loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-size: .75rem;
+  color: #fff;
+  text-align: center;
+  background: rgba(0, 0, 0, .7);
+  z-index: 999999;
+}
+
+.loading>*:first-child {
+  position: absolute;
+  left: 10%;
+  top: 50%;
+  width: 80%;
+  padding-top: 56px;
+  background: url("assets/img/ico_loading.gif") no-repeat center top;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background-size: 5%;
+}
+
+.loading strong {
+  display: block;
+  font-size: .875rem;
+}
+
+.loading.st02 {
+  color: #000;
+  background: none;
+}
+
+.contentsWrap .loading {
+  z-index: 150;
+}
+
+body>.loading {
+  position: fixed;
+}

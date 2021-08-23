@@ -55,3 +55,6 @@ export enum BTN_ROLES {
 
 }
 
+export enum AESINFO {
+  STORE = 'AESINFO'
+}

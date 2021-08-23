@@ -14,9 +14,11 @@ import { CreateAccount } from '../../shares/model/create-account';
 import { PersonalInformation } from '../../shares/model/personal-information';
 import { UserAccount } from '../../shares/model/user-account';
 import { IdentifyInformation } from '../../shares/model/identify-information';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '@progress/kendo-angular-notification';
-import ValidationForm from '../../shares/utils/validation-from';
+import { PipeUtils } from '../../shares/utils/pipe-utils';
+import { Base64WriteImage } from '../../shares/model/base64-image';
+import { ErrorCodes } from '../../shares/constants/common.error.code.const';
 
 @Component({
   selector: 'app-add-account',
@@ -28,28 +30,26 @@ export class AddAccountComponent implements OnInit {
   @ViewChild("firstName") inputFirstName: any;
   @ViewChild("lastName") inputLastName: any;
   @ViewChild("phoneNumber") inputPhoneNumber: any;
-  @ViewChild("otherPhoneNumber") inputOtherPhoneNumber: any;
   @ViewChild("userName") inputUserName: any;
+  @ViewChild("pawword") inputPawword: any;
 
 
 
   modal:any;
+  currentAccount: string = '';
   public horizontal = "right";
   public vertical = "top";
 
   typeList: any[] = [];
-  categoryName = '';
   description = '';
-  currenctAccount: string = '000-000-001';
-  currenctAccountName: string = 'Ean Dalin';
-  amount: number = 0.00;
-  phoneNumber: string = '';
-  otherPhone: string = '';
-  password:string = '';
-  confirmPawword: string = '';
 
   identifyImageUploaded: boolean = false;
+  identifyImageUploadedID: string = '';
   identifyImagePreviews:any[] = [];
+
+  imageUploaded: boolean = false;
+  imagePreviewProfileId: string = '';
+  imagePreviewProfile: any[] = [];
 
 
   filterSettings: DropDownFilterSettings = {
@@ -66,16 +66,16 @@ export class AddAccountComponent implements OnInit {
       isValid: false
     }
   ];
+
   public currentStep = 0;
 
+  currentDate: Date = new Date();
   dateBirth: Date = new Date();
 
   public fileRestrictions: FileRestrictions = {
     allowedExtensions: ['.jpg', '.png']
   };
 
-  image_uploaded: boolean = false;
-  public imagePreviews: any[] = [];
 
   gender = {
     code: '',
@@ -109,6 +109,7 @@ export class AddAccountComponent implements OnInit {
   }
   form: any;
   submitted = false;
+  genderCheck = false;
 
   constructor(
     private translateService: TranslateService,
@@ -121,8 +122,8 @@ export class AddAccountComponent implements OnInit {
     this.inputFirstName as ElementRef;
     this.inputLastName as ElementRef;
     this.inputPhoneNumber as ElementRef;
-    this.inputOtherPhoneNumber as ElementRef;
     this.inputUserName as ElementRef;
+    this.inputPawword as ElementRef;
 
     this.form = this.formBuilder.group(
       {
@@ -130,29 +131,32 @@ export class AddAccountComponent implements OnInit {
         lastName: ['', Validators.required],
         phoneNumber: ['', Validators.required],
         otherPhoneNumber: ['', Validators.required],
+        gender: new FormControl(),
+        remark: [''],
+        identifyID: [''],
         userName: [
           '',
           [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20)
+            Validators.required
           ]
         ],
         password: [
-          '',
+          {value: '', disabled: true},
           [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(40)
+            Validators.required, Validators.minLength(6),Validators.maxLength(40)
           ]
-        ],
-        confirmPassword: ['', Validators.required],
-        acceptTerms: [false, Validators.requiredTrue]
+        ]
       },
-      {
-        validators: [ValidationForm.match('password', 'confirmPassword')]
-      }
+
+
     );
+    // const year = this.currentDate.getFullYear();
+    // const month = this.currentDate.getMonth();
+    // const day = this.currentDate.getDay();
+    // this.dateBirth.setDate(day);
+    // this.dateBirth.setFullYear(year);
+    // this.dateBirth.setMonth(month);
+
 
     this.stepsIcons = [
       { label: 'Info',  isValid: true },
@@ -165,9 +169,12 @@ export class AddAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log();
+
+    if(this.modal.message) {
+      this.currentAccount = PipeUtils.account(this.modal.message.accountID) + ','+ this.modal.message.acountName;
+    }
+
     const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
-    console.log('account_type', account_type);
     const accountType = account_type;
 
     this.accounts = accountDatas;
@@ -177,15 +184,17 @@ export class AddAccountComponent implements OnInit {
           this.accountDisplay.push(element);
         }
     });
+
+    this.form.patchValue({
+      password: this.generatePassword(8)+''
+    });
+
   }
 
   close() {
     this.modal.close( {close: BTN_ROLES.CLOSE});
   }
 
-  onClickBtnMainCategoryName() {
-      this.categoryName = '';
-  }
 
   onClickBtndescription() {
     this.description = '';
@@ -224,7 +233,7 @@ export class AddAccountComponent implements OnInit {
 
   // file select function
   public selectEventHandler(e: SelectEvent): void {
-    this.image_uploaded = false;
+    this.imageUploaded = false;
 
     const that = this;
     e.files.forEach((file: any) => {
@@ -242,7 +251,7 @@ export class AddAccountComponent implements OnInit {
             type: file.rawFile.type,
             extension: file.extension
         };
-        that.imagePreviews.push(image);
+        that.imagePreviewProfile.push(image);
 
         };
         reader.readAsDataURL(file.rawFile);
@@ -257,45 +266,45 @@ export class AddAccountComponent implements OnInit {
   }
 
   public remove(fileSelect:any, uid: string) {
-    this.image_uploaded = false;
+    this.imageUploaded = false;
     fileSelect.removeFileByUid(uid);
-    if(this.imagePreviews.length > 0) {
-      this.imagePreviews.forEach((element,index) =>{
+    if(this.imagePreviewProfile.length > 0) {
+      this.imagePreviewProfile.forEach((element,index) =>{
         if(element.uid === uid) {
             console.log("call add function", element, index);
-            this.imagePreviews.splice(index, 1);
+            this.imagePreviewProfile.splice(index, 1);
         }
       });
     }
   }
 
-  upload(state:any, value: string): boolean {
-    console.log(this.imagePreviews);
+  uploadProfileImage(state:any, value: string): boolean {
     if(value === 'f'){
       return false;
     } else if(value === 't') {
-      if(this.imagePreviews.length > 0) {
-        this.imagePreviews.forEach(element =>{
+      if(this.imagePreviewProfile.length > 0) {
+        this.imagePreviewProfile.forEach(element =>{
           if(element.uid === state) {
               let splitted = element.src.split(',');
-              // const base64WriteImage = new Base64WriteImage();
-              console.log('splitted', splitted)
-              // if(splitted[1]) {
-              //   base64WriteImage.id         = element.id;
-              //   base64WriteImage.base64     = splitted[1];
-              //   base64WriteImage.file_name  = element.name;
-              //   base64WriteImage.file_type  = element.type;
-              //   base64WriteImage.file_size  = element.size;
-              //   base64WriteImage.file_extension = element.extension;
-              //   this.uploadService.upload(base64WriteImage).then(resp=>{
-              //     if(resp === true) {
-              //       this.resource_img_id_list.push({resource_id: base64WriteImage.id});
-              //       console.log('resource_img_id', this.resource_img_id_list);
-              //       this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
-              //      return true;
-              //     }
-              //   });
-              // }
+              const base64WriteImage = new Base64WriteImage();
+              if(splitted[1]) {
+                base64WriteImage.id         = element.id;
+                base64WriteImage.base64     = splitted[1];
+                base64WriteImage.file_name  = element.name;
+                base64WriteImage.file_type  = element.type;
+                base64WriteImage.file_size  = element.size;
+                base64WriteImage.file_extension = element.extension;
+                console.log(base64WriteImage);
+
+                // this.uploadService.upload(base64WriteImage).then(resp=>{
+                //   if(resp === true) {
+                //     this.resource_img_id_list.push({resource_id: base64WriteImage.id});
+                //     console.log('resource_img_id', this.resource_img_id_list);
+                //     this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
+                //    return true;
+                //   }
+                // });
+              }
           }
         });
       } else {
@@ -352,7 +361,6 @@ export class AddAccountComponent implements OnInit {
   }
 
   uploadIdentifyImage(state:any, value: string): boolean {
-    console.log(this.identifyImagePreviews);
     if(value === 'f'){
       return false;
     } else if(value === 't') {
@@ -360,24 +368,23 @@ export class AddAccountComponent implements OnInit {
         this.identifyImagePreviews.forEach(element =>{
           if(element.uid === state) {
               let splitted = element.src.split(',');
-              // const base64WriteImage = new Base64WriteImage();
-              console.log('splitted', splitted)
-              // if(splitted[1]) {
-              //   base64WriteImage.id         = element.id;
-              //   base64WriteImage.base64     = splitted[1];
-              //   base64WriteImage.file_name  = element.name;
-              //   base64WriteImage.file_type  = element.type;
-              //   base64WriteImage.file_size  = element.size;
-              //   base64WriteImage.file_extension = element.extension;
-              //   this.uploadService.upload(base64WriteImage).then(resp=>{
-              //     if(resp === true) {
-              //       this.resource_img_id_list.push({resource_id: base64WriteImage.id});
-              //       console.log('resource_img_id', this.resource_img_id_list);
-              //       this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
-              //      return true;
-              //     }
-              //   });
-              // }
+              const base64WriteImage = new Base64WriteImage();
+              if(splitted[1]) {
+                base64WriteImage.id         = element.id;
+                base64WriteImage.base64     = splitted[1];
+                base64WriteImage.file_name  = element.name;
+                base64WriteImage.file_type  = element.type;
+                base64WriteImage.file_size  = element.size;
+                base64WriteImage.file_extension = element.extension;
+                // this.uploadService.upload(base64WriteImage).then(resp=>{
+                //   if(resp === true) {
+                //     this.resource_img_id_list.push({resource_id: base64WriteImage.id});
+                //     console.log('resource_img_id', this.resource_img_id_list);
+                //     this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
+                //    return true;
+                //   }
+                // });
+              }
           }
         });
       } else {
@@ -392,40 +399,49 @@ export class AddAccountComponent implements OnInit {
 
   save() {
     this.submitted = true;
+    if(this.f.gender.value == null) {
+      this.genderCheck = true;
+    }
+
+
     if(this.f.firstName.errors) {
       this.inputFirstName.nativeElement.focus();
     } else if (this.f.lastName.errors) {
       this.inputLastName.nativeElement.focus();
     } else if (this.f.phoneNumber.errors) {
       this.inputPhoneNumber.nativeElement.focus();
-    } else if (this.f.otherPhoneNumber.errors) {
-      this.inputOtherPhoneNumber.nativeElement.focus();
     } else if (this.f.userName.errors) {
       this.inputUserName.nativeElement.focus();
+    } else if (this.f.password.errors) {
+      this.inputPawword.nativeElement.focus();
+    }  else {
+      const data = this.form.getRawValue();
+      console.log('value', data.firstName);
+      console.log(this.dateBirth);
+      console.log(JSON.stringify(this.form.value));
+
+      let createAccount = new CreateAccount();
+
+      createAccount.personalInformation = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        gender: data.gender.code,
+        dateBirth: data.dateBirth,
+        phoneNumber: data.phoneNumber,
+        otherPhone: data.otherPhoneNumber,
+        resourceId: ''
+      };
+      createAccount.userAccount = {
+        userName: data.userName,
+        password: data.password
+      };
+      createAccount.identifyInformation = {
+        identifyID: data.identifyID,
+        resourceID: ''
+      };
+      console.log(createAccount);
+
     }
-
-
-    const firstInvalidControl: HTMLElement = this.el.nativeElement.querySelector(
-      ".ng-invalid"
-    );
-    window.scroll({
-      top: this.getTopOffset(firstInvalidControl),
-      left: 0,
-      behavior: "smooth"
-    });
-    console.log(this.form.value.firstName);
-
-    console.log(JSON.stringify(this.form.value, null, 2));
-    if (this.form.invalid) {
-      return;
-    }
-
-    console.log(JSON.stringify(this.form.value, null, 2));
-    console.log(this.personalInformation);
-
-    let createAccount = new CreateAccount();
-    createAccount.personalInformation = this.personalInformation;
-    console.log(createAccount);
 
     // this.close();
     // this.viewAccountInfo();
@@ -457,4 +473,84 @@ export class AddAccountComponent implements OnInit {
     // });
   }
 
+  onChangeGender(event: any) {
+    if(event.code == '') {
+      this.genderCheck = true;
+    } else {
+      this.genderCheck = false;
+    }
+
+  }
+
+  isEmpty(code: string) {
+    switch(code) {
+      case 'firstName':
+        this.form.patchValue({
+          firstName: ''
+        });
+        break;
+      case 'lastName':
+        this.form.patchValue({
+          lastName: ''
+        });
+        break;
+      case 'phoneNumber':
+        this.form.patchValue({
+          phoneNumber: ''
+        });
+        break;
+      case 'otherPhoneNumber':
+        this.form.patchValue({
+          otherPhoneNumber: ''
+        });
+        break;
+      case 'userName':
+        this.form.patchValue({
+          userName: ''
+        });
+        break;
+      case 'password':
+        this.form.patchValue({
+          password: ''
+        });
+        break;
+      case 'confirmPawword':
+        this.form.patchValue({
+          confirmPawword: ''
+        });
+        break;
+      case 'remark':
+        this.form.patchValue({
+          remark: ''
+        });
+        break;
+    }
+  }
+
+  generatePassword(passwordLength: number) {
+    var numberChars = "0123456789";
+    var upperChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var lowerChars = "abcdefghijklmnopqrstuvwxyz";
+    var allChars = numberChars + upperChars + lowerChars;
+    var randPasswordArray = Array(passwordLength);
+    randPasswordArray[0] = numberChars;
+    randPasswordArray[1] = upperChars;
+    randPasswordArray[2] = lowerChars;
+    randPasswordArray = randPasswordArray.fill(allChars, 3);
+    return this.shuffleArray(randPasswordArray.map(function(x) { return x[Math.floor(Math.random() * x.length)] })).join('');
+  }
+
+  shuffleArray(array: any []) {
+    for (var i = array.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+    return array;
+  }
+
+  testing() {
+    ErrorCodes.f.firstName;
+  }
 }
