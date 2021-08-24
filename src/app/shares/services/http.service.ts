@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../utils/utils.static';
 import { environment } from '../../../environments/environment.prod';
-import { AESINFO } from '../constants/common.const';
+import { AESINFO, LOCAL_STORAGE } from '../constants/common.const';
 
 @Injectable({
   providedIn: 'root'
@@ -29,11 +29,12 @@ export class HTTPService {
   ) { }
 
   public Post(api: string, TrClass: any): Promise<any> {
+    console.log('api', api);
+    console.log('TrClass', TrClass);
     return new Promise((resolve, reject) => {
-      const aesInfo: any = Utils.getSecureStorage(localStorage.LAST_EVENT_TIME) || {};
-      console.log(aesInfo.timestamp);
-      if (aesInfo && new Date().getTime() - aesInfo.timestamp > environment.autoLogoutTime) {
-
+      const aesInfo: any = Utils.getSecureStorage(LOCAL_STORAGE.LAST_EVENT_TIME) || {};
+      console.log(aesInfo);
+      if (aesInfo && new Date().getTime() - aesInfo > environment.autoLogoutTime) {
         if (this.modal) {
           this.modal.close();
         }
@@ -45,8 +46,8 @@ export class HTTPService {
             {
               callback: () => {
                 $('kendo-dialog').remove();
-                Utils.removeSecureStorage(localStorage.USER_INFO);
-                Utils.removeSecureStorage(localStorage.Authorization);
+                Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
+                Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
                 this.router.navigate(['/login']);
               }
             }
@@ -58,7 +59,7 @@ export class HTTPService {
         $('div.loading').removeClass('none');
         $('body').removeClass('loaded');
 
-        const authorization = Utils.getSecureStorage(localStorage.Authorization);
+        const authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
         const access_token = authorization.access_token;
         if (!access_token) {
           this.modalService.alert(
@@ -79,9 +80,12 @@ export class HTTPService {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + access_token
         };
+        console.log('httpOptionsObj', httpOptionsObj);
 
-        const userInfo = Utils.getSecureStorage(localStorage.USER_INFO);
-        const lang = Utils.getSecureStorage(localStorage.I18N);
+        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+        console.log(userInfo);
+
+        const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
         const uri = this.url + api + '?userId=' + userInfo.id + '&lang=' + lang;
 
         const dataBody = JSON.stringify(TrClass);

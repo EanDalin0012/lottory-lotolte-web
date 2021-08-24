@@ -125,8 +125,7 @@ export class AddAccountComponent implements OnInit {
     this.inputUserName as ElementRef;
     this.inputPawword as ElementRef;
 
-    this.form = this.formBuilder.group(
-      {
+    this.form = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         phoneNumber: ['', Validators.required],
@@ -146,10 +145,7 @@ export class AddAccountComponent implements OnInit {
             Validators.required, Validators.minLength(6),Validators.maxLength(40)
           ]
         ]
-      },
-
-
-    );
+      });
     // const year = this.currentDate.getFullYear();
     // const month = this.currentDate.getMonth();
     // const day = this.currentDate.getDay();

@@ -8600,10 +8600,11 @@ kendo-dialog:focus {
   font-weight: 500 !important;
   font-size: .9375rem !important;
   color: #fff !important;
-  background: #2e210e !important;
+  /* background: #2e210e !important; */
   border-radius: 50px !important;
   border: none !important;
   float: right !important;
+  background: #fff url('assets/img/check-circle-solid.svg') no-repeat right .75rem center/8px 10px;
 }
 
 
@@ -8614,12 +8615,11 @@ kendo-dialog:focus {
   font-weight: 500 !important;
   font-size: .9375rem !important;
   color: #000 !important;
-  background: #ffffff !important;
   border-radius: 50px !important;
   border: none !important;
   float: right !important;
   border: 1px solid #0077ffd4 !important;
-  /* box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important; */
+  box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
 }
 
 .k-dialog .k-dialog-buttongroup {
@@ -8644,7 +8644,7 @@ kendo-dialog {
   overflow: hidden !important;
 }
 
-.open-alert div kendo-dialog-actions button.k-button {
+.open-alert div kendo-dialog-actions button {
   background: url('assets/img/check-circle-solid.svg') !important;
   background-repeat: no-repeat !important;
   background-size: 25% !important;
@@ -9242,6 +9242,24 @@ kendo-dialog.add-confirm.add-pup-confirm div kendo-dialog-actions button:nth-chi
   display: block;
 }
 
+/* kendo-dialog.open-alert div kendo-dialog-actions button:nth-child(1){
+  background-repeat: no-repeat !important;
+  background-size: 19% !important;
+  background-position-x: 12px !important;
+  background-position-y: 5px !important;
+  height: 35px !important;
+  border-color: currentColor !important;
+  color: #212529 !important;
+  font-family: 'El Messiri', 'Khmer', sans-serif !important;
+  border-radius: 0.25rem !important;
+  text-align: right !important;
+  font-size: 1.50rem!important;
+  width: 95px !important;
+  margin-right: 10px;
+  padding: 0px 16px 0px 0px;;
+  max-width: 125px !important;
+  display: block;
+} */
 
 kendo-dropdownlist {
   width: 100% !important;
@@ -9669,4 +9687,8 @@ input.inp_cal:focus {
 
 body>.loading {
   position: fixed;
+}
+
+.none {
+  display: none !important;
 }

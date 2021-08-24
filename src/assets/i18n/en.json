@@ -156,10 +156,15 @@
       "orientation":"Orientation"
     }
   },
-  "MyAccount": {
+  "Login":{
     "Label": {
-      "myAccount":"My Account",
-      "accountInformation":"Account Information"
+      "UserName":"User Name",
+      "":""
+    }
+  },
+  "ServerResponseCode":{
+    "Label": {
+      "Invalid_UserName":"Invalid User Name."
     }
   }
 }

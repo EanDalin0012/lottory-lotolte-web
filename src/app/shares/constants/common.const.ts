@@ -5,6 +5,7 @@ export enum MODAL_STORE_KEY {
 
 export enum LOCAL_STORAGE {
   DEVICE_INFO     = 'deviceInfo',
+  NekWorkIP       = 'NekWorkIP',
   CONTENTS_VERSION= 'contentsVersion',
   PRE_TRANSACTION = 'preTransaction',
   USER_INFO       = 'userInfo',

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { HTTPService } from './http.service';
 import { environment } from 'src/environments/environment';
 import { Utils } from '../utils/utils.static';
+import { LOCAL_STORAGE } from '../constants/common.const';
+import { DeviceInfo } from '../model/device-detector';
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +28,21 @@ export class AuthentcatiionService {
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       this.accessTokenRequest(auth, basicAuth).then(response => {
-        console.log(response);
+        console.log('response',response);
 
-        const authorization = JSON.parse(response);
-        const rawData = authorization.body;
-        // const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
+        if (response.access_token) {
+          this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
+            if (result) {
+              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
+              // this.router.navigate(['/main/home']);
+              console.log(result);
+              resovle(result);
+            }
 
-        if (rawData.access_token) {
-          Utils.setSecureStorage(localStorage.LAST_EVENT_TIME, String(new Date().getTime()));
-          Utils.setSecureStorage(localStorage.Authorization, rawData);
-          resovle(rawData);
+          }).catch((err) => {
+
+          });
+          // resovle(rawData);
           // this.loadUserByUserName(auth.user_name).then(userResponse => {
           // console.log(userResponse);
 
@@ -52,73 +59,85 @@ export class AuthentcatiionService {
 
   }
 
-  // private loadUserByUserName(userName: string): Promise<any> {
-  //   return new Promise((resolve, reject) => {
+  private loadUserByUserName(userName: string, accessToken: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const deviceInfo = Utils.getSecureStorage(LOCAL_STORAGE.DEVICE_INFO) as DeviceInfo;
+      const userInfo = {
+        userName: userName,
+        deviceInfo: {
+          userAgent: deviceInfo.userAgent,
+          os: deviceInfo.os,
+          browser: deviceInfo.browser,
+          device: deviceInfo.device,
+          osVersion: deviceInfo.os_version,
+          browserVersion: deviceInfo.browser_version,
+          deviceType: deviceInfo.deviceType,
+          orientation: deviceInfo.orientation
+        },
+        networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
+      };
 
-  //     let loadUserInfo = new LoadUserInfo();
-  //     const device = CacheInfo.deviceinfo;
-  //     const networkIp = CacheInfo.networkIP;
-  //     loadUserInfo.deviceInfo = device;
-  //     loadUserInfo.networkIP  = networkIp;
-  //     loadUserInfo.userName = userName;
+      // const authorize = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+      // const accessToken = authorize.access_token;
+      // if (!accessToken) {
+      //   this.modalService.alert({
+      //     content: '',
+      //     modalClass: ['open-alert'],
+      //     btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
+      //     callback: res => {
+      //       Utils.removeSecureStorage(LocalStorage.Authorization);
+      //       Utils.removeSecureStorage(LocalStorage.USER_INFO);
+      //       this.router.navigate(['/login']);
+      //     }
+      //   });
+      //   return;
+      // }
 
-  //     const authorize = Utils.getSecureStorage(LocalStorage.Authorization);
-  //     const accessToken = authorize.access_token;
-  //     if (!accessToken) {
-  //       this.modalService.alert({
-  //         content: '',
-  //         modalClass: ['open-alert'],
-  //         btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-  //         callback: res => {
-  //           Utils.removeSecureStorage(LocalStorage.Authorization);
-  //           Utils.removeSecureStorage(LocalStorage.USER_INFO);
-  //           this.router.navigate(['/login']);
-  //         }
-  //       });
-  //       return;
-  //     }
+      // const dataBody = JSON.stringify(loadUserInfo);
+      // const encryptionData = this.cryptoService.encrypt(dataBody);
+      // const requestData = {
+      //   body: encryptionData.toString()
+      // };
+      const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+      const httpOptionsObj = {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + accessToken
+      };
+      const uri = this.baseUrl + '/api/user/v0/loadUser?lang=' + lang;
 
-  //     const dataBody = JSON.stringify(loadUserInfo);
-  //     const encryptionData = this.cryptoService.encrypt(dataBody);
-  //     const requestData = {
-  //       body: encryptionData.toString()
-  //     };
-  //     const lang = Utils.getSecureStorage(LocalStorage.I18N);
-  //     const httpOptionsObj = {
-  //       'Content-Type': 'application/json',
-  //       Authorization: 'Bearer ' + accessToken
-  //     };
-  //     const uri = this.baseUrl + '/api/user/v1/load/user?lang=' + lang;
-
-  //     $('div.loading').removeClass('none');
-  //     $('body').removeClass('loaded');
+      $('div.loading').removeClass('none');
+      $('body').removeClass('loaded');
 
 
-  //     this.httpClient.post(uri, JSON.stringify(requestData), {
-  //       headers: new HttpHeaders(httpOptionsObj)
-  //     }).subscribe( res => {
-  //         $('body').addClass('loaded');
-  //         $('div.loading').addClass('none');
-  //         const result = res as any;
-  //         if (result) {
-  //           const responseData = JSON.parse(result);
-  //           const rawData = responseData.body;
-  //           const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
-  //           if (decryptData.error != null) {
-  //             reject();
-  //             this.message(result.error.message);
-  //           } else {
-  //             resolve(decryptData);
-  //           }
-  //         } else {
-  //           reject();
-  //         }
-  //     }, error => {
-  //       console.log(error);
-  //     });
+      this.httpClient.post(uri, JSON.stringify(userInfo), {
+        headers: new HttpHeaders(httpOptionsObj)
+      }).subscribe( res => {
+          $('body').addClass('loaded');
+          $('div.loading').addClass('none');
+          const responseData = res as any;
+          console.log('result', responseData);
+          if(responseData.result && responseData.result.responseCode !== '200') {
+            this.modalService.alert(
+              this.translate.instant('ServerResponseCode.Label.'+responseData.result.responseMessage),
+             {
+             modalClass: 'open-alert',
+             btnText: this.translate.instant('Common.Button.Confirme'),
+             callback: res => {
+               Utils.removeSecureStorage(localStorage.Authorization);
+               Utils.removeSecureStorage(localStorage.USER_INFO);
+               this.router.navigate(['/login']);
+             }
+           });
+          } else if (responseData.body !== null ) {
+            console.log('responseData.body', responseData.body);
+            resolve(responseData.body);
+          }
+      }, error => {
+        console.log('error', error);
+      });
 
-  //   });
-  // }
+    });
+  }
 
   private accessTokenRequest(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
@@ -148,6 +167,8 @@ export class AuthentcatiionService {
 
       const api = '/oauth/token';
       const uri = this.baseUrl + api;
+      console.log(uri);
+
       const btoa =
         'Basic ' +
         window.btoa(credentail.User_name + ':' + credentail.password);
