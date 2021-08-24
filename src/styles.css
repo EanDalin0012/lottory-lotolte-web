@@ -8620,6 +8620,7 @@ kendo-dialog:focus {
   float: right !important;
   border: 1px solid #0077ffd4 !important;
   box-shadow: 0 3px 5px rgb(0 0 0 / 28%) !important;
+  max-width: 110px !important;
 }
 
 .k-dialog .k-dialog-buttongroup {

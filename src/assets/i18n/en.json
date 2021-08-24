@@ -164,7 +164,12 @@
   },
   "ServerResponseCode":{
     "Label": {
-      "Invalid_UserName":"Invalid User Name."
+      "Invalid_UserName":"Invalid User Name.",
+      "Invalid_Password":"Your password isn't correct.",
+      "userNotFound":"Invalid user name.",
+      "userDisabled":"Your user is disable.",
+      "userLocked":"Your account is blocked.",
+      "userExpired":"Your user expired."
     }
   }
 }

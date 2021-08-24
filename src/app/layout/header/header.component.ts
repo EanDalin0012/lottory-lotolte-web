@@ -28,6 +28,14 @@ export class HeaderComponent implements OnInit {
   notifications: any;
   messagesData: MessagesData[] = [];
   flags = 'assets/img/flags/us.png';
+  userInfo = {
+    dateBirth: '',
+    firstName: '',
+    gender: '',
+    lastName: '',
+    phoneNumber: '',
+    userName: ''
+  };
 
   constructor(
     private translate: TranslateService,
@@ -119,6 +127,7 @@ export class HeaderComponent implements OnInit {
         time: "1 hour ago",
       },
     ];
+    this.userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
   }
 
   getDatas(section: any) {

@@ -16,6 +16,7 @@ export class AppComponent {
 
   // tslint:disable-next-line:typedef
   setInitialAppLanguage() {
+
     const i18n = Utils.getSecureStorage( LOCAL_STORAGE.I18N );
     if ( !i18n ) {
       Utils.setSecureStorage(LOCAL_STORAGE.I18N, LANGUAGE.I18N_EN.toString());

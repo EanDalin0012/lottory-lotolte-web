@@ -28,32 +28,19 @@ export class AuthentcatiionService {
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       this.accessTokenRequest(auth, basicAuth).then(response => {
-        console.log('response',response);
 
         if (response.access_token) {
+          Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
           this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
             if (result) {
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
-              // this.router.navigate(['/main/home']);
-              console.log(result);
               resovle(result);
             }
 
           }).catch((err) => {
 
           });
-          // resovle(rawData);
-          // this.loadUserByUserName(auth.user_name).then(userResponse => {
-          // console.log(userResponse);
-
-          //   if (userResponse) {
-          //     Utils.setSecureStorage(LocalStorage.USER_INFO, userResponse);
-          //     this.router.navigate(['/main/home']);
-          //     console.log(userResponse);
-          //   }
-          // });
         }
-
       });
     });
 
@@ -72,32 +59,12 @@ export class AuthentcatiionService {
           osVersion: deviceInfo.os_version,
           browserVersion: deviceInfo.browser_version,
           deviceType: deviceInfo.deviceType,
-          orientation: deviceInfo.orientation
+          orientation: deviceInfo.orientation,
+          networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
         },
-        networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
+
       };
 
-      // const authorize = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
-      // const accessToken = authorize.access_token;
-      // if (!accessToken) {
-      //   this.modalService.alert({
-      //     content: '',
-      //     modalClass: ['open-alert'],
-      //     btnText: this.translate.instant('COMMON.BUTTON.CONFIRME'),
-      //     callback: res => {
-      //       Utils.removeSecureStorage(LocalStorage.Authorization);
-      //       Utils.removeSecureStorage(LocalStorage.USER_INFO);
-      //       this.router.navigate(['/login']);
-      //     }
-      //   });
-      //   return;
-      // }
-
-      // const dataBody = JSON.stringify(loadUserInfo);
-      // const encryptionData = this.cryptoService.encrypt(dataBody);
-      // const requestData = {
-      //   body: encryptionData.toString()
-      // };
       const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
       const httpOptionsObj = {
         'Content-Type': 'application/json',
@@ -115,7 +82,6 @@ export class AuthentcatiionService {
           $('body').addClass('loaded');
           $('div.loading').addClass('none');
           const responseData = res as any;
-          console.log('result', responseData);
           if(responseData.result && responseData.result.responseCode !== '200') {
             this.modalService.alert(
               this.translate.instant('ServerResponseCode.Label.'+responseData.result.responseMessage),
@@ -129,7 +95,6 @@ export class AuthentcatiionService {
              }
            });
           } else if (responseData.body !== null ) {
-            console.log('responseData.body', responseData.body);
             resolve(responseData.body);
           }
       }, error => {

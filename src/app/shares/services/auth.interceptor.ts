@@ -4,15 +4,17 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse
+  HttpErrorResponse,
+  HttpResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from './modal.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, finalize, tap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
 
   constructor(
     private translate: TranslateService,
@@ -20,10 +22,40 @@ export class AuthInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(request).pipe(catchError(err => {
+    return next.handle(request).pipe(
+      tap(
+        (event: HttpEvent<any>) => {
+          // console.log(event);
+
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      ),
+      // Log when response observable either completes or errors
+      finalize(() => {
+        // const elapsed = Date.now() - started;
+        // const msg = `${req.method} "${req.urlWithParams}" ${ok} in ${elapsed} ms.`;
+        // console.log(msg);
+      }),
+      catchError(err => {
       if(err instanceof HttpErrorResponse) {
         console.log('my error', err);
+        $('body').addClass('loaded');
+        $('div.loading').addClass('none');
 
+        if(err.status === 401) {
+          console.log(err.error.error_description);
+          this.modalService.alert(
+            this.translate.instant('ServerResponseCode.Label.'+err.error.error_description),
+           {
+           modalClass: 'open-alert',
+           btnText: this.translate.instant('Common.Button.Confirme'),
+           callback: res => {
+
+           }
+         });
+        }
         if(err.status === 400) {
           // Handle unauthorized error
           // console.log("Unauthorized");
