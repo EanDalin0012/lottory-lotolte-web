@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
   messagesData: MessagesData[] = [];
   flags = 'assets/img/flags/us.png';
   userInfo = {
+    id: 0,
     dateBirth: '',
     firstName: '',
     gender: '',

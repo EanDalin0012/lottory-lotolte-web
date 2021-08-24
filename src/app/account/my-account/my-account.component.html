@@ -58,6 +58,9 @@
                     <small class="text-danger">(Admin Only)</small>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a (click)="onTab(3)" [ngClass]="{ 'active' : activeTab.index === 3 }" href="javascript:" data-toggle="tab" class="nav-link">Device Information Login</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -121,6 +124,42 @@
   <!-- Tab 1 -->
   <ng-container *ngIf = "activeTab.index === 2">
     <span>Tab 3</span>
+  </ng-container>
+  <!-- /Tab 1 -->
+
+  <!-- Tab 1 -->
+  <ng-container *ngIf = "activeTab.index === 3">
+    <div class="card-body padding-0">
+      <div class="table-responsive custom-table-select">
+          <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Os</th>
+                      <th>Os Version</th>
+                      <th>browser</th>
+                      <th>browser version</th>
+                      <th>device</th>
+                      <th>device type</th>
+                      <th>orientation</th>
+                      <!-- <th>NetWork IP</th> -->
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of deviceInfos;let i = index;">
+                      <td [width] = "50">{{i+1}}</td>
+                      <td [width] = "100">{{item.os}}</td>
+                      <td [width] = "100">{{item.os_version}}</td>
+                      <td [width] = "60">{{item.browser}}</td>
+                      <td [width] = "60">{{item.browser_version}}</td>
+                      <td [width] = "60">{{item.device}}</td>
+                      <td [width] = "60">{{item.device_type}}</td>
+                      <td [width] = "60">{{item.orientation}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
   </ng-container>
   <!-- /Tab 1 -->
 

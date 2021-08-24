@@ -11,9 +11,6 @@ import * as moment from 'moment';
 import { ViewAccountComponent } from '../view-account/view-account.component';
 import { ModalService } from '../../shares/services/modal.service';
 import { CreateAccount } from '../../shares/model/create-account';
-import { PersonalInformation } from '../../shares/model/personal-information';
-import { UserAccount } from '../../shares/model/user-account';
-import { IdentifyInformation } from '../../shares/model/identify-information';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '@progress/kendo-angular-notification';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
@@ -41,7 +38,6 @@ export class AddAccountComponent implements OnInit {
   public vertical = "top";
 
   typeList: any[] = [];
-  description = '';
 
   identifyImageUploaded: boolean = false;
   identifyImageUploadedID: string = '';
@@ -96,17 +92,8 @@ export class AddAccountComponent implements OnInit {
     }
   ];
 
-  personalInformation  = new PersonalInformation();
 
-  userAccount:UserAccount = {
-    userName: '',
-    password: ''
-  };
 
-  identifyInformation: IdentifyInformation = {
-    identifyID: '',
-    resourceID: ''
-  }
   form: any;
   submitted = false;
   genderCheck = false;
@@ -189,11 +176,6 @@ export class AddAccountComponent implements OnInit {
 
   close() {
     this.modal.close( {close: BTN_ROLES.CLOSE});
-  }
-
-
-  onClickBtndescription() {
-    this.description = '';
   }
 
   public onStepActivate(ev: StepperActivateEvent): void {

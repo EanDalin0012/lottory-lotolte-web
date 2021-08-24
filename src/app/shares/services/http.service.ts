@@ -95,7 +95,7 @@ export class HTTPService {
         //   body: encryptionData.toString()
         // };
 
-        this.data = this.httpClient.post(uri, JSON.stringify(dataBody), {
+        this.data = this.httpClient.post(uri, dataBody, {
           headers: new HttpHeaders(httpOptionsObj)
         }).subscribe( res => {
             const newAesInfo: any = Utils.getSecureStorage(AESINFO.STORE) || {};
@@ -105,7 +105,7 @@ export class HTTPService {
             $('div.loading').addClass('none');
             const result = res as any;
             if (result) {
-              const responseData = JSON.parse(result);
+              const responseData = result; //JSON.parse(result);
               const rawData = responseData.body;
               // const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
               if (rawData.error != null) {
@@ -162,7 +162,7 @@ export class HTTPService {
         $('div.loading').addClass('none');
         const result = rest as any;
         console.log(rest);
-        const responseData = JSON.parse(result);
+        const responseData = result; //JSON.parse(result);
         const rawData = responseData.body;
         // const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
 

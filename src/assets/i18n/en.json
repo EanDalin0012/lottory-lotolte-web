@@ -156,12 +156,6 @@
       "orientation":"Orientation"
     }
   },
-  "Login":{
-    "Label": {
-      "UserName":"User Name",
-      "":""
-    }
-  },
   "ServerResponseCode":{
     "Label": {
       "Invalid_UserName":"Invalid User Name.",

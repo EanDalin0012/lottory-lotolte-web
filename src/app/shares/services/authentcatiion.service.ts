@@ -58,7 +58,7 @@ export class AuthentcatiionService {
           device: deviceInfo.device,
           osVersion: deviceInfo.os_version,
           browserVersion: deviceInfo.browser_version,
-          deviceType: deviceInfo.deviceType,
+          deviceType: deviceInfo.device_type,
           orientation: deviceInfo.orientation,
           networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
         },

@@ -6,6 +6,6 @@ export interface DeviceInfo {
   device: string;
   os_version: string;
   browser_version: string;
-  deviceType: string;
+  device_type: string;
   orientation: string;
 }
