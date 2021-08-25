@@ -53,7 +53,7 @@ export class AddAccountComponent implements OnInit {
     operator: 'startsWith'
   };
   accounts:Account[] = [];
-  account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalace: 0};
+  account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalance: 0};
   accountDisplay:Account[] = [];
 
   public stepsIcons = [

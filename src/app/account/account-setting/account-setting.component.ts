@@ -61,8 +61,8 @@ export class AccountSettingComponent implements OnInit {
     this.accountName = accountInfo.accountName;
     this._status = accountInfo.status;
     this.id = accountInfo.id;
-    this.accountBalace = accountInfo.accountBalace ;
-    this.accountBalaceDisplay = accountInfo.accountBalace + ' '+accountInfo.currency;
+    this.accountBalace = accountInfo.accountBalance ;
+    this.accountBalaceDisplay = accountInfo.accountBalance + ' '+accountInfo.currency;
     this.checkStatus(accountInfo.status);
   }
 

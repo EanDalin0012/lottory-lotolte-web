@@ -14,6 +14,9 @@ import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { DeviceInfo } from '../../shares/model/device-detector';
+import { id } from '../../../assets/all-modules-data/id';
+import { ModalService } from '../../shares/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -24,6 +27,7 @@ export class MyAccountComponent implements OnInit {
   private baseUrl: string = '';
 
   subAccounts: Account[] = [];
+
   activeTab = {
     index: 0,
     class: 'nav-link'
@@ -38,12 +42,23 @@ export class MyAccountComponent implements OnInit {
   public dtTrigger: Subject<any> = new Subject();
 
   deviceInfos: DeviceInfo[] = [];
+  accountInfo: Account = {
+    id: 0,
+    accountId: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    status:'',
+    currency: ''
+  };
 
   constructor(
     private titleService: Title,
     private router: Router,
     private dataService: DataService,
-    private hTTPService: HTTPService
+    private modalService: ModalService,
+    private hTTPService: HTTPService,
+    private translate: TranslateService
   ) {
     this.baseUrl = environment.bizServer.server;
     const url = (window.location.href).split('/');
@@ -72,13 +87,29 @@ export class MyAccountComponent implements OnInit {
     const api = this.baseUrl + '/api/my/account/v0/inquiry';
     const userInfo =Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
     const requestData = {
-      userName: userInfo.userName
+      userName: userInfo.userName,
+      userID: userInfo.id,
     };
     this.hTTPService.Post(api,requestData).then((resposne)=> {
       console.log('resposne', resposne);
-      if(resposne) {
-        this.deviceInfos = resposne.deviceInfos;
+       if( resposne && resposne.result.responseCode !== '200' && resposne.result.responseMessage === 'Invalid_UserID') {
+        this.modalService.alert(
+          this.translate.instant('ServerResponseCode.Label.Invalid_UserID'),
+         {
+         modalClass: 'open-alert',
+         btnText: this.translate.instant('Common.Button.Confirme'),
+         callback: res => {
+
+         }
+       });
+      }
+      if(resposne && resposne.result.responseCode === '200') {
+        this.deviceInfos = resposne.body.deviceInfos;
+        this.accountInfo = resposne.body.accountInfo;
+        this.subAccounts = resposne.body.subAccounts;
         console.log(this.deviceInfos);
+        console.log(this.accountInfo);
+        console.log(this.subAccounts);
       }
 
     });

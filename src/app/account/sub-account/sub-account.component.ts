@@ -23,7 +23,7 @@ export class SubAccountComponent implements OnInit {
     id: 0,
     accountId: '',
     accountName: '',
-    accountBalace: 0,
+    accountBalance: 0,
     accountType: '',
     currency: '',
     status: ''

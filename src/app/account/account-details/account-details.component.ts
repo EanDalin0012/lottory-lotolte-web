@@ -20,7 +20,7 @@ export class AccountDetailsComponent implements OnInit {
     accountId: '',
     accountName: '',
     accountType: '',
-    accountBalace: 0,
+    accountBalance: 0,
     currency: '',
     status: ''
   };

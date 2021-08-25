@@ -20,6 +20,7 @@ import { InvalidControlScrollContainerDirective } from './shares/directive/inval
 import { InvalidControlScrollDirective } from './shares/directive/invalid-control-scroll.directive';
 import { JsonipService } from './shares/services/jsonip.service';
 import { AuthInterceptor } from './shares/services/auth.interceptor';
+import { AccountBalancePipe } from './shares/pipe/account-balance.pipe';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +34,7 @@ export function createTranslateLoader(http: HttpClient) {
     Error404Component,
     Error405Component,
     InvalidControlScrollContainerDirective,
-    InvalidControlScrollDirective
+    InvalidControlScrollDirective,
   ],
   imports: [
     MLayoutModule,
@@ -63,7 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
 export class AppModule {
   constructor(
     private deviceService: DeviceDetectorService,
-    private jsonipService: JsonipService
+    private jsonipService: JsonipService,
+    private http:HttpClient
     ) {
       this.jsonipService.jsonIp().then((result) => {
         Utils.setSecureStorage(LOCAL_STORAGE.NekWorkIP, result);

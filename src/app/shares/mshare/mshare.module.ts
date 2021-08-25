@@ -25,12 +25,14 @@ import { AccountPipe } from '../pipe/account.pipe';
 import { AccountStatusPipe } from '../pipe/account-status.pipe';
 import { AccountTypePipe } from '../pipe/account-type.pipe';
 import {NgxScrollToFirstInvalidModule} from '@ismaestro/ngx-scroll-to-first-invalid';
+import { AccountBalancePipe } from '../pipe/account-balance.pipe';
 @NgModule({
   declarations: [
     ModalComponent,
     AccountPipe,
     AccountStatusPipe,
-    AccountTypePipe
+    AccountTypePipe,
+    AccountBalancePipe
   ],
   imports: [
     // InputsModule,
@@ -79,7 +81,8 @@ import {NgxScrollToFirstInvalidModule} from '@ismaestro/ngx-scroll-to-first-inva
     // pipe
     AccountPipe,
     AccountStatusPipe,
-    AccountTypePipe
+    AccountTypePipe,
+    AccountBalancePipe
   ],
   entryComponents: [
     ModalComponent,

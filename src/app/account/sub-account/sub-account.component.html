@@ -31,7 +31,7 @@
                   </li>
                   <li>
                       <div class="title">{{'Account.Label.accountBalance' | translate}}</div>
-                      <div class="text">{{accountInfo.accountBalace}} {{accountInfo.currency}}</div>
+                      <div class="text">{{accountInfo.accountBalance}} {{accountInfo.currency}}</div>
                   </li>
                   <li>
                     <div class="title">{{'Account.Label.accountType' | translate}}</div>
@@ -94,7 +94,7 @@
                           <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center" [innerHTML] = "item.accountType | accountType"></td>
-                          <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
+                          <td class="text-center">{{item.accountBalance}} {{item.currency}}</td>
                           <td class="text-center" style="width: 90px;" [innerHTML] = "item.status | accountStatus"></td>
                           <td class="text-right" style="width: 100px;">
                               <div class="dropdown dropdown-action" >
@@ -172,7 +172,7 @@
                           <td>{{item.accountId | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center" [innerHTML] = "item.accountType | accountType"></td>
-                          <td class="text-center">{{item.accountBalace}} {{item.currency}}</td>
+                          <td class="text-center">{{item.accountBalance}} {{item.currency}}</td>
                           <td class="text-center" style="width: 90px;" [innerHTML] = "item.status | accountStatus"></td>
                           <td class="text-right" style="width: 100px;">
                               <div class="dropdown dropdown-action">

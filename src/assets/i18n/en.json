@@ -26,6 +26,10 @@
       "withDrawalMoney":"WithDrawal Money",
       "details":"Details",
       "fileName":"File Name",
+      "allSubAccount":"All Sub Account",
+      "accountDepositMoney":"Account Deposit Money",
+      "accountWithdrawalMoney":"Account Withdrawal Money",
+      "deviceInformationLogin":"Device Information Login",
       "fileSize":"File Size {{value}}",
       "previewSelectedImages":"Preview Selected Images",
       "WithDrawal": {
@@ -133,6 +137,19 @@
     }
 
   },
+  "MyAccount": {
+    "Label": {
+      "myAccount":"My Account",
+      "accountInformation":"Account Information",
+      "os":"Os",
+      "osVersion":"Os Version",
+      "browser":"Browser",
+      "browserVersion":"Browser Version",
+      "device":"Device",
+      "deviceType":"Device Type",
+      "orientation":"Orientation"
+    }
+  },
   "Deposit": {
     "Label": {
       "FromAccount":"From account",
@@ -163,7 +180,9 @@
       "userNotFound":"Invalid user name.",
       "userDisabled":"Your user is disable.",
       "userLocked":"Your account is blocked.",
-      "userExpired":"Your user expired."
+      "userExpired":"Your user expired.",
+      "Invalid_UserID":"Invalid User ID.",
+      "Server_Error":"Server Error"
     }
   }
 }

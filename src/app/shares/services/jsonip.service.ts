@@ -8,10 +8,10 @@ export class JsonipService {
   constructor(private http: HttpClient) { }
   public jsonIp(): Promise<string> {
       return new Promise( resolve => {
-        this.http.get<{ip: string}>('https://jsonip.com').subscribe( data => {
-          const ipAddress = data as any;
-          resolve(ipAddress.ip);
-        });
+        this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+        console.log('res.ip', res.ip);
+      });
+
       });
   }
 }

@@ -106,7 +106,7 @@ export class HTTPService {
             const result = res as any;
             if (result) {
               const responseData = result; //JSON.parse(result);
-              const rawData = responseData.body;
+              const rawData = responseData;
               // const decryptData = JSON.parse(this.cryptoService.decrypt(String(rawData)));
               if (rawData.error != null) {
                 reject();
