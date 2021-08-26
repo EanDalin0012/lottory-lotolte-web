@@ -7,6 +7,8 @@ import { AccountDetailsComponent } from './account-details/account-details.compo
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
 import { SubAccountComponent } from './sub-account/sub-account.component';
+import { SubAccountAgentComponent } from './sub-account-agent/sub-account-agent.component';
+import { SubAccountMasterComponent } from './sub-account-master/sub-account-master.component';
 
 const routes: Routes = [
   {
@@ -18,7 +20,10 @@ const routes: Routes = [
       {path: 'details', component: AccountDetailsComponent},
       {path: 'my-account', component: MyAccountComponent},
       {path: 'account-setting', component: AccountSettingComponent},
-      {path: 'sub-account', component: SubAccountComponent}
+      {path: 'sub-account-senair', component: SubAccountComponent},
+      {path: 'sub-account-master', component: SubAccountMasterComponent},
+      {path: 'sub-account-agent', component: SubAccountAgentComponent},
+      {path: 'sub-account-member', component: SubAccountAgentComponent}
     ]
   }
 ];

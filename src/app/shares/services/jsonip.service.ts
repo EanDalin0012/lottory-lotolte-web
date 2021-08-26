@@ -9,7 +9,7 @@ export class JsonipService {
   public jsonIp(): Promise<string> {
       return new Promise( resolve => {
         this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
-        console.log('res.ip', res.ip);
+        resolve(res.ip);
       });
 
       });

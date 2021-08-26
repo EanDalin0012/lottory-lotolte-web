@@ -25,11 +25,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {
-          console.log('event', event);
+          // console.log('event', event);
 
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
+         //  console.log(error);
         }
       ),
       // Log when response observable either completes or errors
@@ -40,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
       }),
       catchError(err => {
       if(err instanceof HttpErrorResponse) {
-        console.log('my error', err);
+        // console.log('my error', err);
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
 

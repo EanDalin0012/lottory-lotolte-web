@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from '../../shares/services/data.service';
-import { SubAccount } from '../../shares/model/sub-account';
-import { AccountStatusPipe } from '../../shares/pipe/account-status.pipe';
 import { Account } from 'src/app/shares/model/account';
 import { subAccounts } from 'src/assets/all-modules-data/all-modules-data';
 import { DataTableDirective } from 'angular-datatables';
@@ -12,11 +10,14 @@ import { Utils } from '../../shares/utils/utils.static';
 import { StoreUtil } from '../../shares/utils/store';
 import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
-import { LOCAL_STORAGE } from '../../shares/constants/common.const';
+import { LOCAL_STORAGE, AccountTypeCode } from '../../shares/constants/common.const';
 import { DeviceInfo } from '../../shares/model/device-detector';
-import { id } from '../../../assets/all-modules-data/id';
 import { ModalService } from '../../shares/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
+import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
+import { AddAccountComponent } from '../add-account/add-account.component';
+import { accountAgentTypes } from '../../layout/sidebar/sidebar.component';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -58,7 +59,7 @@ export class MyAccountComponent implements OnInit {
     private dataService: DataService,
     private modalService: ModalService,
     private hTTPService: HTTPService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
     this.baseUrl = environment.bizServer.server;
     const url = (window.location.href).split('/');
@@ -91,7 +92,6 @@ export class MyAccountComponent implements OnInit {
       userID: userInfo.id,
     };
     this.hTTPService.Post(api,requestData).then((resposne)=> {
-      console.log('resposne', resposne);
        if( resposne && resposne.result.responseCode !== '200' && resposne.result.responseMessage === 'Invalid_UserID') {
         this.modalService.alert(
           this.translate.instant('ServerResponseCode.Label.Invalid_UserID'),
@@ -107,9 +107,6 @@ export class MyAccountComponent implements OnInit {
         this.deviceInfos = resposne.body.deviceInfos;
         this.accountInfo = resposne.body.accountInfo;
         this.subAccounts = resposne.body.subAccounts;
-        console.log(this.deviceInfos);
-        console.log(this.accountInfo);
-        console.log(this.subAccounts);
       }
 
     });
@@ -125,4 +122,67 @@ export class MyAccountComponent implements OnInit {
     this.router.navigate(['/acc/account-setting']);
   }
 
+  deposit(value:any) {
+    this.modalService.open(
+      AccountDepositComponent,
+      {
+        message: value,
+        callback: _response => {
+
+      }
+    });
+  }
+
+  withdrawal(value:any) {
+    this.modalService.open(
+      AccountWithdrawalComponent,
+      {
+        message: value,
+        callback: _response => {
+
+      }
+    });
+  }
+
+  newAccount() {
+    this.modalService.open(
+      AddAccountComponent,
+      {
+      message: {
+        openAccount: AccountTypeCode.Seniar,
+        accountInfo: this.accountInfo,
+      },
+      callback: _response => {
+
+      }
+    });
+  }
+
+  details(item: any) {
+    Utils.setSecureStorage('toDetailsAccountInfo', item);
+    this.router.navigate(['/acc/details']);
+  }
+
+  onSubAccount(item: Account) {
+    console.log(item);
+    switch (item.accountType) {
+      case AccountTypeCode.Admin:
+        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountSenair, item);
+        this.router.navigate(['/acc/sub-account-senair']);
+        break;
+      case AccountTypeCode.Seniar:
+        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountMaster, item);
+        this.router.navigate(['/acc/sub-account-master']);
+        break;
+      case AccountTypeCode.Master:
+        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountAgent, item);
+        this.router.navigate(['/acc/sub-account-agent']);
+        break;
+      case AccountTypeCode.Agent:
+        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountMember, item);
+        this.router.navigate(['/acc/sub-account-member']);
+        break;
+    }
+
+  }
 }

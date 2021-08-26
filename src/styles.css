@@ -9693,3 +9693,6 @@ body>.loading {
 .none {
   display: none !important;
 }
+.padding-7px {
+  padding: 7px !important;
+}

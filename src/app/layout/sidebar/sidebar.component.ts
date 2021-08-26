@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Event, NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import * as $ from 'jquery';
 import { UrlComplete } from '../../shares/model/url-complete';
 import { Member } from '../../shares/model/members';
@@ -8,6 +8,7 @@ import { AccountType } from '../../shares/model/account-type';
 import { AccountTypeCode, LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { DataService } from '../../shares/services/data.service';
 import { Utils } from '../../shares/utils/utils.static';
+import { Account } from '../../shares/model/account';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,6 +18,15 @@ import { Utils } from '../../shares/utils/utils.static';
 export class SidebarComponent implements OnInit {
 
   accountTypes: AccountType[] = accountTypes;
+  accountInfo: Account = {
+    id: 0,
+    accountId: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    status:'',
+    currency: ''
+  };
 
   urlComplete: UrlComplete = {
     mainUrl: '',
@@ -86,8 +96,6 @@ export class SidebarComponent implements OnInit {
     this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
       let account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
       let msg = '';
-      console.log('this.account_type', account_type);
-      console.log('message', message);
       if (message !== '') {
         msg = message;
       } else {
@@ -95,25 +103,6 @@ export class SidebarComponent implements OnInit {
         msg = account_type;
       }
       this.activeSidebar(msg);
-      // switch (msg) {
-      //   case 'profile':
-      //     this.urlComplete.mainUrl = 'acc'+message;
-      //     this.urlComplete.subUrl = message;
-      //     break;
-      //   case 'acc':
-      //     this.urlComplete.mainUrl = 'acc';
-      //     this.urlComplete.subUrl = account_type;
-      //     break;
-      //   case 'my-account':
-      //     this.urlComplete.mainUrl = 'my-account';
-      //     this.urlComplete.subUrl = 'my-account';
-      //     break;
-      //   default:
-      //     this.urlComplete.mainUrl = '';
-      //     this.urlComplete.subUrl = account_type;
-      //     break;
-      // }
-      console.log('this.urlComplete', this.urlComplete);
     });
 
     // Slide up and down of menus
@@ -142,16 +131,18 @@ export class SidebarComponent implements OnInit {
     //   }
     // });
 
+    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
+
   }
 
   setActive(member:any) {
     // this.allModulesService.members.active = member;
   }
 
-  routerAccount(accountType: AccountType) {
+  routerAccount() {
     this.urlComplete.mainUrl = 'acc';
-    this.urlComplete.subUrl = accountType.code;
-    Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, accountType.code);
+    this.urlComplete.subUrl = this.accountInfo.accountType;
+    Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, this.accountInfo.accountType);
     this.dataService.visitParamRouterChange('acc');
     this.onNavigateRoutor('/acc/');
   }
@@ -161,7 +152,6 @@ export class SidebarComponent implements OnInit {
   }
 
   activeSidebar(msg: string) {
-    console.log('msg', msg);
     switch (msg) {
       case 'profile':
         this.urlComplete.mainUrl = 'acc'+msg;

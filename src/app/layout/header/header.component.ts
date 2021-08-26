@@ -5,14 +5,15 @@ import { MessagesData } from '../../shares/model/messages-data';
 import { Utils } from '../../shares/utils/utils.static';
 import { TranslateService } from '@ngx-translate/core';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
-
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  private baseUrl: string = '';
+  src = '';
   langCode  = this.translate.currentLang;
   langText  = 'English';
   langData          = {
@@ -35,12 +36,16 @@ export class HeaderComponent implements OnInit {
     gender: '',
     lastName: '',
     phoneNumber: '',
-    userName: ''
+    userName: '',
+    resourceID: 0
   };
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService, private router: Router) {}
+    private headerService: HeaderService, private router: Router) {
+      this.baseUrl = environment.bizServer.server;
+
+    }
 
   ngOnInit() {
      switch(this.langCode) {
@@ -129,6 +134,7 @@ export class HeaderComponent implements OnInit {
       },
     ];
     this.userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+    this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
   }
 
   getDatas(section: any) {

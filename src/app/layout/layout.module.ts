@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MshareModule } from '../shares/mshare/mshare.module';
 import {
   PerfectScrollbarModule, PerfectScrollbarConfigInterface,
   PERFECT_SCROLLBAR_CONFIG
@@ -18,7 +19,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {};
   ],
   imports: [
     CommonModule,
-    PerfectScrollbarModule
+    PerfectScrollbarModule,
+    MshareModule
   ],
   exports: [
     HeaderComponent,

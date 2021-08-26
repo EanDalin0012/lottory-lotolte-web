@@ -7,16 +7,19 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE, AccountTypeCode } from '../../shares/constants/common.const';
-import { accountDatas } from '../account-list/account-data';
 import { Subject } from 'rxjs';
 import { accountMasterAndAgent } from '../../../assets/all-modules-data/all-modules-data';
-
+import { HTTPService } from '../../shares/services/http.service';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-sub-account',
   templateUrl: './sub-account.component.html',
   styleUrls: ['./sub-account.component.css']
 })
 export class SubAccountComponent implements OnInit {
+
+  private baseUrl: string = '';
 
   accounts: Account[] = [];
   accountInfo: Account= {
@@ -48,8 +51,12 @@ export class SubAccountComponent implements OnInit {
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService,
+    private hTTPService: HTTPService,
   ) {
+    this.baseUrl = environment.bizServer.server;
+
     this.titleService.setTitle('Account-Admin');
     this.dtElement as DataTableDirective;
     this.dtOptions = {
@@ -65,33 +72,73 @@ export class SubAccountComponent implements OnInit {
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
-    this.accountInfo = Utils.getSecureStorage('sub-account');
-    this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
-      const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
-      //this.accountType = account_type;
-      this.inquiry();
-    });
+    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
+    // this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
+    //   const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+    //   //this.accountType = account_type;
+    //   // this.inquiry();
+    // });
 
     this.inquiry();
 
   }
 
   inquiry(){
-    this.accounts = accountMasterAndAgent;
-    this.accountDisplays = [];
-    if(this.activeTab.index == 0) {
-      this.accounts.forEach(element => {
-        if(AccountTypeCode.Master == element.accountType) {
-          this.accountDisplays.push(element);
+    // this.accounts = accountMasterAndAgent;
+    // this.accountDisplays = [];
+    // if(this.activeTab.index == 0) {
+    //   this.accounts.forEach(element => {
+    //     if(AccountTypeCode.Master == element.accountType) {
+    //       this.accountDisplays.push(element);
+    //     }
+    //   });
+    // } else if (this.activeTab.index == 1) {
+    //   this.accounts.forEach(element => {
+    //     if(AccountTypeCode.Agent == element.accountType) {
+    //       this.accountDisplays.push(element);
+    //     }
+    //   });
+    // }
+
+
+    const api = this.baseUrl + '/api/sub/account/v0/inquiry';
+    // const accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
+    const requestData = {
+      mainAccountID: this.accountInfo.id,
+    };
+    this.hTTPService.Post(api,requestData).then((resposne)=> {
+       if( resposne && resposne.result.responseCode !== '200' && resposne.result.responseMessage === 'Invalid_MainAccountID') {
+        this.modalService.alert(
+          this.translate.instant('ServerResponseCode.Label.Invalid_MainAccountID'),
+         {
+         modalClass: 'open-alert',
+         btnText: this.translate.instant('Common.Button.Confirme'),
+         callback: res => {
+
+         }
+       });
+      }
+      if(resposne && resposne.result.responseCode === '200') {
+        console.log(resposne);
+        this.accounts = resposne.body;
+        this.accountDisplays = [];
+        if(this.activeTab.index == 0) {
+          this.accounts.forEach(element => {
+            if(AccountTypeCode.Master == element.accountType) {
+              this.accountDisplays.push(element);
+            }
+          });
+        } else if (this.activeTab.index == 1) {
+          this.accounts.forEach(element => {
+            if(AccountTypeCode.Agent == element.accountType) {
+              this.accountDisplays.push(element);
+            }
+          });
         }
-      });
-    } else if (this.activeTab.index == 1) {
-      this.accounts.forEach(element => {
-        if(AccountTypeCode.Agent == element.accountType) {
-          this.accountDisplays.push(element);
-        }
-      });
-    }
+
+      }
+
+    });
 
     this.dtTrigger.next();
     this.rows = this.accounts;

@@ -14,7 +14,10 @@ import { AddAccountComponent } from '../add-account/add-account.component';
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { Router } from '@angular/router';
 import { StoreUtil } from '../../shares/utils/store';
+import { HTTPService } from '../../shares/services/http.service';
 declare const $: any;
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
@@ -22,6 +25,7 @@ declare const $: any;
 })
 export class AccountListComponent implements OnInit {
 
+  private baseUrl: string = '';
   storeUtil = new StoreUtil();
   accounts: Account[] = [];
   @ViewChild(DataTableDirective, { static: false })
@@ -46,9 +50,11 @@ export class AccountListComponent implements OnInit {
     private modalService: ModalService,
     private dataService: DataService,
     private titleService: Title,
-    private router: Router
+    private router: Router,
+    private hTTPService: HTTPService,
+    private translate: TranslateService,
   ) {
-
+    this.baseUrl = environment.bizServer.server;
     this.titleService.setTitle('Account-Admin');
     this.dtElement as DataTableDirective;
     this.dtOptions = {
@@ -66,6 +72,9 @@ export class AccountListComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[3]);
     this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
       const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
+
+      console.log('account_type',account_type);
+
       this.accountType = account_type;
       this.inquiry();
     });
@@ -81,6 +90,32 @@ export class AccountListComponent implements OnInit {
           this.accountDisplay.push(element);
         }
       });
+    const userInfo =Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+    const requestData = {
+      userName: userInfo.userName,
+      userID: userInfo.id,
+    };
+    const api = this.baseUrl + '/api/my/account/v0/inquiry';
+
+    this.hTTPService.Post(api,requestData).then((resposne)=> {
+      console.log('resposne', resposne);
+       if( resposne && resposne.result.responseCode !== '200' && resposne.result.responseMessage === 'Invalid_UserID') {
+        this.modalService.alert(
+          this.translate.instant('ServerResponseCode.Label.Invalid_UserID'),
+         {
+         modalClass: 'open-alert',
+         btnText: this.translate.instant('Common.Button.Confirme'),
+         callback: res => {
+
+         }
+       });
+      }
+      if(resposne && resposne.result.responseCode === '200') {
+        this.accountDisplay = resposne.body.subAccounts;
+      }
+
+    });
+
       this.dtTrigger.next();
       this.rows = this.accountDisplay
       this.srch = [...this.rows];

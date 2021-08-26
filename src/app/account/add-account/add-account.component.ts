@@ -101,6 +101,17 @@ export class AddAccountComponent implements OnInit {
   submitted = false;
   genderCheck = false;
 
+  mainAccountInfo: Account = {
+    id: 0,
+    accountId: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    status:'',
+    currency: ''
+  };
+  openAccounttype: string = '';
+
   constructor(
     private translateService: TranslateService,
     private modalService: ModalService,
@@ -159,9 +170,10 @@ export class AddAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     if(this.modal.message) {
-      this.currentAccount = PipeUtils.account(this.modal.message.accountID) + ','+ this.modal.message.acountName;
+      this.mainAccountInfo = this.modal.message.accountInfo;
+      this.openAccounttype = this.modal.message.openAccount;
+      this.currentAccount = PipeUtils.account(this.mainAccountInfo.accountId) + ','+ this.mainAccountInfo.accountName;
     }
 
     const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);

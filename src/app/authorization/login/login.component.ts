@@ -69,8 +69,6 @@ export class LoginComponent implements OnInit {
       this.inputPassword.nativeElement.focus();
     } else {
       const formData = this.formLogin.getRawValue();
-      console.log('formData',formData);
-
       const logInfo: AuthentcatiionRequest = {
         user_name: formData.userName,
         password: formData.password
@@ -81,7 +79,6 @@ export class LoginComponent implements OnInit {
         }
       }).catch((err: any) => {
           console.log(err);
-
       });
     }
 

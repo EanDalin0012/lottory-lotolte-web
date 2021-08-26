@@ -1,5 +1,5 @@
 <!-- Page Content -->
-<div class="content container-fluid">
+<div class="content container-fluid" style="padding-top: 0px;">
 
   <!-- Page Header -->
   <div class="page-header">
@@ -78,7 +78,17 @@
 
   <!-- Tab 0 -->
   <ng-container *ngIf = "activeTab.index === 0">
-    <div class="card-body padding-0">
+    <div class="col-auto float-right ml-auto row col-md-12" style="margin-bottom: 10px;">
+      <div style="float: left;"></div>
+     <div style="padding-right: 0px">
+      <button (click)="newAccount()"  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px;" style = "float: right;width: 190px;">
+        <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
+        <span class="font-weigh-700 margin-left-5px">{{'Account.Label.newSeniarAccount' | translate}}</span>
+      </button>
+     </div>
+    </div>
+
+    <div class="card-body col-md-12 card tab-box">
       <div class="table-responsive custom-table-select">
           <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
               <thead>
@@ -87,32 +97,63 @@
                       <th>{{'Account.Label.accountID' | translate}}</th>
                       <th>{{'Account.Label.accountName' | translate}}</th>
                       <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
+                      <th class="text-center" width = "150px">{{'Account.Label.accountType' | translate}}</th>
                       <th>{{'Common.Label.status' | translate}}</th>
                       <th>{{'Common.Label.action' | translate}}</th>
                   </tr>
               </thead>
               <tbody>
                   <tr *ngFor="let item of subAccounts;let i = index;">
-                      <td>{{i+1}}</td>
-                      <td>{{item.accountId | account}}</td>
-                      <td>{{item.accountName}}</td>
+                      <td class="padding-7px">{{i+1}}</td>
+                      <td class="padding-7px">{{item.accountId | account}}</td>
+                      <td class="padding-7px">{{item.accountName}}</td>
                       <td class="text-center">{{item.accountBalance | accountBalance: item.currency }} {{item.currency}}</td>
-                      <td style="width: 90px;">
+                      <td class="text-center">
+                        <div [innerHTML] = 'item.accountType | accountType'>
+                        </div>
+                      </td>
+                      <td class="padding-7px" style="width: 90px;">
                         <div [innerHTML] = 'item.status | accountStatus'>
                         </div>
                       </td>
-                      <td class="text-right" style="width: 100px;">
-                        <div class="dropdown dropdown-action">
-                            <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
-                              <i class="material-icons">more_vert</i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#edit_overtime" (click)="setting(item)">
-                                  <i class="la la-cog m-r-5"></i>
-                                  {{'Common.Label.setting' | translate}}
-                                </a>
-                            </div>
-                        </div>
+                      <td class="text-right padding-7px" style="width: 100px;">
+                        <div class="dropdown dropdown-action" >
+                          <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
+                            <i class="material-icons">more_vert</i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
+                              <a (click)="setting(item)" class="dropdown-item" href="javascript:">
+                                <i class="la la-cog font-size-1-50rem"></i>
+                                {{'Common.Label.setting' | translate}}
+                              </a>
+
+                              <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
+                                <i class="pi pi-wallet font-size-1-50rem"></i>
+                                {{'Common.Label.depositMoney' | translate}}
+                              </a>
+
+                              <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
+                                <i class="pi pi-wallet font-size-1-50rem"></i>
+                                {{'Common.Label.withDrawalMoney' | translate}}
+                              </a>
+
+                              <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
+                                <i class="pi pi-info-circle font-size-1-50rem"></i>
+                                {{'Common.Label.details' | translate}}
+                              </a>
+
+                              <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="onSubAccount(item)">
+                                <i class="pi pi-users font-size-1-50rem"></i>
+                                {{'Account.Label.subSeniarAccount' | translate}}
+                              </a>
+
+                              <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="onSubAccount(item)">
+                                <i class="pi pi-lock-open font-size-1-50rem"></i>
+                                Reset Password
+                              </a>
+
+                          </div>
+                      </div>
                     </td>
                   </tr>
               </tbody>
