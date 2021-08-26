@@ -33,7 +33,10 @@ export class AuthentcatiionService {
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
           this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
             if (result) {
-              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result);
+              Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result.userInfo);
+              Utils.setSecureStorage(LOCAL_STORAGE.Account_Info, result.accountInfo);
+              console.log('result', result);
+
               resovle(result);
             }
 
@@ -82,6 +85,8 @@ export class AuthentcatiionService {
           $('body').addClass('loaded');
           $('div.loading').addClass('none');
           const responseData = res as any;
+          console.log('responseData', responseData);
+
           if(responseData.result && responseData.result.responseCode !== '200') {
             this.modalService.alert(
               this.translate.instant('ServerResponseCode.Label.'+responseData.result.responseMessage),

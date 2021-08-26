@@ -16,13 +16,16 @@ import { NotificationService } from '@progress/kendo-angular-notification';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
 import { Base64WriteImage } from '../../shares/model/base64-image';
 import { ErrorCodes } from '../../shares/constants/common.error.code.const';
-
+import { HTTPService } from '../../shares/services/http.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html',
   styleUrls: ['./add-account.component.css']
 })
 export class AddAccountComponent implements OnInit {
+
+  private baseUrl: string = '';
 
   @ViewChild("firstName") inputFirstName: any;
   @ViewChild("lastName") inputLastName: any;
@@ -40,11 +43,11 @@ export class AddAccountComponent implements OnInit {
   typeList: any[] = [];
 
   identifyImageUploaded: boolean = false;
-  identifyImageUploadedID: string = '';
+  identifyImageUploadedID: number = 0;
   identifyImagePreviews:any[] = [];
 
   imageUploaded: boolean = false;
-  imagePreviewProfileId: string = '';
+  imagePreviewProfileID: number = 0;
   imagePreviewProfile: any[] = [];
 
 
@@ -103,8 +106,11 @@ export class AddAccountComponent implements OnInit {
     private modalService: ModalService,
     private formBuilder: FormBuilder,
     private el: ElementRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private hTTPService: HTTPService,
   ) {
+    this.baseUrl = environment.bizServer.server;
+
     this.form as FormGroup;
     this.inputFirstName as ElementRef;
     this.inputLastName as ElementRef;
@@ -115,6 +121,7 @@ export class AddAccountComponent implements OnInit {
     this.form = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
+        birthDate: new FormControl(new Date(new Date().getFullYear() - 18, 10, 10)),
         phoneNumber: ['', Validators.required],
         otherPhoneNumber: ['', Validators.required],
         gender: new FormControl(),
@@ -272,16 +279,14 @@ export class AddAccountComponent implements OnInit {
                 base64WriteImage.file_type  = element.type;
                 base64WriteImage.file_size  = element.size;
                 base64WriteImage.file_extension = element.extension;
-                console.log(base64WriteImage);
+                const api = this.baseUrl + '/api/base64/image/v0/write';
+                this.hTTPService.Post(api, base64WriteImage).then(resp=>{
+                  console.log(resp);
 
-                // this.uploadService.upload(base64WriteImage).then(resp=>{
-                //   if(resp === true) {
-                //     this.resource_img_id_list.push({resource_id: base64WriteImage.id});
-                //     console.log('resource_img_id', this.resource_img_id_list);
-                //     this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
-                //    return true;
-                //   }
-                // });
+                  if(resp.body.status === 'Y') {
+                    this.identifyImageUploadedID = resp.body.resourceID;
+                  }
+                });
               }
           }
         });
@@ -354,14 +359,12 @@ export class AddAccountComponent implements OnInit {
                 base64WriteImage.file_type  = element.type;
                 base64WriteImage.file_size  = element.size;
                 base64WriteImage.file_extension = element.extension;
-                // this.uploadService.upload(base64WriteImage).then(resp=>{
-                //   if(resp === true) {
-                //     this.resource_img_id_list.push({resource_id: base64WriteImage.id});
-                //     console.log('resource_img_id', this.resource_img_id_list);
-                //     this.modalService.showNotificationService(this.translateService.instant('Uploaded Image name:'+element.name), 900,'notification-profile upload-product-image');
-                //    return true;
-                //   }
-                // });
+                const api = this.baseUrl + '/api/base64/image/v0/write';
+                this.hTTPService.Post(api, base64WriteImage).then(resp=>{
+                  if(resp.body.status === 'Y') {
+                    this.imagePreviewProfileID = resp.body.resourceID;
+                  }
+                });
               }
           }
         });
@@ -377,6 +380,11 @@ export class AddAccountComponent implements OnInit {
 
   save() {
     this.submitted = true;
+    console.log(this.form.getRawValue());
+    const t = this.form.getRawValue();
+    const db = t.birthDate as Date;
+    console.log(db, db.getFullYear(), db.getMonth(), db.getDate());
+
     if(this.f.gender.value == null) {
       this.genderCheck = true;
     }
@@ -397,26 +405,26 @@ export class AddAccountComponent implements OnInit {
       console.log('value', data.firstName);
       console.log(this.dateBirth);
       console.log(JSON.stringify(this.form.value));
-
+      const db = data.birthDate as Date;
       let createAccount = new CreateAccount();
 
       createAccount.personalInformation = {
         firstName: data.firstName,
         lastName: data.lastName,
         gender: data.gender.code,
-        dateBirth: data.dateBirth,
+        dateBirth: db.getFullYear() + ''+db.getMonth() + ''+db.getDate(),
         phoneNumber: data.phoneNumber,
         otherPhone: data.otherPhoneNumber,
-        resourceId: ''
-      };
-      createAccount.userAccount = {
+        resourceID: this.imagePreviewProfileID,
         userName: data.userName,
         password: data.password
       };
       createAccount.identifyInformation = {
         identifyID: data.identifyID,
-        resourceID: ''
+        resourceID: this.identifyImageUploadedID
       };
+      createAccount.remark = data.remark;
+
       console.log(createAccount);
 
     }
@@ -433,11 +441,6 @@ export class AddAccountComponent implements OnInit {
 
       }
     });
-  }
-
-  private getTopOffset(controlEl: HTMLElement): number {
-    const labelOffset = 50;
-    return controlEl.getBoundingClientRect().top + window.scrollY - labelOffset;
   }
 
   public showNotification(): void {

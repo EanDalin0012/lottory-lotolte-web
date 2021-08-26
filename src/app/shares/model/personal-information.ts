@@ -5,5 +5,7 @@ export class PersonalInformation {
   dateBirth: string | undefined;
   phoneNumber: string | undefined;
   otherPhone: string | undefined;
-  resourceId: string | undefined;
+  resourceID: number | undefined;
+  userName: number | undefined;
+  password: number | undefined;
 }

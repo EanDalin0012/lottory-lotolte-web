@@ -88,7 +88,7 @@
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">{{'Account.Label.dateBirth' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" [value]="dateBirth" required>
+                    <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" formControlName="birthDate">
                     </kendo-datepicker>
 
                     <ng-container *ngIf="dateBirth === null">
