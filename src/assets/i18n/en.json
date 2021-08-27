@@ -23,6 +23,8 @@
       "member":"Member",
       "deposit":"Deposit",
       "newMasterAccount":"New Master Account",
+      "newAgentAccount":"New Agent Account",
+      "newMemberAccount":"New Member Account",
       "withDrawalMoney":"WithDrawal Money",
       "details":"Details",
       "fileName":"File Name",

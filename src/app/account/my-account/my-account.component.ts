@@ -18,6 +18,7 @@ import { AccountDepositComponent } from '../account-deposit/account-deposit.comp
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { accountAgentTypes } from '../../layout/sidebar/sidebar.component';
+import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -26,7 +27,7 @@ import { accountAgentTypes } from '../../layout/sidebar/sidebar.component';
 export class MyAccountComponent implements OnInit {
 
   private baseUrl: string = '';
-
+  subAccountRoutorUtil = new SubAccountRoutorUtil(this.router);
   subAccounts: Account[] = [];
 
   activeTab = {
@@ -163,26 +164,7 @@ export class MyAccountComponent implements OnInit {
     this.router.navigate(['/acc/details']);
   }
 
-  onSubAccount(item: Account) {
-    console.log(item);
-    switch (item.accountType) {
-      case AccountTypeCode.Admin:
-        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountSenair, item);
-        this.router.navigate(['/acc/sub-account-senair']);
-        break;
-      case AccountTypeCode.Seniar:
-        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountMaster, item);
-        this.router.navigate(['/acc/sub-account-master']);
-        break;
-      case AccountTypeCode.Master:
-        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountAgent, item);
-        this.router.navigate(['/acc/sub-account-agent']);
-        break;
-      case AccountTypeCode.Agent:
-        Utils.setSecureStorage(LOCAL_STORAGE.SubAccountMember, item);
-        this.router.navigate(['/acc/sub-account-member']);
-        break;
-    }
-
+  onSubAccountRouter(item: Account) {
+    this.subAccountRoutorUtil.subAccountRouter(item);
   }
 }

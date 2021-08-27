@@ -9,6 +9,7 @@ import { AccountSettingComponent } from './account-setting/account-setting.compo
 import { SubAccountComponent } from './sub-account/sub-account.component';
 import { SubAccountAgentComponent } from './sub-account-agent/sub-account-agent.component';
 import { SubAccountMasterComponent } from './sub-account-master/sub-account-master.component';
+import { SubAccountMemberComponent } from './sub-account-member/sub-account-member.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
       {path: 'sub-account-senair', component: SubAccountComponent},
       {path: 'sub-account-master', component: SubAccountMasterComponent},
       {path: 'sub-account-agent', component: SubAccountAgentComponent},
-      {path: 'sub-account-member', component: SubAccountAgentComponent}
+      {path: 'sub-account-member', component: SubAccountMemberComponent}
     ]
   }
 ];

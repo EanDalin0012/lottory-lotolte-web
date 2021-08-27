@@ -65,7 +65,7 @@
   <ng-container *ngIf = "activeTab.index === 0">
     <div class="row">
       <div class="col-auto float-right ml-auto" style="margin-right: 10px; width: 100%;" (click)="newAccount()" >
-        <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;">
+        <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;margin-right: 9px;">
           <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
           <span class="font-weigh-700 margin-left-5px">{{'Common.Label.newMasterAccount' | translate}}</span>
         </button>
@@ -117,12 +117,12 @@
                                         {{'Common.Label.withDrawalMoney' | translate}}
                                       </a>
 
-                                      <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
+                                      <a class="dropdown-item" href="javascript:" (click)="details(item)">
                                         <i class="fa fa-trash-o m-r-5"></i>
                                         {{'Common.Label.details' | translate}}
                                       </a>
 
-                                      <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime">
+                                      <a href="javascript:" class="dropdown-item" (click)="onSubAccountRouter(item)">
                                         <i class="fa fa-trash-o m-r-5"></i>
                                         {{'Account.Label.subMasterAccount' | translate}}
                                       </a>
@@ -143,7 +143,7 @@
 
     <div class="row">
       <div class="col-auto float-right ml-auto" style="margin-right: 10px; width: 100%;" (click)="newAccount()" >
-        <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;">
+        <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;margin-right: 9px;">
           <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
           <span class="font-weigh-700 margin-left-5px">{{'Account.Label.newAgentAccount' | translate}}</span>
         </button>
@@ -195,12 +195,12 @@
                                       {{'Common.Label.withDrawalMoney' | translate}}
                                     </a>
 
-                                    <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
+                                    <a class="dropdown-item" href="javascript:" (click)="details(item)">
                                       <i class="fa fa-trash-o m-r-5"></i>
                                       {{'Common.Label.details' | translate}}
                                     </a>
 
-                                    <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime">
+                                    <a href="javascript:" class="dropdown-item" (click)="onSubAccountRouter(item)">
                                       <i class="fa fa-trash-o m-r-5"></i>
                                       {{'Account.Label.subAgentAccount' | translate}}
                                     </a>

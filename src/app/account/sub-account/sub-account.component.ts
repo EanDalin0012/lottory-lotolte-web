@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE, AccountTypeCode } from '../../shares/constants/common.const';
 import { Subject } from 'rxjs';
-import { accountMasterAndAgent } from '../../../assets/all-modules-data/all-modules-data';
 import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
 @Component({
   selector: 'app-sub-account',
   templateUrl: './sub-account.component.html',
@@ -20,7 +20,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class SubAccountComponent implements OnInit {
 
   private baseUrl: string = '';
-
+  subAccountRoutorUtil = new SubAccountRoutorUtil(this.router);
   accounts: Account[] = [];
   accountInfo: Account= {
     id: 0,
@@ -84,25 +84,7 @@ export class SubAccountComponent implements OnInit {
   }
 
   inquiry(){
-    // this.accounts = accountMasterAndAgent;
-    // this.accountDisplays = [];
-    // if(this.activeTab.index == 0) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Master == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // } else if (this.activeTab.index == 1) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Agent == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // }
-
-
     const api = this.baseUrl + '/api/sub/account/v0/inquiry';
-    // const accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
     const requestData = {
       mainAccountID: this.accountInfo.id,
     };
@@ -178,6 +160,10 @@ export class SubAccountComponent implements OnInit {
   onTab(index: number) {
     this.activeTab.index = index;
     this.inquiry();
+  }
+
+  onSubAccountRouter(item: Account) {
+    this.subAccountRoutorUtil.subAccountRouter(item);
   }
 
 }
