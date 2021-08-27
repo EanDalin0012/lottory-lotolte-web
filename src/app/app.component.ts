@@ -1,17 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LOCAL_STORAGE, LANGUAGE } from './shares/constants/common.const';
 import { Utils } from './shares/utils/utils.static';
-
+import { environment } from 'src/environments/environment';
+import { HTTPService } from './shares/services/http.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+
+
+
   title = 'LattoryLotoLTE';
-  constructor(private translate: TranslateService) {
-    this.setInitialAppLanguage();
+  constructor(
+    private hTTPService: HTTPService,
+    private translate: TranslateService) {
+    window.onbeforeunload = (event) => {
+      const e = event || window.event;
+      const requestData = {
+        isClose: 'broswer is close'
+      };
+      // Cancel the event
+      e.preventDefault();
+      const api = environment.bizServer.server + '/api/client/v0/close';
+        this.hTTPService.Post(api,requestData).then((resposne)=> {
+
+       });
+      if (e) {
+
+        e.returnValue = ''; // Legacy method for cross browser support
+      }
+      return ''; // Legacy method for cross browser support
+    };
+  }
+  ngOnDestroy(): void {
+   alert('close application');
   }
 
   // tslint:disable-next-line:typedef

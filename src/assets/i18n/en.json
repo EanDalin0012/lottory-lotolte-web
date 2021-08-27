@@ -149,7 +149,8 @@
       "browserVersion":"Browser Version",
       "device":"Device",
       "deviceType":"Device Type",
-      "orientation":"Orientation"
+      "orientation":"Orientation",
+      "IP":"IP"
     }
   },
   "Deposit": {

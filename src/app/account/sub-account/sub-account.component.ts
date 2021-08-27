@@ -72,15 +72,8 @@ export class SubAccountComponent implements OnInit {
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
-    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
-    // this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
-    //   const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
-    //   //this.accountType = account_type;
-    //   // this.inquiry();
-    // });
-
+    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
     this.inquiry();
-
   }
 
   inquiry(){

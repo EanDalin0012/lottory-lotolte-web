@@ -54,6 +54,27 @@ export class MyAccountComponent implements OnInit {
     currency: ''
   };
 
+  transactionHistorys = [
+    {
+      id: 2,
+      accountId: '000000001',
+      accountName: 'Paly',
+      amount: 10000,
+      currency: 'KH',
+      transactionType: 'withdrawal',
+      dateTime: 'Wednesday, August 25, 2021'
+    },
+    {
+      id: 3,
+      accountId: '000000002',
+      accountName: 'Dalin',
+      amount: 10000,
+      currency: 'KH',
+      transactionType: 'deposit',
+      dateTime: 'Wednesday, August 8, 2021'
+    }
+  ];
+
   constructor(
     private titleService: Title,
     private router: Router,

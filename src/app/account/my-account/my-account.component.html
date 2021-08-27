@@ -59,16 +59,10 @@
                 </li>
 
                 <li class="nav-item">
-                  <a (click)="onTab(1)" [ngClass]="{ 'active' : activeTab.index === 1 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.accountDepositMoney' | translate}}</a>
+                  <a (click)="onTab(1)" [ngClass]="{ 'active' : activeTab.index === 1 }" href="javascript:" class="nav-link">Transaction History</a>
                 </li>
                 <li class="nav-item">
-                  <a (click)="onTab(2)" [ngClass]="{ 'active' : activeTab.index === 2 }" href="javascript:" data-toggle="tab" class="nav-link">
-                    {{'Common.Label.accountWithdrawalMoney' | translate}}
-                    <!-- <small class="text-danger">(Admin Only)</small> -->
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a (click)="onTab(3)" [ngClass]="{ 'active' : activeTab.index === 3 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.deviceInformationLogin' | translate}}</a>
+                  <a (click)="onTab(2)" [ngClass]="{ 'active' : activeTab.index === 2 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.deviceInformationLogin' | translate}}</a>
                 </li>
             </ul>
         </div>
@@ -166,25 +160,52 @@
 
   <!-- Tab 1 -->
   <ng-container *ngIf = "activeTab.index === 1">
-    <span>Tab 2</span>
+    <div class="card-body col-md-12 card tab-box">
+      <div class="table-responsive custom-table-select">
+          <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>{{'Account.Label.account' | translate}}</th>
+                      <th class="text-right">Amount</th>
+                      <th class="text-center">Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of transactionHistorys;let i = index;">
+                      <td class="padding-7px">{{i+1}}</td>
+                      <td class="padding-7px">{{item.accountId | account}}-{{item.accountName}}</td>
+                      <td  class="text-right" >
+                        <ng-container *ngIf = "item.transactionType === 'withdrawal'">
+                          <i class="pi pi-window-maximize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px; color: red;"></i>
+                          <span style="color: red;">-</span>
+                        </ng-container>
+                        <ng-container *ngIf = "item.transactionType === 'deposit'">
+                          <i class="pi pi-window-minimize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px;color: #26af48;"></i>
+                        </ng-container>
+                        <span [ngStyle]="{'color': item.transactionType === 'withdrawal' ? 'red' : '#26af48' }">
+                          {{item.amount | accountBalance: item.currency }} {{item.currency}}
+                        </span>
+
+                      </td>
+                      <td class="padding-7px text-center">{{item.dateTime}} </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
   </ng-container>
   <!-- /Tab 1 -->
-
 
   <!-- Tab 1 -->
   <ng-container *ngIf = "activeTab.index === 2">
-    <span>Tab 3</span>
-  </ng-container>
-  <!-- /Tab 1 -->
-
-  <!-- Tab 1 -->
-  <ng-container *ngIf = "activeTab.index === 3">
     <div class="card-body padding-0">
       <div class="table-responsive custom-table-select">
           <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
               <thead>
                   <tr>
                       <th>#</th>
+                      <th>{{'MyAccount.Label.IP' | translate}}</th>
                       <th>{{'MyAccount.Label.os' | translate}}</th>
                       <th>{{'MyAccount.Label.osVersion' | translate}}</th>
                       <th>{{'MyAccount.Label.browser' | translate}}</th>
@@ -198,7 +219,8 @@
               <tbody>
                   <tr *ngFor="let item of deviceInfos;let i = index;">
                       <td [width] = "50">{{i+1}}</td>
-                      <td [width] = "100">{{item.os}}</td>
+                      <td [width] = "80">{{item.ip}}</td>
+                      <td [width] = "50">{{item.os}}</td>
                       <td [width] = "100">{{item.os_version}}</td>
                       <td [width] = "60">{{item.browser}}</td>
                       <td [width] = "60">{{item.browser_version}}</td>

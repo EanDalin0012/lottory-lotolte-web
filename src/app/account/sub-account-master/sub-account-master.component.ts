@@ -72,7 +72,9 @@ export class SubAccountMasterComponent implements OnInit {
   ngOnInit(): void {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
-    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
+    this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountMaster);
+    console.log('SubAccountMaster', this.accountInfo);
+
     // this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
     //   const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
     //   //this.accountType = account_type;
@@ -124,13 +126,13 @@ export class SubAccountMasterComponent implements OnInit {
         this.accountDisplays = [];
         if(this.activeTab.index == 0) {
           this.accounts.forEach(element => {
-            if(AccountTypeCode.Master == element.accountType) {
+            if(AccountTypeCode.Agent == element.accountType) {
               this.accountDisplays.push(element);
             }
           });
         } else if (this.activeTab.index == 1) {
           this.accounts.forEach(element => {
-            if(AccountTypeCode.Agent == element.accountType) {
+            if(AccountTypeCode.Member == element.accountType) {
               this.accountDisplays.push(element);
             }
           });

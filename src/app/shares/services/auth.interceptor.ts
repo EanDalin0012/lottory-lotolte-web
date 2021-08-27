@@ -4,8 +4,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HttpErrorResponse,
-  HttpResponse
+  HttpErrorResponse
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -44,6 +43,17 @@ export class AuthInterceptor implements HttpInterceptor {
         $('body').addClass('loaded');
         $('div.loading').addClass('none');
 
+        if (err && err.status === 0) {
+          this.modalService.alert(
+            'message : <span>Connection faile</span> status: ' + err.statusText,
+            {
+            modalClass: 'message-alert testing, open-alert',
+            btnText: 'Confirm',
+            callback: (res) => {
+              return false;
+            }
+          });
+        }
         if(err.status === 401) {
           console.log(err.error.error_description);
           this.modalService.alert(

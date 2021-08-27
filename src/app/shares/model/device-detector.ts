@@ -8,4 +8,5 @@ export interface DeviceInfo {
   browser_version: string;
   device_type: string;
   orientation: string;
+  ip?: string;
 }
