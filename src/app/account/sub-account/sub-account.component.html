@@ -5,10 +5,10 @@
   <div class="page-header">
       <div class="row align-items-center">
           <div class="col">
-              <h3 class="page-title">{{'Account.Label.account' | translate}}</h3>
+              <h3 class="page-title">{{'Account.Label.Account' | translate}}</h3>
               <ul class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/acc/">{{'Account.Label.account' | translate}}</a></li>
-                  <li class="breadcrumb-item active">{{'Account.Label.subAccount' | translate}}</li>
+                  <li class="breadcrumb-item"><a href="/acc/">{{'Account.Label.Account' | translate}}</a></li>
+                  <li class="breadcrumb-item active">{{'Account.Label.SubAccount' | translate}}</li>
               </ul>
           </div>
       </div>
@@ -19,22 +19,22 @@
     <div class="col-md-6 d-flex">
       <div class="card profile-box flex-fill">
           <div class="card-body">
-              <h3 class="card-title">{{'MyAccount.Label.accountInformation' | translate}}</h3>
+              <h3 class="card-title">{{'MyAccount.Label.AccountInformation' | translate}}</h3>
               <ul class="personal-info">
                   <li>
-                      <div class="title">{{'Account.Label.accountName' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountName' | translate}}</div>
                       <div class="text">{{accountInfo.accountName}}</div>
                   </li>
                   <li>
-                      <div class="title">{{'Account.Label.accountID' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountID' | translate}}</div>
                       <div class="text">{{accountInfo.accountId | account}}</div>
                   </li>
                   <li>
-                      <div class="title">{{'Account.Label.accountBalance' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountBalance' | translate}}</div>
                       <div class="text">{{accountInfo.accountBalance}} {{accountInfo.currency}}</div>
                   </li>
                   <li>
-                    <div class="title">{{'Account.Label.accountType' | translate}}</div>
+                    <div class="title">{{'Account.Label.AccountType' | translate}}</div>
                     <div class="text" [innerHTML] = "accountInfo.accountType | accountType"></div>
                 </li>
 
@@ -50,11 +50,11 @@
         <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
             <ul class="nav nav-tabs nav-tabs-bottom">
                 <li class="nav-item">
-                  <a (click)="onTab(0)" [ngClass]="{ 'active' : activeTab.index === 0 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.master' | translate}}</a>
+                  <a (click)="onTab(0)" [ngClass]="{ 'active' : activeTab.index === 0 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.Master' | translate}}</a>
                 </li>
 
                 <li class="nav-item">
-                  <a (click)="onTab(1)" [ngClass]="{ 'active' : activeTab.index === 1 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.agent' | translate}}</a>
+                  <a (click)="onTab(1)" [ngClass]="{ 'active' : activeTab.index === 1 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.Agent' | translate}}</a>
                 </li>
             </ul>
         </div>
@@ -67,7 +67,7 @@
       <div class="col-auto float-right ml-auto" style="margin-right: 10px; width: 100%;" (click)="newAccount()" >
         <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;margin-right: 9px;">
           <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
-          <span class="font-weigh-700 margin-left-5px">{{'Common.Label.newMasterAccount' | translate}}</span>
+          <span class="font-weigh-700 margin-left-5px">{{'Common.Label.NewMasterAccount' | translate}}</span>
         </button>
       </div>
     </div>
@@ -80,12 +80,12 @@
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>{{'Account.Label.accountID' | translate}}</th>
-                          <th>{{'Account.Label.accountName' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountType' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
-                          <th class="text-center">{{'Common.Label.status' | translate}}</th>
-                          <th class="text-right">{{'Common.Label.action' | translate}}</th>
+                          <th>{{'Account.Label.AccountID' | translate}}</th>
+                          <th>{{'Account.Label.AccountName' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.AccountType' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.AccountBalance' | translate}}</th>
+                          <th class="text-center">{{'Common.Label.Status' | translate}}</th>
+                          <th class="text-right">{{'Common.Label.Action' | translate}}</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -104,27 +104,27 @@
                                   <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
                                       <a (click)="setting(item)" class="dropdown-item" href="javascript:">
                                         <i class="fa fa-pencil m-r-5"></i>
-                                        {{'Common.Label.setting' | translate}}
+                                        {{'Common.Label.Setting' | translate}}
                                       </a>
 
                                       <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
                                         <i class="fa fa-pencil m-r-5"></i>
-                                        {{'Common.Label.depositMoney' | translate}}
+                                        {{'Common.Label.DepositMoney' | translate}}
                                       </a>
 
                                       <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
                                         <i class="fa fa-pencil m-r-5"></i>
-                                        {{'Common.Label.withDrawalMoney' | translate}}
+                                        {{'Common.Label.WithDrawalMoney' | translate}}
                                       </a>
 
                                       <a class="dropdown-item" href="javascript:" (click)="details(item)">
                                         <i class="fa fa-trash-o m-r-5"></i>
-                                        {{'Common.Label.details' | translate}}
+                                        {{'Common.Label.Details' | translate}}
                                       </a>
 
                                       <a href="javascript:" class="dropdown-item" (click)="onSubAccountRouter(item)">
                                         <i class="fa fa-trash-o m-r-5"></i>
-                                        {{'Account.Label.subMasterAccount' | translate}}
+                                        {{'Account.Label.SubMasterAccount' | translate}}
                                       </a>
 
                                   </div>

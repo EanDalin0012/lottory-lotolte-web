@@ -82,7 +82,6 @@ export class MyAccountComponent implements OnInit {
       // ... skipped ...
       // pageLength: 10,
       dom: "lrtip",
-      pagingType: 'full_numbers',
       pageLength: 10,
       processing: true
     };
