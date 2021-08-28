@@ -47,6 +47,16 @@ export class SubAccountComponent implements OnInit {
     class: 'nav-link'
   }
 
+  accountInfoMain: Account= {
+    id: 0,
+    accountId: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    currency: '',
+    status: ''
+  };
+
   constructor(
     private modalService: ModalService,
     private dataService: DataService,
@@ -73,6 +83,7 @@ export class SubAccountComponent implements OnInit {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
     this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
+    this.accountInfoMain = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
     this.inquiry();
   }
 

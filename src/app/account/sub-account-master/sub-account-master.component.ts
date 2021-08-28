@@ -31,6 +31,16 @@ export class SubAccountMasterComponent implements OnInit {
     currency: '',
     status: ''
   };
+
+  accountInfoMain: Account= {
+    id: 0,
+    accountId: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    currency: '',
+    status: ''
+  };
   accountDisplays: Account[] = [];
 
   @ViewChild(DataTableDirective, { static: false })
@@ -72,7 +82,8 @@ export class SubAccountMasterComponent implements OnInit {
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
     this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountMaster);
-    console.log('SubAccountMaster', this.accountInfo);
+    this.accountInfoMain = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
+    console.log('accountInfoMain', this.accountInfoMain);
 
     // this.dataService.visitSourceParamRoutorChangeData.subscribe(message => {
     //   const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);

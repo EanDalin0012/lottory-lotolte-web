@@ -65,6 +65,25 @@ export class MyAccountComponent implements OnInit {
     }
   ];
 
+  depositCashOutAccount = [
+    {
+      id: 1,
+      accountID: '000-000-001',
+      accountName: 'Paly',
+      amount: 10000,
+      currency: 'KH',
+      date: '2021-08-28 12:00'
+    },
+    {
+      id: 2,
+      accountID: '000-000-002',
+      accountName: 'Dalin',
+      amount: 10000,
+      currency: 'KH',
+      date: '2021-08-28 2:00'
+    }
+  ];
+
   constructor(
     private titleService: Title,
     private router: Router,

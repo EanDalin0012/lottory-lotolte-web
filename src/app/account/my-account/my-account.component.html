@@ -204,6 +204,33 @@
 
   <ng-container *ngIf = "activeTab.index === 2">
     <span>Deposit Cash Out</span>
+    <div class="card-body padding-0">
+      <div class="table-responsive custom-table-select">
+          <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
+              <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Deposit Cash Out Account</th>
+                      <th>Amount</th>
+                      <th>Date</th>
+
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let item of depositCashOutAccount;let i = index;">
+                      <td [width] = "50">{{i+1}}</td>
+                      <td >{{item.accountID}}-{{item.accountName}}</td>
+                      <td style="color: red;">
+                        <i class="pi pi-window-maximize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px; color: red;"></i>
+                          <span style="color: red;">-</span>
+                        {{item.amount}} {{item.currency}}
+                      </td>
+                      <td >{{item.date}}</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+    </div>
 
   </ng-container>
   <!-- Tab 1 -->

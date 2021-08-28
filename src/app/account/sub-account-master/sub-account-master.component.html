@@ -103,6 +103,7 @@
                                     <i class="material-icons">more_vert</i>
                                   </a>
                                   <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
+                                    <ng-container *ngIf = "accountInfoMain.accountType === 'mast'">
                                       <a (click)="setting(item)" class="dropdown-item" href="javascript:">
                                         <i class="fa fa-pencil m-r-5"></i>
                                         {{'Common.Label.Setting' | translate}}
@@ -122,11 +123,14 @@
                                         <i class="fa fa-trash-o m-r-5"></i>
                                         {{'Common.Label.Details' | translate}}
                                       </a>
+                                    </ng-container>
 
-                                      <a href="javascript:" class="dropdown-item" (click)="onSubAccountRouter(item)">
-                                        <i class="fa fa-trash-o m-r-5"></i>
-                                        {{'Account.Label.SubAgentAccount' | translate}}
-                                      </a>
+                                    <a href="javascript:" class="dropdown-item" (click)="onSubAccountRouter(item)">
+                                      <i class="fa fa-trash-o m-r-5"></i>
+                                      {{'Account.Label.SubAgentAccount' | translate}}
+                                    </a>
+
+
 
                                   </div>
                               </div>
@@ -146,7 +150,7 @@
       <div class="col-auto float-right ml-auto" style="margin-right: 10px; width: 100%;" (click)="newAccount()" >
         <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px; float: right;margin-right: 9px;">
           <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
-          <span class="font-weigh-700 margin-left-5px">{{'Common.Label.newMemberAccount' | translate}}</span>
+          <span class="font-weigh-700 margin-left-5px">{{'Common.Label.NewMemberAccount' | translate}}</span>
         </button>
       </div>
     </div>
@@ -159,12 +163,12 @@
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>{{'Account.Label.accountID' | translate}}</th>
-                          <th>{{'Account.Label.accountName' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountType' | translate}}</th>
-                          <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
-                          <th class="text-center">{{'Common.Label.status' | translate}}</th>
-                          <th class="text-right">{{'Common.Label.action' | translate}}</th>
+                          <th>{{'Account.Label.AccountID' | translate}}</th>
+                          <th>{{'Account.Label.AccountName' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.AccountType' | translate}}</th>
+                          <th class="text-center">{{'Account.Label.AccountBalance' | translate}}</th>
+                          <th class="text-center">{{'Common.Label.Status' | translate}}</th>
+                          <th class="text-right">{{'Common.Label.Action' | translate}}</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -183,22 +187,22 @@
                                   <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
                                     <a (click)="setting(item)" class="dropdown-item" href="javascript:">
                                       <i class="fa fa-pencil m-r-5"></i>
-                                      {{'Common.Label.setting' | translate}}
+                                      {{'Common.Label.Setting' | translate}}
                                     </a>
 
                                     <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
                                       <i class="fa fa-pencil m-r-5"></i>
-                                      {{'Common.Label.depositMoney' | translate}}
+                                      {{'Common.Label.DepositMoney' | translate}}
                                     </a>
 
                                     <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
                                       <i class="fa fa-pencil m-r-5"></i>
-                                      {{'Common.Label.withDrawalMoney' | translate}}
+                                      {{'Common.Label.WithDrawalMoney' | translate}}
                                     </a>
 
                                     <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
                                       <i class="fa fa-trash-o m-r-5"></i>
-                                      {{'Common.Label.details' | translate}}
+                                      {{'Common.Label.Details' | translate}}
                                     </a>
 
 
