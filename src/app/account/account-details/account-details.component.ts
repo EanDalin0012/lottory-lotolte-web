@@ -3,7 +3,6 @@ import { StoreUtil } from '../../shares/utils/store';
 import { Account } from 'src/app/shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
 import { DeviceInfo } from '../../shares/model/device-detector';
-import { deviceInfos } from 'src/assets/all-modules-data/all-modules-data';
 import { DataTableDirective } from 'angular-datatables';
 import { Title } from '@angular/platform-browser';
 import { Subject } from 'rxjs';
@@ -65,7 +64,7 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   inquiryDeviceInfo(){
-    this.deviceLoginInfos = deviceInfos;
+   // this.deviceLoginInfos = deviceInfos;
     this.dtTrigger.next();
     this.rows = this.deviceLoginInfos
     this.srch = [...this.rows];

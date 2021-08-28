@@ -5,10 +5,10 @@
   <div class="page-header">
     <div class="row">
         <div class="col-sm-12">
-            <h3 class="page-title">{{'MyAccount.Label.myAccount' | translate}}</h3>
+            <h3 class="page-title">{{'MyAccount.Label.MyAccount' | translate}}</h3>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">{{'Common.Label.dashboard' | translate}}</a></li>
-                <li class="breadcrumb-item active">{{'MyAccount.Label.myAccount' | translate}}</li>
+                <li class="breadcrumb-item"><a href="index.html">{{'Common.Label.Dashboard' | translate}}</a></li>
+                <li class="breadcrumb-item active">{{'MyAccount.Label.MyAccount' | translate}}</li>
             </ul>
         </div>
     </div>
@@ -19,27 +19,27 @@
     <div class="col-md-6 d-flex">
       <div class="card profile-box flex-fill">
           <div class="card-body">
-              <h3 class="card-title">{{'MyAccount.Label.accountInformation' | translate}}</h3>
+              <h3 class="card-title">{{'MyAccount.Label.AccountInformation' | translate}}</h3>
               <ul class="personal-info">
                   <li>
-                      <div class="title">{{'Account.Label.accountName' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountName' | translate}}</div>
                       <div class="text">{{accountInfo.accountName}}</div>
                   </li>
                   <li>
-                      <div class="title">{{'Account.Label.accountID' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountID' | translate}}</div>
                       <div class="text">{{accountInfo.accountId | account}}</div>
                   </li>
                   <li>
-                      <div class="title">{{'Account.Label.accountBalance' | translate}}</div>
+                      <div class="title">{{'Account.Label.AccountBalance' | translate}}</div>
                       <div class="text">{{accountInfo.accountBalance | accountBalance: accountInfo.currency }} {{accountInfo.currency}}</div>
                   </li>
 
                   <li>
-                    <div class="title">{{'Common.Label.status' | translate}}</div>
+                    <div class="title">{{'Common.Label.Status' | translate}}</div>
                     <div class="text" [innerHTML] = 'accountInfo.status | accountStatus'> </div>
                 </li>
                 <li>
-                  <div class="title">{{'Account.Label.accountType' | translate}}</div>
+                  <div class="title">{{'Account.Label.AccountType' | translate}}</div>
                   <div class="text" [innerHTML] = 'accountInfo.accountType | accountType'> </div>
               </li>
 
@@ -55,14 +55,19 @@
         <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
             <ul class="nav nav-tabs nav-tabs-bottom">
                 <li class="nav-item">
-                  <a (click)="onTab(0)" [ngClass]="{ 'active' : activeTab.index === 0 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.allSubAccount' | translate}}</a>
+                  <a (click)="onTab(0)" [ngClass]="{ 'active' : activeTab.index === 0 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.AllSubAccount' | translate}}</a>
                 </li>
 
                 <li class="nav-item">
                   <a (click)="onTab(1)" [ngClass]="{ 'active' : activeTab.index === 1 }" href="javascript:" class="nav-link">Transaction History</a>
                 </li>
+
                 <li class="nav-item">
-                  <a (click)="onTab(2)" [ngClass]="{ 'active' : activeTab.index === 2 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.deviceInformationLogin' | translate}}</a>
+                  <a (click)="onTab(2)" [ngClass]="{ 'active' : activeTab.index === 2 }" href="javascript:" class="nav-link">Deposit Cash Out History</a>
+                </li>
+
+                <li class="nav-item">
+                  <a (click)="onTab(3)" [ngClass]="{ 'active' : activeTab.index === 3 }" href="javascript:" data-toggle="tab" class="nav-link">{{'Common.Label.DeviceInformationLogin' | translate}}</a>
                 </li>
             </ul>
         </div>
@@ -77,7 +82,7 @@
      <div style="padding-right: 0px">
       <button (click)="newAccount()"  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 200px;" style = "float: right;width: 190px;">
         <span class="k-icon k-i-plus-circle margin-top-1px font-size-20px"></span>
-        <span class="font-weigh-700 margin-left-5px">{{'Account.Label.newSeniarAccount' | translate}}</span>
+        <span class="font-weigh-700 margin-left-5px">{{'Account.Label.NewSeniarAccount' | translate}}</span>
       </button>
      </div>
     </div>
@@ -88,12 +93,12 @@
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>{{'Account.Label.accountID' | translate}}</th>
-                      <th>{{'Account.Label.accountName' | translate}}</th>
-                      <th class="text-center">{{'Account.Label.accountBalance' | translate}}</th>
-                      <th class="text-center" width = "150px">{{'Account.Label.accountType' | translate}}</th>
-                      <th>{{'Common.Label.status' | translate}}</th>
-                      <th>{{'Common.Label.action' | translate}}</th>
+                      <th>{{'Account.Label.AccountID' | translate}}</th>
+                      <th>{{'Account.Label.AccountName' | translate}}</th>
+                      <th class="text-center">{{'Account.Label.AccountBalance' | translate}}</th>
+                      <th class="text-center" width = "150px">{{'Account.Label.AccountType' | translate}}</th>
+                      <th>{{'Common.Label.Status' | translate}}</th>
+                      <th>{{'Common.Label.Action' | translate}}</th>
                   </tr>
               </thead>
               <tbody>
@@ -118,27 +123,27 @@
                           <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
                               <a (click)="setting(item)" class="dropdown-item" href="javascript:">
                                 <i class="la la-cog font-size-1-50rem"></i>
-                                {{'Common.Label.setting' | translate}}
+                                {{'Common.Label.Setting' | translate}}
                               </a>
 
                               <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
                                 <i class="pi pi-wallet font-size-1-50rem"></i>
-                                {{'Common.Label.depositMoney' | translate}}
+                                {{'Common.Label.DepositCashOut' | translate}}
                               </a>
 
                               <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
                                 <i class="pi pi-wallet font-size-1-50rem"></i>
-                                {{'Common.Label.withDrawalMoney' | translate}}
+                                {{'Common.Label.WithDrawalMoney' | translate}}
                               </a>
 
                               <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
                                 <i class="pi pi-info-circle font-size-1-50rem"></i>
-                                {{'Common.Label.details' | translate}}
+                                {{'Common.Label.Details' | translate}}
                               </a>
 
                               <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="onSubAccountRouter(item)">
                                 <i class="pi pi-users font-size-1-50rem"></i>
-                                {{'Account.Label.subSeniarAccount' | translate}}
+                                {{'Account.Label.SubSeniarAccount' | translate}}
                               </a>
 
                               <a class="dropdown-item cursor-pointer" data-toggle="modal" data-target="#delete_overtime" (click)="onSubAccountRouter(item)">
@@ -166,9 +171,9 @@
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>{{'Account.Label.account' | translate}}</th>
-                      <th class="text-right">Amount</th>
-                      <th class="text-center">Date</th>
+                      <th>{{'Account.Label.Account' | translate}}</th>
+                      <th class="text-right">{{'Account.Label.Amount' | translate}}</th>
+                      <th class="text-center">{{'Account.Label.Date' | translate}}</th>
                   </tr>
               </thead>
               <tbody>
@@ -197,8 +202,12 @@
   </ng-container>
   <!-- /Tab 1 -->
 
-  <!-- Tab 1 -->
   <ng-container *ngIf = "activeTab.index === 2">
+    <span>Deposit Cash Out</span>
+
+  </ng-container>
+  <!-- Tab 1 -->
+  <ng-container *ngIf = "activeTab.index === 3">
     <div class="card-body padding-0">
       <div class="table-responsive custom-table-select">
           <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
@@ -206,13 +215,14 @@
                   <tr>
                       <th>#</th>
                       <th>{{'MyAccount.Label.IP' | translate}}</th>
-                      <th>{{'MyAccount.Label.os' | translate}}</th>
-                      <th>{{'MyAccount.Label.osVersion' | translate}}</th>
-                      <th>{{'MyAccount.Label.browser' | translate}}</th>
-                      <th>{{'MyAccount.Label.browserVersion' | translate}}</th>
-                      <th>{{'MyAccount.Label.device' | translate}}</th>
-                      <th>{{'MyAccount.Label.deviceType' | translate}}</th>
-                      <th>{{'MyAccount.Label.orientation' | translate}}</th>
+                      <th>{{'MyAccount.Label.Os' | translate}}</th>
+                      <th>{{'MyAccount.Label.OsVersion' | translate}}</th>
+                      <th>{{'MyAccount.Label.Browser' | translate}}</th>
+                      <th>{{'MyAccount.Label.BrowserVersion' | translate}}</th>
+                      <th>{{'MyAccount.Label.Device' | translate}}</th>
+                      <th>{{'MyAccount.Label.DeviceType' | translate}}</th>
+                      <th>{{'MyAccount.Label.Orientation' | translate}}</th>
+                      <th>{{'MyAccount.Label.UserAgent' | translate}}</th>
                       <!-- <th>NetWork IP</th> -->
                   </tr>
               </thead>
@@ -221,12 +231,13 @@
                       <td [width] = "50">{{i+1}}</td>
                       <td [width] = "80">{{item.ip}}</td>
                       <td [width] = "50">{{item.os}}</td>
-                      <td [width] = "100">{{item.os_version}}</td>
+                      <td [width] = "100">{{item.osVersion}}</td>
                       <td [width] = "60">{{item.browser}}</td>
-                      <td [width] = "60">{{item.browser_version}}</td>
+                      <td [width] = "60">{{item.browserVersion}}</td>
                       <td [width] = "60">{{item.device}}</td>
-                      <td [width] = "60">{{item.device_type}}</td>
+                      <td [width] = "60">{{item.deviceType}}</td>
                       <td [width] = "60">{{item.orientation}}</td>
+                      <td [width] = "60">{{item.userAgent}}</td>
                   </tr>
               </tbody>
           </table>

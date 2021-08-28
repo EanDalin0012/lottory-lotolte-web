@@ -4,9 +4,9 @@ export interface DeviceInfo {
   os: string;
   browser: string;
   device: string;
-  os_version: string;
-  browser_version: string;
-  device_type: string;
+  osVersion: string;
+  browserVersion: string;
+  deviceType: string;
   orientation: string;
   ip?: string;
 }

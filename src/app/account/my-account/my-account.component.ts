@@ -17,7 +17,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
-import { accountAgentTypes } from '../../layout/sidebar/sidebar.component';
 import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
 @Component({
   selector: 'app-my-account',
@@ -55,15 +54,6 @@ export class MyAccountComponent implements OnInit {
   };
 
   transactionHistorys = [
-    {
-      id: 2,
-      accountId: '000000001',
-      accountName: 'Paly',
-      amount: 10000,
-      currency: 'KH',
-      transactionType: 'withdrawal',
-      dateTime: 'Wednesday, August 25, 2021'
-    },
     {
       id: 3,
       accountId: '000000002',
@@ -127,6 +117,8 @@ export class MyAccountComponent implements OnInit {
       }
       if(resposne && resposne.result.responseCode === '200') {
         this.deviceInfos = resposne.body.deviceInfos;
+        console.log(resposne.body.deviceInfos);
+
         this.accountInfo = resposne.body.accountInfo;
         this.subAccounts = resposne.body.subAccounts;
       }

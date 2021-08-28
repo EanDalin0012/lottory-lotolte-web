@@ -14,11 +14,11 @@ export class AccountStatusPipe implements PipeTransform {
     // let status = '<span class="badge bg-inverse-success">' + this.translateService.instant('Common.Label.otherStatus') + '</span>'; //'Other Status';
     switch (value) {
       case AccountStatus.Active:
-        return '<span class="badge bg-inverse-success">'+this.translateService.instant('Common.Label.active')+' </span>';
+        return '<span class="badge bg-inverse-success">'+this.translateService.instant('Common.Label.Active')+' </span>';
       case AccountStatus.Inactive:
-        return '<span class="badge bg-inverse-danger">' + this.translateService.instant('Common.Label.inactive') + '</span>';
+        return '<span class="badge bg-inverse-danger">' + this.translateService.instant('Common.Label.Inactive') + '</span>';
       default:
-      return '<span class="badge bg-inverse-success">' + this.translateService.instant('Common.Label.otherStatus') + '</span>'; //'Other Status';
+      return '<span class="badge bg-inverse-success">' + this.translateService.instant('Common.Label.OtherStatus') + '</span>'; //'Other Status';
     }
   }
 

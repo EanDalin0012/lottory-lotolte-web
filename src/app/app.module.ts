@@ -20,6 +20,7 @@ import { InvalidControlScrollContainerDirective } from './shares/directive/inval
 import { InvalidControlScrollDirective } from './shares/directive/invalid-control-scroll.directive';
 import { JsonipService } from './shares/services/jsonip.service';
 import { AuthInterceptor } from './shares/services/auth.interceptor';
+import { DeviceInfo } from './shares/model/device-detector';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -64,14 +65,25 @@ export class AppModule {
   constructor(
     private deviceService: DeviceDetectorService,
     private jsonipService: JsonipService,
-    private http:HttpClient
     ) {
       this.jsonipService.jsonIp().then((result) => {
         Utils.setSecureStorage(LOCAL_STORAGE.NekWorkIP, result);
       }).catch((err) => {
 
       });
-    Utils.setSecureStorage(LOCAL_STORAGE.DEVICE_INFO, this.deviceService.getDeviceInfo());
-    //Utils.setSecureStorage(LOCAL_STORAGE.NekWorkIP, );
+      const data = this.deviceService.getDeviceInfo();
+      const deviceInfo: DeviceInfo = {
+        id: 0,
+        userAgent: data.userAgent,
+        os: data.os,
+        browser: data.browser,
+        device: data.device,
+        osVersion: data.os_version,
+        browserVersion: data.browser_version,
+        deviceType: data.deviceType,
+        orientation: data.orientation,
+        ip: '',
+      }
+      Utils.setSecureStorage(LOCAL_STORAGE.DEVICE_INFO, deviceInfo);
   }
  }

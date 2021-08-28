@@ -34,6 +34,7 @@ export class AppComponent implements OnDestroy {
       }
       return ''; // Legacy method for cross browser support
     };
+    this.setInitialAppLanguage();
   }
   ngOnDestroy(): void {
    alert('close application');

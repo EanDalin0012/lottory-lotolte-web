@@ -59,15 +59,17 @@ export class AuthentcatiionService {
           os: deviceInfo.os,
           browser: deviceInfo.browser,
           device: deviceInfo.device,
-          osVersion: deviceInfo.os_version,
-          browserVersion: deviceInfo.browser_version,
-          deviceType: deviceInfo.device_type,
+          osVersion: deviceInfo.osVersion,
+          browserVersion: deviceInfo.browserVersion,
+          deviceType: deviceInfo.deviceType,
           orientation: deviceInfo.orientation,
           networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
         },
 
-      };
 
+
+      };
+      console.log('console.log(userInfo);', userInfo);
       const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
       const httpOptionsObj = {
         'Content-Type': 'application/json',
