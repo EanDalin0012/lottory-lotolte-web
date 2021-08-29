@@ -185,6 +185,7 @@ export class MyAccountComponent implements OnInit {
         accountInfo: this.accountInfo,
       },
       callback: _response => {
+        console.log('_response', _response);
 
       }
     });

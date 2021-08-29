@@ -4,8 +4,8 @@
           <!-- header -->
           <div class="pop_header">
               <h1>
-                {{'Account.Label.createNewSeniarAccount' | translate}}
-                <small style="color: #f43b48;margin-left: 5%;font-weight: 700;"> {{'Account.Label.mainAccount' | translate: {account: currentAccount} }}</small>
+                {{'Account.Label.CreateNewSeniarAccount' | translate}}
+                <small style="color: #f43b48;margin-left: 5%;font-weight: 700;"> {{'Account.Label.MainAccount' | translate: {account: currentAccount} }}</small>
               </h1>
               <button type="button" tabindex=-1 class="btn_popclose" (click)="close()"><span>close</span></button>
           </div>
@@ -23,36 +23,36 @@
 
             <div class="form-row row">
               <div class="form-group col-md-12">
-                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.personalInformations' | translate}}</h1>
+                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.PersonalInformations' | translate}}</h1>
               </div>
             </div>
 
             <div class="form-row row">
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.firstName' | translate}}</label>
+                  <label class="font-khmer-cursive">{{'Account.Label.FirstName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input #firstName type="text" formControlName="firstName" [ngClass]="form.getRawValue().firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterFirstName' | translate}}">
+                  <input #firstName type="text" formControlName="firstName" [ngClass]="form.getRawValue().firstName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterFirstName' | translate}}">
 
                   <div class="in_box">
                       <button (click)="isEmpty('firstName')" type="button" [ngClass]="form.getRawValue().firstName? 'btn_del' : ''"  class="btn"></button>
                   </div>
 
                   <ng-container *ngIf="submitted && f.firstName.errors">
-                    <small class="text-danger font-weight-700">{{'Account.Message.firstNameRequired' | translate}}</small>
+                    <small class="text-danger font-weight-700">{{'Account.Message.FirstNameRequired' | translate}}</small>
                   </ng-container>
               </div>
 
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.lastName' | translate}}</label>
+                  <label class="font-khmer-cursive">{{'Account.Label.LastName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input #lastName formControlName="lastName" type="text" [ngClass]="form.getRawValue().lastName? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterLastName' | translate}}">
+                  <input #lastName formControlName="lastName" type="text" [ngClass]="form.getRawValue().lastName? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterLastName' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="form.getRawValue().lastName? 'btn_del' : ''" (click)="isEmpty('lastName')"  class="btn"></button>
                   </div>
 
                   <ng-container *ngIf="submitted && f.lastName.errors">
-                    <small class="text-danger font-weight-700">{{'Account.Message.lastNameRequired' | translate}}</small>
+                    <small class="text-danger font-weight-700">{{'Account.Message.LastNameRequired' | translate}}</small>
                   </ng-container>
 
               </div>
@@ -62,7 +62,7 @@
             <div class="form-row row">
 
                 <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">{{'Account.Label.gender' | translate}}</label>
+                    <label class="font-khmer-cursive">{{'Account.Label.Gender' | translate}}</label>
                     <span class="text-danger">*</span>
                     <kendo-dropdownlist
                       [data]="genders"
@@ -81,18 +81,18 @@
                     </kendo-dropdownlist>
 
                     <ng-container *ngIf="submitted === true && genderCheck === true">
-                      <small class="text-danger font-weight-700">{{'Account.Message.genderRequired' | translate}}</small>
+                      <small class="text-danger font-weight-700">{{'Account.Message.GenderRequired' | translate}}</small>
                     </ng-container>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">{{'Account.Label.dateBirth' | translate}}</label>
+                    <label class="font-khmer-cursive">{{'Account.Label.DateBirth' | translate}}</label>
                     <span class="text-danger">*</span>
                     <kendo-datepicker [format]="'dd/MM/yyyy'" [topView]="'year'" [navigation]="false" formControlName="birthDate">
                     </kendo-datepicker>
 
                     <ng-container *ngIf="dateBirth === null">
-                      <span class="text-danger font-weight-700">{{'Account.Message.dateBirthRequired' | translate}}</span>
+                      <span class="text-danger font-weight-700">{{'Account.Message.DateBirthRequired' | translate}}</span>
                     </ng-container>
 
                 </div>
@@ -100,22 +100,22 @@
 
             <div class="form-row row">
                 <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">{{'Account.Label.phoneNumber' | translate}}</label>
+                    <label class="font-khmer-cursive">{{'Account.Label.PhoneNumber' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <input #phoneNumber formControlName="phoneNumber" type="text" [ngClass]="form.getRawValue().phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterPhoneNumber' | translate}}">
+                    <input #phoneNumber formControlName="phoneNumber" type="text" [ngClass]="form.getRawValue().phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterPhoneNumber' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="form.getRawValue().phoneNumber? 'btn_del' : ''" class="btn" (click)="isEmpty('phoneNumber')"></button>
                     </div>
 
                     <ng-container *ngIf="submitted && f.phoneNumber.errors">
-                      <small class="text-danger font-weight-700">{{'Account.Message.phoneNumberRequired' | translate}}</small>
+                      <small class="text-danger font-weight-700">{{'Account.Message.PhoneNumberRequired' | translate}}</small>
                     </ng-container>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">{{'Account.Label.otherPhoneNumber' | translate}}</label>
-                    <input formControlName="otherPhoneNumber" type="text" [ngClass]="form.getRawValue().otherPhoneNumber? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterOtherPhoneNumber' | translate}}">
+                    <label class="font-khmer-cursive">{{'Account.Label.OtherPhoneNumber' | translate}}</label>
+                    <input formControlName="otherPhoneNumber" type="text" [ngClass]="form.getRawValue().otherPhoneNumber? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterOtherPhoneNumber' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="form.getRawValue().otherPhoneNumber? 'btn_del' : ''" (click)="isEmpty('otherPhoneNumber')"></button>
@@ -128,31 +128,31 @@
 
             <div class="form-row row">
               <div class="form-group col-md-12">
-                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.userAccount' | translate}}</h1>
+                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.UserAccount' | translate}}</h1>
               </div>
             </div>
 
             <div class="form-row row">
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.userName' | translate}}</label>
+                  <label class="font-khmer-cursive">{{'Account.Label.UserName' | translate}}</label>
                   <span class="text-danger">*</span>
-                  <input #userName type="text" formControlName="userName" [ngClass]="form.getRawValue().userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterUserName' | translate}}">
+                  <input #userName type="text" formControlName="userName" [ngClass]="form.getRawValue().userName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterUserName' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="form.getRawValue().userName? 'btn_del' : ''" class="btn" (click)="isEmpty('userName')"></button>
                   </div>
                   <ng-container *ngIf="submitted && f.userName.errors">
-                    <small class="text-danger font-weight-700">{{'Account.Message.userNameRequired' | translate}}</small>
+                    <small class="text-danger font-weight-700">{{'Account.Message.UserNameRequired' | translate}}</small>
                   </ng-container>
               </div>
 
               <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">{{'Account.Label.password' | translate}}</label>
+                <label class="font-khmer-cursive">{{'Account.Label.Password' | translate}}</label>
                 <span class="text-danger">*</span>
-                <input #password formControlName="password" type="text"   [ngClass]="form.getRawValue().password? 'active-input' : ''" class=" form-control font-khmer-cursive my-disable"  placeholder="{{'Account.Holder.enterPassword' | translate}}">
-                <ng-container>
-                  <small class="text-danger font-weight-700" style="color: #f39c12 !important;">{{'Account.Message.passwordNoteFirstTime' | translate}}</small>
-                </ng-container>
+                <input #password formControlName="password" type="text"   [ngClass]="form.getRawValue().password? 'active-input' : ''" class=" form-control font-khmer-cursive my-disable"  placeholder="{{'Account.Holder.EnterPassword' | translate}}">
+                <!-- <ng-container>
+                  <small class="text-danger font-weight-700" style="color: #f39c12 !important;">{{'Account.Message.PasswordNoteFirstTime' | translate}}</small>
+                </ng-container> -->
 
             </div>
 
@@ -160,7 +160,7 @@
 
             <div class="form-row row">
               <div class="form-group col-md-12">
-                <label class="font-khmer-cursive">{{'Account.Label.profile' | translate}}</label>
+                <label class="font-khmer-cursive">{{'Account.Label.Profile' | translate}}</label>
 
                 <kendo-fileselect
                                   [restrictions]="fileRestrictions"
@@ -170,9 +170,9 @@
                                           #myFileSelect="kendoFileSelect">
                                           <ng-template kendoFileSelectFileTemplate let-files let-state="state">
                                               <div class="font-khmer-cursive">
-                                                  {{'Common.Label.fileName' | translate: {'value': files[0].name} }}
+                                                  {{'Common.Label.FileName' | translate: {'value': files[0].name} }}
                                                    <strong class="chipe-00">
-                                                       {{'Common.Label.fileSize' | translate: {'value': files[0].size} }}
+                                                       {{'Common.Label.FileSize' | translate: {'value': files[0].size} }}
                                                   </strong>
                                               </div>
                                               <button  class="k-button"  style="position: absolute; right: 6.2em; height: 30px;"   kendoButton (click)="remove(myFileSelect, files[0].uid)" [icon]="'x'" [look]="'outline'">{{'Common.Button.Remove' | translate}}</button>
@@ -180,7 +180,7 @@
                                           </ng-template>
                   </kendo-fileselect>
                   <div *ngIf="imagePreviewProfile.length" class="img-preview example-config">
-                    <h3 class="font-khmer-cursive">{{'Common.Label.previewSelectedImages' | translate}}</h3>
+                    <h3 class="font-khmer-cursive">{{'Common.Label.PreviewSelectedImages' | translate}}</h3>
                     <img *ngFor="let image of imagePreviewProfile"
                     [src]="image.src"
                     alt="image preview"
@@ -193,15 +193,15 @@
 
             <div class="form-row row">
               <div class="form-group col-md-12">
-                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.identifyInformations' | translate}}</h1>
+                <h1 class="font-khmer-cursive" style="font-weight: bold;">{{'Account.Label.IdentifyInformations' | translate}}</h1>
               </div>
             </div>
 
 
             <div class="form-row row">
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.identifyID' | translate}}</label>
-                  <input formControlName="identifyID" type="text" [ngClass]="form.getRawValue().identifyID? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.enterIdentifyID' | translate}}">
+                  <label class="font-khmer-cursive">{{'Account.Label.IdentifyID' | translate}}</label>
+                  <input formControlName="identifyID" type="text" [ngClass]="form.getRawValue().identifyID? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterIdentifyID' | translate}}">
 
                   <div class="in_box">
                       <button type="button" [ngClass]="form.getRawValue().identifyID? 'btn_del' : ''"class="btn"></button>
@@ -209,7 +209,7 @@
 
               </div>
               <div class="form-group col-md-6">
-                  <label class="font-khmer-cursive">{{'Account.Label.imageIdentify' | translate}}</label>
+                  <label class="font-khmer-cursive">{{'Account.Label.ImageIdentify' | translate}}</label>
 
                   <kendo-fileselect
                                     [restrictions]="fileRestrictions"
@@ -272,5 +272,6 @@
           </button>
 
       </div>
+
   </div>
 </div>

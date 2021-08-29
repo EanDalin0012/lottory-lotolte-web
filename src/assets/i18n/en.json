@@ -177,15 +177,22 @@
   },
   "ServerResponseCode":{
     "Label": {
-      "Invalid_UserName":"Invalid User Name.",
+      "Invalid_UserName":"User name is required.",
       "Invalid_Password":"Your password isn't correct.",
       "UserNotFound":"Invalid user name.",
       "UserDisabled":"Your user is disable.",
       "UserLocked":"Your account is blocked.",
       "UserExpired":"Your user expired.",
-      "Invalid_UserID":"Invalid User ID.",
+      "Invalid_UserID":"User id is required.",
       "Server_Error":"Server Error",
-      "Invalid_MainAccountID":"Invalid Main Account ID"
+      "Invalid_MainAccountID":"Main account id is required.",
+      "Invalid_FirstName":"First name is required.",
+      "Invalid_LastName":"Last name is required.",
+      "Invalid_Gender":" gender is required.",
+      "Invalid_DB":"Date of birth is required.",
+      "Invalid_AccountType":"Account type is required.",
+      "Invalid_Currency":"Account currency is required.",
+      "Invalid_Token":"Invalid access token."
     }
   }
 }

@@ -19,6 +19,7 @@ import { ViewAccountComponent } from './view-account/view-account.component';
 import { SubAccountMasterComponent } from './sub-account-master/sub-account-master.component';
 import { SubAccountAgentComponent } from './sub-account-agent/sub-account-agent.component';
 import { SubAccountMemberComponent } from './sub-account-member/sub-account-member.component';
+import { ShowAddAccountComponent } from './show-add-account/show-add-account.component';
 
 
 
@@ -38,7 +39,8 @@ import { SubAccountMemberComponent } from './sub-account-member/sub-account-memb
     ViewAccountComponent,
     SubAccountMasterComponent,
     SubAccountAgentComponent,
-    SubAccountMemberComponent
+    SubAccountMemberComponent,
+    ShowAddAccountComponent
   ],
   imports: [
     CommonModule,

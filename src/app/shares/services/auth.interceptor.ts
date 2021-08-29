@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from './modal.service';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -17,7 +18,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private translate: TranslateService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private router: Router,
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -55,16 +57,32 @@ export class AuthInterceptor implements HttpInterceptor {
           });
         }
         if(err.status === 401) {
-          console.log(err.error.error_description);
-          this.modalService.alert(
-            this.translate.instant('ServerResponseCode.Label.'+err.error.error_description),
-           {
-           modalClass: 'open-alert',
-           btnText: this.translate.instant('Common.Button.Confirme'),
-           callback: res => {
+          console.log('err', err);
+          if (err.error.error === 'invalid_token') {
+            console.log(err.error.error_description);
+            this.modalService.alert(
+              this.translate.instant('ServerResponseCode.Label.Invalid_Token'),
+             {
+             modalClass: 'open-alert',
+             btnText: this.translate.instant('Common.Button.Confirme'),
+             callback: res => {
+              localStorage.clear();
+              this.router.navigate(['/login']);
+             }
+           });
+          } else {
+            console.log(err.error.error_description);
+            this.modalService.alert(
+              this.translate.instant('ServerResponseCode.Label.'+err.error.error_description),
+             {
+             modalClass: 'open-alert',
+             btnText: this.translate.instant('Common.Button.Confirme'),
+             callback: res => {
 
-           }
-         });
+             }
+           });
+          }
+
         }
         if(err.status === 400) {
           // Handle unauthorized error

@@ -18,6 +18,7 @@ import { Base64WriteImage } from '../../shares/model/base64-image';
 import { ErrorCodes } from '../../shares/constants/common.error.code.const';
 import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
+import { ShowAddAccountComponent } from '../show-add-account/show-add-account.component';
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html',
@@ -32,7 +33,6 @@ export class AddAccountComponent implements OnInit {
   @ViewChild("phoneNumber") inputPhoneNumber: any;
   @ViewChild("userName") inputUserName: any;
   @ViewChild("pawword") inputPawword: any;
-
 
 
   modal:any;
@@ -151,13 +151,6 @@ export class AddAccountComponent implements OnInit {
           ]
         ]
       });
-    // const year = this.currentDate.getFullYear();
-    // const month = this.currentDate.getMonth();
-    // const day = this.currentDate.getDay();
-    // this.dateBirth.setDate(day);
-    // this.dateBirth.setFullYear(year);
-    // this.dateBirth.setMonth(month);
-
 
     this.stepsIcons = [
       { label: 'Info',  isValid: true },
@@ -212,21 +205,14 @@ export class AddAccountComponent implements OnInit {
     this.currentStep -= 1;
   }
 
-  public next(value: number): void {
-    console.log(value);
-    this.currentStep += 1;
-    if(value === 0) {
-      // if(this.checkUserInfo()) {
-      //   this.stepsIcons[0].isValid =  true;
-      //   this.stepsIcons[1].isValid =  true;
-      //   this.currentStep += 1;
-      // } else {
-      //   this.stepsIcons[0].isValid =  false;
-      // }
-    } else if (value === 1) {
-      this.currentStep += 1;
-    }
-  }
+  // public next(value: number): void {
+  //   console.log(value);
+  //   this.currentStep += 1;
+  //   if(value === 0) {
+  //   } else if (value === 1) {
+  //     this.currentStep += 1;
+  //   }
+  // }
 
   // file select function
   public selectEventHandler(e: SelectEvent): void {
@@ -429,7 +415,10 @@ export class AddAccountComponent implements OnInit {
         otherPhone: data.otherPhoneNumber,
         resourceID: this.imagePreviewProfileID,
         userName: data.userName,
-        password: data.password
+        password: data.password,
+        accountType: this.openAccounttype,
+        currency: 'KH',
+        mainAccountID: this.mainAccountInfo.id
       };
       createAccount.identifyInformation = {
         identifyID: data.identifyID,
@@ -438,6 +427,25 @@ export class AddAccountComponent implements OnInit {
       createAccount.remark = data.remark;
 
       console.log(createAccount);
+      const api = this.baseUrl + '/api/account/v0/save';
+      this.hTTPService.Post(api,createAccount).then((resposne)=> {
+        console.log('resposne', resposne);
+        if( resposne && resposne.result.responseCode !== '200') {
+          this.translateErrorServer(resposne.result.responseMessage);
+        }
+       if(resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
+          console.log('resposne', resposne);
+          this.close();
+          this.modalService.open(
+            ShowAddAccountComponent,
+            {
+            message: resposne.body,
+            callback: _response => {
+            }
+          });
+       }
+
+     });
 
     }
 
@@ -545,5 +553,52 @@ export class AddAccountComponent implements OnInit {
 
   testing() {
     ErrorCodes.f.firstName;
+  }
+
+  translateErrorServer(tran: string) {
+    let message = '';
+
+    switch(tran) {
+      case 'Invalid_FirstName':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_FirstName');
+        break;
+      case 'Invalid_LastName':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_LastName');
+        break;
+      case 'Invalid_Password':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_Password');
+        break;
+      case 'Invalid_Gender':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_Gender');
+        break;
+      case 'Invalid_DB':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_DB');
+        break;
+      case 'Invalid_UserName':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_UserName');
+        break;
+      case 'Invalid_AccountType':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_AccountType');
+        break;
+      case 'Invalid_Currency':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_Currency');
+        break;
+      case 'Invalid_MainAccountID':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_MainAccountID');
+        break;
+      case '500':
+        message = this.translateService.instant('ServerResponseCode.Label.Server_Error');
+        break;
+    }
+    this.modalService.alert(
+      message,
+     {
+     modalClass: 'open-alert',
+     btnText: this.translateService.instant('Common.Button.Confirme'),
+     callback: res => {
+
+     }
+   });
+
   }
 }

@@ -8,4 +8,7 @@ export class PersonalInformation {
   resourceID: number | undefined;
   userName: number | undefined;
   password: number | undefined;
+  accountType: string | undefined;
+  currency: string | undefined;
+  mainAccountID: number | undefined;
 }
