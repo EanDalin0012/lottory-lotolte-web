@@ -28,7 +28,7 @@ export class MyAccountComponent implements OnInit {
   private baseUrl: string = '';
   subAccountRoutorUtil = new SubAccountRoutorUtil(this.router);
   subAccounts: Account[] = [];
-
+  acountTypeCode = AccountTypeCode;
   activeTab = {
     index: 0,
     class: 'nav-link'
@@ -106,7 +106,6 @@ export class MyAccountComponent implements OnInit {
     };
     this.dataService.viewNewAccountCloseData.subscribe(message => {
       if(message === 'Close_New_Account') {
-        console.log('viewNewAccountCloseData', message);
         this.inquiry();
       }
     });
@@ -142,6 +141,8 @@ export class MyAccountComponent implements OnInit {
       if(resposne && resposne.result.responseCode === '200') {
         this.deviceInfos = resposne.body.deviceInfos;
         this.accountInfo = resposne.body.accountInfo;
+        console.log(this.accountInfo);
+        this.checkActiveIndexTabeByAccountType(this.accountInfo.accountType);
         this.subAccounts = resposne.body.subAccounts;
       }
 
@@ -202,5 +203,22 @@ export class MyAccountComponent implements OnInit {
 
   onSubAccountRouter(item: Account) {
     this.subAccountRoutorUtil.subAccountRouter(item);
+  }
+
+  checkActiveIndexTabeByAccountType(accountType: string) {
+      switch (accountType) {
+        case AccountTypeCode.Admin:
+          this.activeTab.index = 0;
+          break;
+        case AccountTypeCode.Seniar:
+          this.activeTab.index = 1;
+          break;
+        case AccountTypeCode.Master:
+          this.activeTab.index = 3;
+          break;
+        case AccountTypeCode.Agent:
+          this.activeTab.index = 5;
+          break;
+      }
   }
 }

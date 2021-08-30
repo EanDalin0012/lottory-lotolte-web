@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
   }
 
   routors() {
-    // Utils.setSecureStorage(LOCAL_STORAGE.AccountTypeCode, AccountTypeCode.Admin);
-    // this.dataService.visitParamRouterChange(AccountTypeCode.Admin);
     this.router.navigate(['/acc/my-account']);
   }
 
@@ -75,6 +73,8 @@ export class LoginComponent implements OnInit {
       };
       this.authentcatiionService.login(logInfo).then((result: any) => {
         if(result) {
+          console.log('result', result);
+
           this.routors();
         }
       }).catch((err: any) => {
