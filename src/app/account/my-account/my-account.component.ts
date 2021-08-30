@@ -104,6 +104,12 @@ export class MyAccountComponent implements OnInit {
       pageLength: 10,
       processing: true
     };
+    this.dataService.viewNewAccountCloseData.subscribe(message => {
+      if(message === 'Close_New_Account') {
+        console.log('viewNewAccountCloseData', message);
+        this.inquiry();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -135,8 +141,6 @@ export class MyAccountComponent implements OnInit {
       }
       if(resposne && resposne.result.responseCode === '200') {
         this.deviceInfos = resposne.body.deviceInfos;
-        console.log(resposne.body.deviceInfos);
-
         this.accountInfo = resposne.body.accountInfo;
         this.subAccounts = resposne.body.subAccounts;
       }

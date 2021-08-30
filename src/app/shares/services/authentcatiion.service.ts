@@ -69,7 +69,6 @@ export class AuthentcatiionService {
 
 
       };
-      console.log('console.log(userInfo);', userInfo);
       const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
       const httpOptionsObj = {
         'Content-Type': 'application/json',
@@ -148,6 +147,9 @@ export class AuthentcatiionService {
       const httpOptionsObj = {
         Authorization: btoa
       };
+
+      console.log(auth.user_name);
+      console.log(auth.password);
 
       const formData = new FormData();
       formData.append('client_id', 'spring-security-oauth2-read-write-client');

@@ -27,6 +27,9 @@ import { AccountTypePipe } from '../pipe/account-type.pipe';
 import {NgxScrollToFirstInvalidModule} from '@ismaestro/ngx-scroll-to-first-invalid';
 import { AccountBalancePipe } from '../pipe/account-balance.pipe';
 import { AccountTypeCodePipe } from '../pipe/account-type-code.pipe';
+import { AvatarModule } from 'ngx-avatar';
+import { DateFormatPipe } from '../pipe/date-format.pipe';
+import { GenderPipe } from '../pipe/gender.pipe';
 @NgModule({
   declarations: [
     ModalComponent,
@@ -34,7 +37,9 @@ import { AccountTypeCodePipe } from '../pipe/account-type-code.pipe';
     AccountStatusPipe,
     AccountTypePipe,
     AccountBalancePipe,
-    AccountTypeCodePipe
+    AccountTypeCodePipe,
+    DateFormatPipe,
+    GenderPipe,
   ],
   imports: [
     // InputsModule,
@@ -55,7 +60,8 @@ import { AccountTypeCodePipe } from '../pipe/account-type-code.pipe';
     // SortableModule,
     // TooltipModule,
     // UploadModule,
-    NgxScrollToFirstInvalidModule
+    NgxScrollToFirstInvalidModule,
+    AvatarModule
   ],
   exports: [
     FormsModule,
@@ -80,12 +86,15 @@ import { AccountTypeCodePipe } from '../pipe/account-type-code.pipe';
     TooltipModule,
     UploadModule,
     UploadsModule,
+    AvatarModule,
     // pipe
     AccountPipe,
     AccountStatusPipe,
     AccountTypePipe,
     AccountBalancePipe,
-    AccountTypeCodePipe
+    AccountTypeCodePipe,
+    DateFormatPipe,
+    GenderPipe,
   ],
   entryComponents: [
     ModalComponent,

@@ -19,6 +19,7 @@ import { ErrorCodes } from '../../shares/constants/common.error.code.const';
 import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
 import { ShowAddAccountComponent } from '../show-add-account/show-add-account.component';
+import { DataService } from '../../shares/services/data.service';
 @Component({
   selector: 'app-add-account',
   templateUrl: './add-account.component.html',
@@ -116,6 +117,7 @@ export class AddAccountComponent implements OnInit {
     private translateService: TranslateService,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
+    private dataService: DataService,
     private el: ElementRef,
     private notificationService: NotificationService,
     private hTTPService: HTTPService,
@@ -145,7 +147,7 @@ export class AddAccountComponent implements OnInit {
           ]
         ],
         password: [
-          {value: '', disabled: true},
+          {value: ''},
           [
             Validators.required, Validators.minLength(6),Validators.maxLength(40)
           ]
@@ -392,7 +394,9 @@ export class AddAccountComponent implements OnInit {
       this.inputFirstName.nativeElement.focus();
     } else if (this.f.lastName.errors) {
       this.inputLastName.nativeElement.focus();
-    } else if (this.f.phoneNumber.errors) {
+    } else if (this.f.gender.errors) {
+      this.genderCheck = true;
+    }else if (this.f.phoneNumber.errors) {
       this.inputPhoneNumber.nativeElement.focus();
     } else if (this.f.userName.errors) {
       this.inputUserName.nativeElement.focus();
@@ -404,6 +408,10 @@ export class AddAccountComponent implements OnInit {
       console.log(this.dateBirth);
       console.log(JSON.stringify(this.form.value));
       const db = data.birthDate as Date;
+      if(data.gender.code === '') {
+        this.translateErrorServer('Invalid_Gender');
+        return;
+      }
       let createAccount = new CreateAccount();
 
       createAccount.personalInformation = {
@@ -433,7 +441,7 @@ export class AddAccountComponent implements OnInit {
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
-       if(resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
+       if(resposne.body != null && resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
           console.log('resposne', resposne);
           this.close();
           this.modalService.open(

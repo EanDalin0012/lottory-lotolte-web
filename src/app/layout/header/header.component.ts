@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class HeaderComponent implements OnInit {
   private baseUrl: string = '';
   src = '';
+  imageName = '';
   langCode  = this.translate.currentLang;
   langText  = 'English';
   langData          = {
@@ -135,6 +136,7 @@ export class HeaderComponent implements OnInit {
     ];
     this.userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
     this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
+    this.imageName = this.userInfo.firstName + ' ' + this.userInfo.lastName;
   }
 
   getDatas(section: any) {

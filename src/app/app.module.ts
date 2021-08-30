@@ -21,6 +21,8 @@ import { InvalidControlScrollDirective } from './shares/directive/invalid-contro
 import { JsonipService } from './shares/services/jsonip.service';
 import { AuthInterceptor } from './shares/services/auth.interceptor';
 import { DeviceInfo } from './shares/model/device-detector';
+import { DateFormatPipe } from './shares/pipe/date-format.pipe';
+import { GenderPipe } from './shares/pipe/gender.pipe';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -34,7 +36,7 @@ export function createTranslateLoader(http: HttpClient) {
     Error404Component,
     Error405Component,
     InvalidControlScrollContainerDirective,
-    InvalidControlScrollDirective,
+    InvalidControlScrollDirective
   ],
   imports: [
     MLayoutModule,

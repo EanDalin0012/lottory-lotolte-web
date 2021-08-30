@@ -9,3 +9,18 @@ export interface User{
     description: string;
     password: string;
 }
+
+
+export interface UserInfomation{
+  id: number;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  dateBirth: string;
+  gender: string;
+  resourceID: number;
+  phoneNumber: string;
+  otherPhoneNumber: string;
+  createDate: string;
+  address: string;
+}

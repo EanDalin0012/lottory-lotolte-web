@@ -9696,3 +9696,7 @@ body>.loading {
 .padding-7px {
   padding: 7px !important;
 }
+
+.avatar-01 div.avatar-content {
+  margin-right: 5px;
+}

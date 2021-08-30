@@ -13,7 +13,10 @@ export class DataService {
   visitSourceParamRoutorChangeData = this.visitSourceParamRoutorChange.asObservable();
 
   private viewProductDetail =  new BehaviorSubject<any>('');
-  viewProductDetailData = this.visitSource.asObservable();
+  viewProductDetailData = this.viewProductDetail.asObservable();
+
+  private viewNewAccountClose =  new BehaviorSubject<any>('');
+  viewNewAccountCloseData = this.viewNewAccountClose.asObservable();
 
   visitMessage(message: any) {
     this.visitSource.next(message);
@@ -27,6 +30,8 @@ export class DataService {
     this.viewProductDetail.next(message);
   }
 
-
+  viewNewAccountCloseMessage(message: any) {
+    this.viewNewAccountClose.next(message);
+  }
 
 }

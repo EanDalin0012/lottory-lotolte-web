@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BTN_ROLES } from '../../shares/constants/common.const';
 import { Router } from '@angular/router';
+import { DataService } from '../../shares/services/data.service';
 
 @Component({
   selector: 'app-show-add-account',
@@ -19,7 +20,9 @@ export class ShowAddAccountComponent implements OnInit {
 
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private dataService: DataService,
+    private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.modal.message);
@@ -33,8 +36,8 @@ export class ShowAddAccountComponent implements OnInit {
 
   close() {
     // /acc/my-account
+    this.dataService.viewNewAccountCloseMessage('Close_New_Account');
     this.modal.close( {close: 'Close_Add_Account'});
-    this.router.navigate(['/acc/my-account']);
   }
 
 }

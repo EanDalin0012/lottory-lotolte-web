@@ -192,7 +192,9 @@
       "Invalid_DB":"Date of birth is required.",
       "Invalid_AccountType":"Account type is required.",
       "Invalid_Currency":"Account currency is required.",
-      "Invalid_Token":"Invalid access token."
+      "Invalid_Token":"Invalid access token.",
+      "UserNameNotFound":"Your user name not found.",
+      "InvalidPassword":"Your password is wrong."
     }
   }
 }

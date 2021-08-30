@@ -135,9 +135,14 @@
 
       <li class="nav-item dropdown has-arrow main-drop">
           <a href="javascript:" class="dropdown-toggle nav-link" data-toggle="dropdown">
-              <span class="user-img">
-                <img [src]="src" alt="" style="    width: 36px;height: 35px;">
-                  <span class="status online"></span></span>
+            <span class="user-img">
+                <!-- <img [src]="src" alt="" style="    width: 36px;height: 35px;"> -->
+              <ngx-avatar class="avatar-01" size="35" [name]="imageName"
+              [src]="src">
+              </ngx-avatar>
+
+              <span class="status online" style="bottom: -10px;"></span>
+            </span>
               <span>{{userInfo.firstName}} {{userInfo.lastName}}</span>
           </a>
           <div class="dropdown-menu">

@@ -71,16 +71,17 @@ export class AuthInterceptor implements HttpInterceptor {
              }
            });
           } else {
-            console.log(err.error.error_description);
-            this.modalService.alert(
-              this.translate.instant('ServerResponseCode.Label.'+err.error.error_description),
-             {
-             modalClass: 'open-alert',
-             btnText: this.translate.instant('Common.Button.Confirme'),
-             callback: res => {
+            this.translateErrorServer(err.error.error_description);
+          //   console.log(err.error.error_description);
+          //   this.modalService.alert(
+          //     this.translate.instant('ServerResponseCode.Label.'+err.error.error_description),
+          //    {
+          //    modalClass: 'open-alert',
+          //    btnText: this.translate.instant('Common.Button.Confirme'),
+          //    callback: res => {
 
-             }
-           });
+          //    }
+          //  });
           }
 
         }
@@ -98,5 +99,40 @@ export class AuthInterceptor implements HttpInterceptor {
       }
       return new Observable<HttpEvent<any>>();
     }));
+  }
+
+  translateErrorServer(tran: string) {
+    let message = '';
+
+    switch(tran) {
+      case 'UserNameNotFound':
+        message = this.translate.instant('ServerResponseCode.Label.UserNameNotFound');
+        break;
+      case 'UserLocked':
+        message = this.translate.instant('ServerResponseCode.Label.UserLocked');
+        break;
+      case 'UserDisabled':
+        message = this.translate.instant('ServerResponseCode.Label.UserDisabled');
+        break;
+      case 'UserExpired':
+        message = this.translate.instant('ServerResponseCode.Label.UserExpired');
+        break;
+      case 'InvalidPassword':
+        message = this.translate.instant('ServerResponseCode.Label.InvalidPassword');
+        break;
+      case '500':
+        message = this.translate.instant('ServerResponseCode.Label.Server_Error');
+        break;
+    }
+    this.modalService.alert(
+      message,
+     {
+     modalClass: 'open-alert',
+     btnText: this.translate.instant('Common.Button.Confirme'),
+     callback: res => {
+
+     }
+   });
+
   }
 }
