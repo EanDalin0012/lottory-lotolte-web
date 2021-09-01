@@ -65,6 +65,7 @@ export class EditPersonalInfoComponent implements OnInit {
   imagePreviewProfileID: number = 0;
   imagePreviewProfile: any[] = [];
   public value: Date = new Date();
+
   constructor(
     private translateService: TranslateService,
     private modalService: ModalService,
@@ -301,7 +302,6 @@ export class EditPersonalInfoComponent implements OnInit {
     if(this.imagePreviewProfile.length > 0) {
       this.imagePreviewProfile.forEach((element,index) =>{
         if(element.uid === uid) {
-            console.log("call add function", element, index);
             this.imagePreviewProfile.splice(index, 1);
         }
       });
@@ -326,8 +326,6 @@ export class EditPersonalInfoComponent implements OnInit {
                 base64WriteImage.file_extension = element.extension;
                 const api = this.baseUrl + '/api/base64/image/v0/write';
                 this.hTTPService.Post(api, base64WriteImage).then(resp=>{
-                  console.log(resp);
-
                   if(resp.body.status === 'Y') {
                     this.imagePreviewProfileID = resp.body.resourceID;
                   }

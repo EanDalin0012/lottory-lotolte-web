@@ -37,7 +37,7 @@ export class DataService {
     this.viewNewAccountClose.next(message);
   }
 
-  chageProfileDataMessage(message: number) {
+  chageProfileDataMessage(message: any) {
     this.chageProfile.next(message);
   }
 

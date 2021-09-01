@@ -53,10 +53,7 @@ export class AccountProfileComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[4]);
     this.userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
     this.account = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
-    console.log(this.account);
-
     this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
-
     this.imageName = this.userInfo.firstName + ' ' + this.userInfo.lastName;
   }
 
@@ -66,7 +63,6 @@ export class AccountProfileComponent implements OnInit {
       {
         message: this.userInfo,
         callback: _response => {
-          console.log('_response', _response);
           if(_response && _response.responseCode === '200') {
             this.userInfo.firstName = _response.personalInfo.firstName;
             this.userInfo.lastName = _response.personalInfo.lastName;
@@ -78,7 +74,7 @@ export class AccountProfileComponent implements OnInit {
             this.userInfo.dateBirth        = _response.personalInfo.dateBirth;
             Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, this.userInfo);
             this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
-            this.dataService.chageProfileDataMessage(this.userInfo.resourceID);
+            this.dataService.chageProfileDataMessage(this.userInfo);
 
           }
 

@@ -22,6 +22,7 @@ import { SubAccountMemberComponent } from './sub-account-member/sub-account-memb
 import { ShowAddAccountComponent } from './show-add-account/show-add-account.component';
 import { EditPersonalInfoComponent } from './edit-personal-info/edit-personal-info.component';
 import { EditAccountInfoComponent } from './edit-account-info/edit-account-info.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 
@@ -44,7 +45,8 @@ import { EditAccountInfoComponent } from './edit-account-info/edit-account-info.
     SubAccountMemberComponent,
     ShowAddAccountComponent,
     EditPersonalInfoComponent,
-    EditAccountInfoComponent
+    EditAccountInfoComponent,
+    ResetPasswordComponent
   ],
   imports: [
     CommonModule,

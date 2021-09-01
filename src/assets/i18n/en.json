@@ -68,6 +68,7 @@
   "Account": {
     "Label": {
       "Account":"Account",
+      "AccountValue":"Account : {{account}}",
       "SubAccount":"Sub Account",
       "Id": "Id",
       "AccountID": "Account ID",
@@ -107,7 +108,8 @@
       "Date":"Date",
       "Address":"Address",
       "UpatePersonalInformation":"Update Personal Information",
-      "UpateAccountInformation":"Update Account Information"
+      "UpateAccountInformation":"Update Account Information",
+      "ResetPassword":"Reset Password"
 
     },
     "Message": {
@@ -121,7 +123,9 @@
       "PhoneNumberRequired":"*Phone number is required",
       "UserNameRequired":"*User Name is required",
       "PasswordNoteFirstTime":"Password is generate by system. When user login first time need to change password again. thank",
-      "ConfirmPasswordRequired":"*Confirm Password is required"
+      "ConfirmPasswordRequired":"*Confirm Password is required",
+      "PasswordRequired":"*Password is required",
+      "PasswordReseted":"Your password reseted. Thank you"
     },
     "Holder": {
       "EnterAccountID": "Enter account ID",

@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { HTTPService } from '../../shares/services/http.service';
 import { Account } from '../../shares/model/account';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
-import { AccountBalancePipe } from '../../shares/pipe/account-balance.pipe';
 
 @Component({
   selector: 'app-edit-account-info',
@@ -70,7 +69,6 @@ export class EditAccountInfoComponent implements OnInit {
   ngOnInit(): void {
     if(this.modal) {
       this.account = this.modal.message;
-      console.log(this.account);
       this.form.patchValue({
         accountName: this.account.accountName,
         accountID: PipeUtils.account(this.account.accountID),
@@ -124,8 +122,6 @@ export class EditAccountInfoComponent implements OnInit {
         id: this.account.id
       };
 
-
-      console.log(accountInformation);
       const api = this.baseUrl + '/api/account/v0/update/accountName';
       this.hTTPService.Post(api,accountInformation).then((resposne)=> {
         if( resposne && resposne.result.responseCode !== '200') {

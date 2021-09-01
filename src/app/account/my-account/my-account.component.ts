@@ -18,6 +18,7 @@ import { AccountDepositComponent } from '../account-deposit/account-deposit.comp
 import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -188,6 +189,20 @@ export class MyAccountComponent implements OnInit {
       message: {
         openAccount: AccountTypeCode.Seniar,
         accountInfo: this.accountInfo,
+      },
+      callback: _response => {
+        console.log('_response', _response);
+
+      }
+    });
+  }
+
+  resetPassword(item: Account) {
+    this.modalService.open(
+      ResetPasswordComponent,
+      {
+      message: {
+        accountInfo: item,
       },
       callback: _response => {
         console.log('_response', _response);

@@ -57,9 +57,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
       this.dataService.chageProfileData.subscribe(message => {
         if(message) {
-          this.src = this.baseUrl + '/api/image/reader/v0/read/'+message;
+          this.userInfo = message;
+          this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
         }
       });
+
      switch(this.langCode) {
        case 'en':
         this.flags = 'assets/img/flags/us.png';
