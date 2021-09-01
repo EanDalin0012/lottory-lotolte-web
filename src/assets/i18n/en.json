@@ -106,7 +106,8 @@
       "Amount":"Amount",
       "Date":"Date",
       "Address":"Address",
-      "UpatePersonalInformation":"Update Personal Information"
+      "UpatePersonalInformation":"Update Personal Information",
+      "UpateAccountInformation":"Update Account Information"
 
     },
     "Message": {

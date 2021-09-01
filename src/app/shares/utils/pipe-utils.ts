@@ -10,4 +10,11 @@ export class PipeUtils {
       return value;
     }
   }
+
+  public static accountBalance(value: number, currency: string) {
+    if(currency === 'KH') {
+      return (value).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+    return (value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+  }
 }

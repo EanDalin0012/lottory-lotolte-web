@@ -7,6 +7,9 @@ import { CreateAccount } from '../../shares/model/create-account';
 import { ModalService } from '../../shares/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HTTPService } from '../../shares/services/http.service';
+import { Account } from '../../shares/model/account';
+import { PipeUtils } from '../../shares/utils/pipe-utils';
+import { AccountBalancePipe } from '../../shares/pipe/account-balance.pipe';
 
 @Component({
   selector: 'app-edit-account-info',
@@ -17,11 +20,9 @@ export class EditAccountInfoComponent implements OnInit {
 
   private baseUrl: string = '';
 
-  @ViewChild("firstName") inputFirstName: any;
-  @ViewChild("lastName") inputLastName: any;
-  @ViewChild("phoneNumber") inputPhoneNumber: any;
-  @ViewChild("userName") inputUserName: any;
-  @ViewChild("pawword") inputPawword: any;
+  @ViewChild("accountName") inputAccountName: any;
+  @ViewChild("accountID") inputAccountID: any;
+  @ViewChild("accountBalance") inputAccountBalance: any;
 
   modal:any;
 
@@ -31,18 +32,14 @@ export class EditAccountInfoComponent implements OnInit {
   genderCheck = false;
 
   dateBirth: Date = new Date();
-  userInfo: UserInfomation = {
+  account:Account = {
     id: 0,
-    firstName: '',
-    lastName:'',
-    userName: '',
-    dateBirth: '',
-    gender:'',
-    resourceID: 0,
-    phoneNumber: '',
-    otherPhoneNumber: '',
-    createDate: '',
-    address: ''
+    accountID: '',
+    accountName:'',
+    accountBalance: 0,
+    currency: '',
+    accountType: '',
+    status: '',
   };
 
   gender = {
@@ -59,30 +56,28 @@ export class EditAccountInfoComponent implements OnInit {
     private translateService: TranslateService,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private hTTPService: HTTPService,
+    private hTTPService: HTTPService
   ) {
     this.baseUrl = environment.bizServer.server;
 
     this.form as FormGroup;
 
     this.form = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthDate: new FormControl(new Date(new Date().getFullYear() - 18, 10, 10)),
-      phoneNumber: ['', Validators.required],
-      otherPhoneNumber: [''],
-      gender: new FormControl(),
-      address: [''],
-
+      accountName: [ '', Validators.required],
+      accountID: [{value: '', disabled: true}, Validators.required],
+      accountBalance: [{value: '', disabled: true}, Validators.required],
     });
   }
 
   ngOnInit(): void {
-    console.log();
     if(this.modal) {
-      this.userInfo = this.modal.message;
-      console.log(this.userInfo);
-
+      this.account = this.modal.message;
+      console.log(this.account.currency);
+      this.form.patchValue({
+        accountName: this.account.accountName,
+        accountID: PipeUtils.account(this.account.accountID),
+        accountBalance: PipeUtils.accountBalance(this.account.accountBalance, this.account.currency) + ' '+ this.account.currency
+      });
     }
 
   }
@@ -106,29 +101,9 @@ export class EditAccountInfoComponent implements OnInit {
 
   isEmpty(code: string) {
     switch(code) {
-      case 'firstName':
+      case 'accountName':
         this.form.patchValue({
           firstName: ''
-        });
-        break;
-      case 'lastName':
-        this.form.patchValue({
-          lastName: ''
-        });
-        break;
-      case 'phoneNumber':
-        this.form.patchValue({
-          phoneNumber: ''
-        });
-        break;
-      case 'otherPhoneNumber':
-        this.form.patchValue({
-          otherPhoneNumber: ''
-        });
-        break;
-      case 'address':
-        this.form.patchValue({
-          address: ''
         });
         break;
     }
@@ -136,49 +111,24 @@ export class EditAccountInfoComponent implements OnInit {
 
   save() {
     this.submitted = true;
-    console.log(this.form.getRawValue());
-    const t = this.form.getRawValue();
-    const db = t.birthDate as Date;
-    console.log(db, db.getFullYear(), db.getMonth(), db.getDate());
-
-    if(this.f.gender.value == null) {
-      this.genderCheck = true;
-    }
-
-
-    if(this.f.firstName.errors) {
-      this.inputFirstName.nativeElement.focus();
-    } else if (this.f.lastName.errors) {
-      this.inputLastName.nativeElement.focus();
-    } else if (this.f.gender.errors) {
-      this.genderCheck = true;
-    }else if (this.f.phoneNumber.errors) {
-      this.inputPhoneNumber.nativeElement.focus();
+    if(this.f.accountID.errors) {
+      this.inputAccountID.nativeElement.focus();
+    } else if (this.f.accountName.errors) {
+      this.inputAccountName.nativeElement.focus();
+    } else if (this.f.accountBalance.errors) {
+      this.inputAccountBalance.nativeElement.focus();
     } else {
       const data = this.form.getRawValue();
-      const db = data.birthDate as Date;
-      if(data.gender.code === '') {
-        this.translateErrorServer('Invalid_Gender');
-        return;
-      }
-      // let createAccount = new CreateAccount();
 
-      const personalInformation = {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        gender: data.gender.code,
-        dateBirth: db.getFullYear() + ''+db.getMonth() + ''+db.getDate(),
-        phoneNumber: data.phoneNumber,
-        otherPhone: data.otherPhoneNumber,
-        userName: data.userName,
-        password: data.password,
-        address: data.address
+      const accountInformation = {
+        accountName: data.accountName,
+        accountID: data.accountID
       };
 
 
-      console.log(personalInformation);
+      console.log(accountInformation);
       const api = this.baseUrl + '';
-      this.hTTPService.Post(api,personalInformation).then((resposne)=> {
+      this.hTTPService.Post(api,accountInformation).then((resposne)=> {
         console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
