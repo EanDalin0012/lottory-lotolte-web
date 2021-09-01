@@ -12,6 +12,7 @@ import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
+import { AddAccountComponent } from '../add-account/add-account.component';
 @Component({
   selector: 'app-sub-account',
   templateUrl: './sub-account.component.html',
@@ -57,6 +58,7 @@ export class SubAccountComponent implements OnInit {
     status: ''
   };
 
+  accountTypeCode = AccountTypeCode;
   constructor(
     private modalService: ModalService,
     private dataService: DataService,
@@ -77,6 +79,15 @@ export class SubAccountComponent implements OnInit {
       pageLength: 10,
       processing: true
     };
+
+    this.dataService.viewNewAccountCloseData.subscribe(message => {
+      this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
+      if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Master || AccountTypeCode.Agent) {
+        this.dataService.unsubscribeNewAccountClose();
+        alert();
+        this.inquiry();
+      }
+    });
    }
 
   ngOnInit(): void {
@@ -84,7 +95,10 @@ export class SubAccountComponent implements OnInit {
     this.dataService.visitParamRouterChange(url[3]);
     this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
     this.accountInfoMain = Utils.getSecureStorage(LOCAL_STORAGE.Account_Info);
-    this.inquiry();
+    if(this.accountInfo) {
+      this.inquiry();
+    }
+
   }
 
   inquiry(){
@@ -93,6 +107,7 @@ export class SubAccountComponent implements OnInit {
       mainAccountID: this.accountInfo.id,
     };
     this.hTTPService.Post(api,requestData).then((resposne)=> {
+
        if( resposne && resposne.result.responseCode !== '200' && resposne.result.responseMessage === 'Invalid_MainAccountID') {
         this.modalService.alert(
           this.translate.instant('ServerResponseCode.Label.Invalid_MainAccountID'),
@@ -131,16 +146,6 @@ export class SubAccountComponent implements OnInit {
     this.srch = [...this.rows];
   }
 
-  newAccount() {
-    // this.modalService.open(
-    //   AddAccountComponent,
-    //   {
-    //   callback: _response => {
-
-    //   }
-    // });
-  }
-
   edit(item: any) {
 
   }
@@ -168,6 +173,27 @@ export class SubAccountComponent implements OnInit {
 
   onSubAccountRouter(item: Account) {
     this.subAccountRoutorUtil.subAccountRouter(item);
+  }
+
+  newAccount(accoutTypeCode: string) {
+    let typeCode = '';
+    if(AccountTypeCode.Master === accoutTypeCode) {
+      typeCode = AccountTypeCode.Master
+    } else if (AccountTypeCode.Agent === accoutTypeCode) {
+      typeCode = AccountTypeCode.Agent
+    }
+    this.modalService.open(
+      AddAccountComponent,
+      {
+      message: {
+        openAccount: typeCode,
+        accountInfo: this.accountInfo,
+      },
+      callback: _response => {
+        console.log('_response', _response);
+
+      }
+    });
   }
 
 }

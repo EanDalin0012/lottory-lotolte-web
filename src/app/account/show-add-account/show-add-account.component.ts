@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BTN_ROLES } from '../../shares/constants/common.const';
 import { Router } from '@angular/router';
 import { DataService } from '../../shares/services/data.service';
@@ -8,9 +8,10 @@ import { DataService } from '../../shares/services/data.service';
   templateUrl: './show-add-account.component.html',
   styleUrls: ['./show-add-account.component.css']
 })
-export class ShowAddAccountComponent implements OnInit {
+export class ShowAddAccountComponent implements OnInit, OnDestroy {
 
   modal:any;
+  createAccountType: string = '';
   dataInfo = {
     status: '',
     accountName: '',
@@ -24,20 +25,24 @@ export class ShowAddAccountComponent implements OnInit {
     private dataService: DataService,
     private router: Router) { }
 
-  ngOnInit(): void {
-    console.log(this.modal.message);
-    if(this.modal) {
-      this.dataInfo = this.modal.message;
-      console.log(this.dataInfo);
+  ngOnDestroy(): void {
+    this.dataService.unsubscribeNewAccountClose();
+  }
 
+  ngOnInit(): void {
+
+    if(this.modal) {
+      this.dataInfo = this.modal.message.resposne;
+      this.createAccountType = this.modal.message.createAccountType;
+      console.log(this.modal.dataInfo, this.createAccountType);
     }
 
   }
 
   close() {
     // /acc/my-account
-    this.dataService.viewNewAccountCloseMessage('Close_New_Account');
-    this.modal.close( {close: 'Close_Add_Account'});
+    this.dataService.viewNewAccountCloseMessage({close: 'Close_Add_Account', createdAccountType: this.createAccountType});
+    this.modal.close( {close: {close: 'Close_Add_Account', createdAccountType: this.createAccountType}});
   }
 
 }

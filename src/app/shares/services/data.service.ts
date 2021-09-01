@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
 
   private visitSource =  new BehaviorSubject<any>('');
   visitData = this.visitSource.asObservable();
@@ -39,6 +40,10 @@ export class DataService {
 
   chageProfileDataMessage(message: any) {
     this.chageProfile.next(message);
+  }
+
+  unsubscribeNewAccountClose() {
+    this.viewNewAccountClose.unsubscribe;
   }
 
 }

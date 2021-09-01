@@ -441,7 +441,7 @@ export class AddAccountComponent implements OnInit {
           this.modalService.open(
             ShowAddAccountComponent,
             {
-            message: resposne.body,
+            message: { createAccountType: this.openAccounttype, resposne: resposne.body },
             callback: _response => {
             }
           });

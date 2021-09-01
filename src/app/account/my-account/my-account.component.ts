@@ -106,7 +106,8 @@ export class MyAccountComponent implements OnInit {
       processing: true
     };
     this.dataService.viewNewAccountCloseData.subscribe(message => {
-      if(message === 'Close_New_Account') {
+      this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
+      if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Seniar) {
         this.inquiry();
       }
     });
@@ -192,7 +193,6 @@ export class MyAccountComponent implements OnInit {
       },
       callback: _response => {
         console.log('_response', _response);
-
       }
     });
   }
