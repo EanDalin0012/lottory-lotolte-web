@@ -72,7 +72,7 @@ export class EditAccountInfoComponent implements OnInit {
   ngOnInit(): void {
     if(this.modal) {
       this.account = this.modal.message;
-      console.log(this.account.currency);
+      console.log(this.account);
       this.form.patchValue({
         accountName: this.account.accountName,
         accountID: PipeUtils.account(this.account.accountID),
@@ -122,21 +122,21 @@ export class EditAccountInfoComponent implements OnInit {
 
       const accountInformation = {
         accountName: data.accountName,
-        accountID: data.accountID
+        accountID: this.account.accountID,
+        id: this.account.id
       };
 
 
       console.log(accountInformation);
-      const api = this.baseUrl + '';
+      const api = this.baseUrl + '/api/account/v0/update/accountName';
       this.hTTPService.Post(api,accountInformation).then((resposne)=> {
         console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
-       if(resposne.body != null && resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
+        if(resposne.body != null && resposne.body.responseCode === '200') {
           console.log('resposne', resposne);
-          this.close();
-
+          this.modal.close( {close: BTN_ROLES.CLOSE, responseCode: resposne.body.responseCode, accountInfo: accountInformation});
        }
 
      });

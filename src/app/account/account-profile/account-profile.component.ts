@@ -92,7 +92,10 @@ export class AccountProfileComponent implements OnInit {
       {
         message: this.account,
         callback: _response => {
-
+          if(_response && _response.responseCode === '200') {
+            this.account.accountName = _response.accountInfo.accountName;
+            Utils.setSecureStorage(LOCAL_STORAGE.Account_Info, this.account);
+          }
       }
     });
   }
