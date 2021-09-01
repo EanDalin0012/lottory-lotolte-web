@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BTN_ROLES, Genders } from '../../shares/constants/common.const';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { UserInfomation } from '../../shares/model/user';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
-import { CreateAccount } from '../../shares/model/create-account';
 import { ModalService } from '../../shares/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HTTPService } from '../../shares/services/http.service';
@@ -130,12 +128,10 @@ export class EditAccountInfoComponent implements OnInit {
       console.log(accountInformation);
       const api = this.baseUrl + '/api/account/v0/update/accountName';
       this.hTTPService.Post(api,accountInformation).then((resposne)=> {
-        console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
         if(resposne.body != null && resposne.body.responseCode === '200') {
-          console.log('resposne', resposne);
           this.modal.close( {close: BTN_ROLES.CLOSE, responseCode: resposne.body.responseCode, accountInfo: accountInformation});
        }
 

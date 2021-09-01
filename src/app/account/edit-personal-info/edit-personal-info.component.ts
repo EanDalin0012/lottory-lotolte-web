@@ -6,7 +6,7 @@ import { ModalService } from '../../shares/services/modal.service';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
-import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
+import { FileRestrictions, SelectEvent } from '@progress/kendo-angular-upload';
 import * as moment from 'moment';
 import { Base64WriteImage } from '../../shares/model/base64-image';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
@@ -91,7 +91,6 @@ export class EditPersonalInfoComponent implements OnInit {
 
     if(this.modal) {
       this.userInfo = this.modal.message;
-      console.log(this.userInfo);
       this.imagePreviewProfileID = this.userInfo.resourceID;
       this.gender.code = this.userInfo.gender;
       this.gender.text = PipeUtils.gender(this.userInfo.gender);
@@ -163,11 +162,6 @@ export class EditPersonalInfoComponent implements OnInit {
 
   save() {
     this.submitted = true;
-    console.log(this.form.getRawValue());
-    const t = this.form.getRawValue();
-    const db = t.birthDate as Date;
-    console.log(db, db.getFullYear(), db.getMonth(), db.getDate());
-
     if(this.f.gender.value == null) {
       this.genderCheck = true;
       return;
@@ -210,16 +204,12 @@ export class EditPersonalInfoComponent implements OnInit {
         resourceID: this.imagePreviewProfileID,
         userID: this.userInfo.id
       };
-
-      console.log(personalInformation);
       const api = this.baseUrl + '/api/user/v0/update/info';
       this.hTTPService.Post(api,personalInformation).then((resposne)=> {
-        console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
        if(resposne.body != null && resposne.body.responseCode === '200') {
-          console.log('resposne', resposne);
           this.modal.close( {close: BTN_ROLES.CLOSE, responseCode: resposne.body.responseCode, personalInfo: personalInformation});
        }
 
