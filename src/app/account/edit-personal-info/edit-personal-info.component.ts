@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { FileRestrictions, FileState, SelectEvent } from '@progress/kendo-angular-upload';
 import * as moment from 'moment';
 import { Base64WriteImage } from '../../shares/model/base64-image';
+import { PipeUtils } from '../../shares/utils/pipe-utils';
 
 @Component({
   selector: 'app-edit-personal-info',
@@ -58,12 +59,12 @@ export class EditPersonalInfoComponent implements OnInit {
   genders = Genders;
 
   public fileRestrictions: FileRestrictions = {
-    allowedExtensions: ['.jpg', '.png']
+    allowedExtensions: ['.jpg', '.png', '.jpeg']
   };
   imageUploaded: boolean = false;
   imagePreviewProfileID: number = 0;
   imagePreviewProfile: any[] = [];
-
+  public value: Date = new Date();
   constructor(
     private translateService: TranslateService,
     private modalService: ModalService,
@@ -77,7 +78,7 @@ export class EditPersonalInfoComponent implements OnInit {
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      birthDate: new FormControl(new Date(new Date().getFullYear() - 18, 10, 10)),
+      birthDate: new FormControl(new Date(2000, 10, 10)),
       phoneNumber: ['', Validators.required],
       otherPhoneNumber: [''],
       gender: new FormControl(),
@@ -87,10 +88,27 @@ export class EditPersonalInfoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log();
+
     if(this.modal) {
       this.userInfo = this.modal.message;
       console.log(this.userInfo);
+      this.imagePreviewProfileID = this.userInfo.resourceID;
+      this.gender.code = this.userInfo.gender;
+      this.gender.text = PipeUtils.gender(this.userInfo.gender);
+      const year = +this.userInfo.dateBirth.substr(0, 4);
+      const month= (+this.userInfo.dateBirth.substr(4,2) ) -1;
+      const day= +this.userInfo.dateBirth.substr(6,2);
+
+      this.form.patchValue({
+        firstName: this.userInfo.firstName,
+        lastName: this.userInfo.lastName,
+        phoneNumber: this.userInfo.phoneNumber,
+        otherPhoneNumber: this.userInfo.otherPhoneNumber,
+        address: this.userInfo.address,
+        gender: this.gender
+      });
+
+      this.value = new Date(year, month, day);
 
     }
 
@@ -152,6 +170,7 @@ export class EditPersonalInfoComponent implements OnInit {
 
     if(this.f.gender.value == null) {
       this.genderCheck = true;
+      return;
     }
 
 
@@ -165,9 +184,17 @@ export class EditPersonalInfoComponent implements OnInit {
       this.inputPhoneNumber.nativeElement.focus();
     } else {
       const data = this.form.getRawValue();
-      const db = data.birthDate as Date;
+      var dd = String(this.value.getDate()).padStart(2, '0');
+      var mm = String(this.value.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = this.value.getFullYear();
+
       if(data.gender.code === '') {
         this.translateErrorServer('Invalid_Gender');
+        return;
+      }
+
+      if(!this.value) {
+        this.translateErrorServer('Invalid_DB');
         return;
       }
       // let createAccount = new CreateAccount();
@@ -176,24 +203,24 @@ export class EditPersonalInfoComponent implements OnInit {
         firstName: data.firstName,
         lastName: data.lastName,
         gender: data.gender.code,
-        dateBirth: db.getFullYear() + ''+db.getMonth() + ''+db.getDate(),
+        dateBirth: yyyy+''+mm+''+dd,
         phoneNumber: data.phoneNumber,
         otherPhone: data.otherPhoneNumber,
         address: data.address,
         resourceID: this.imagePreviewProfileID,
+        userID: this.userInfo.id
       };
 
       console.log(personalInformation);
-      const api = this.baseUrl + '';
+      const api = this.baseUrl + '/api/user/v0/update/info';
       this.hTTPService.Post(api,personalInformation).then((resposne)=> {
         console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
-       if(resposne.body != null && resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
+       if(resposne.body != null && resposne.body.responseCode === '200') {
           console.log('resposne', resposne);
-          this.close();
-
+          this.modal.close( {close: BTN_ROLES.CLOSE, responseCode: resposne.body.responseCode, personalInfo: personalInformation});
        }
 
      });
@@ -326,6 +353,13 @@ export class EditPersonalInfoComponent implements OnInit {
       return false;
     }
 
+  }
+
+  public onChange(value: Date): void {
+    // var dd = String(value.getDate()).padStart(2, '0');
+    // var mm = String(value.getMonth() + 1).padStart(2, '0'); //January is 0!
+    // var yyyy = value.getFullYear();
+    this.value = value;
   }
 
 }

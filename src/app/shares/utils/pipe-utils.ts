@@ -17,4 +17,15 @@ export class PipeUtils {
     }
     return (value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
   }
+
+  public static gender(value: string ) {
+    if(value === 'm') {
+      return "Male";
+    } else if (value === 'f') {
+      return 'Female';
+    }
+    return 'Other';
+  }
+
+
 }

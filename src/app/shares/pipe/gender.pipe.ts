@@ -11,7 +11,7 @@ export class GenderPipe implements PipeTransform {
     } else if (value === 'f') {
       return 'Female';
     }
-    return '';
+    return 'Other';
   }
 
 }

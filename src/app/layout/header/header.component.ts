@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { environment } from 'src/environments/environment';
 import { AuthentcatiionService } from '../../shares/services/authentcatiion.service';
+import { DataService } from '../../shares/services/data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -46,13 +47,19 @@ export class HeaderComponent implements OnInit {
     private translate: TranslateService,
     private headerService: HeaderService,
     private router: Router,
-    private authentcatiionService: AuthentcatiionService
+    private authentcatiionService: AuthentcatiionService,
+    private dataService: DataService
     ) {
       this.baseUrl = environment.bizServer.server;
 
     }
 
   ngOnInit() {
+      this.dataService.chageProfileData.subscribe(message => {
+        if(message) {
+          this.src = this.baseUrl + '/api/image/reader/v0/read/'+message;
+        }
+      });
      switch(this.langCode) {
        case 'en':
         this.flags = 'assets/img/flags/us.png';

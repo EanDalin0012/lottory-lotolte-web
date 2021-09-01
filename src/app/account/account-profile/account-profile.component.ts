@@ -21,16 +21,16 @@ export class AccountProfileComponent implements OnInit {
 
   userInfo: UserInfomation = {
     id: 0,
-  firstName: '',
-  lastName:'',
-  userName: '',
-  dateBirth: '',
-  gender:'',
-  resourceID: 0,
-  phoneNumber: '',
-  otherPhoneNumber: '',
-  createDate: '',
-  address: ''
+    firstName: '',
+    lastName:'',
+    userName: '',
+    dateBirth: '',
+    gender:'',
+    resourceID: 0,
+    phoneNumber: '',
+    otherPhoneNumber: '',
+    createDate: '',
+    address: ''
   };
   account:Account = {
     id: 0,
@@ -66,8 +66,23 @@ export class AccountProfileComponent implements OnInit {
       {
         message: this.userInfo,
         callback: _response => {
+          console.log('_response', _response);
+          if(_response && _response.responseCode === '200') {
+            this.userInfo.firstName = _response.personalInfo.firstName;
+            this.userInfo.lastName = _response.personalInfo.lastName;
+            this.userInfo.address = _response.personalInfo.address;
+            this.userInfo.gender  = _response.personalInfo.gender;
+            this.userInfo.resourceID = _response.personalInfo.resourceID;
+            this.userInfo.phoneNumber = _response.personalInfo.phoneNumber;
+            this.userInfo.otherPhoneNumber = _response.personalInfo.otherPhoneNumber;
+            this.userInfo.dateBirth        = _response.personalInfo.dateBirth;
+            Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, this.userInfo);
+            this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
+            this.dataService.chageProfileDataMessage(this.userInfo.resourceID);
 
-      }
+          }
+
+        }
     });
   }
 

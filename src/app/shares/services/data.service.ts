@@ -18,6 +18,9 @@ export class DataService {
   private viewNewAccountClose =  new BehaviorSubject<any>('');
   viewNewAccountCloseData = this.viewNewAccountClose.asObservable();
 
+  private chageProfile =  new BehaviorSubject<any>('');
+  chageProfileData = this.chageProfile.asObservable();
+
   visitMessage(message: any) {
     this.visitSource.next(message);
   }
@@ -32,6 +35,10 @@ export class DataService {
 
   viewNewAccountCloseMessage(message: any) {
     this.viewNewAccountClose.next(message);
+  }
+
+  chageProfileDataMessage(message: number) {
+    this.chageProfile.next(message);
   }
 
 }
