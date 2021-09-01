@@ -16,7 +16,7 @@ export class AccountDetailsComponent implements OnInit {
 
   account: Account = {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountType: '',
     accountBalance: 0,

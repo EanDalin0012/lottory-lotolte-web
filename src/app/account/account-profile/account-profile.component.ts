@@ -5,6 +5,9 @@ import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { environment } from 'src/environments/environment';
 import { Account } from '../../shares/model/account';
 import { UserInfomation } from '../../shares/model/user';
+import { ModalService } from '../../shares/services/modal.service';
+import { EditAccountInfoComponent } from '../edit-account-info/edit-account-info.component';
+import { EditPersonalInfoComponent } from '../edit-personal-info/edit-personal-info.component';
 @Component({
   selector: 'app-account-profile',
   templateUrl: './account-profile.component.html',
@@ -31,14 +34,17 @@ export class AccountProfileComponent implements OnInit {
   };
   account:Account = {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName:'',
     accountBalance: 0,
     currency: '',
     accountType: '',
     status: ''
   };
-  constructor(private dataService: DataService) {
+  constructor(
+    private modalService: ModalService,
+    private dataService: DataService
+    ) {
     this.baseUrl = environment.bizServer.server;
    }
 
@@ -52,6 +58,28 @@ export class AccountProfileComponent implements OnInit {
     this.src = this.baseUrl + '/api/image/reader/v0/read/'+this.userInfo.resourceID;
 
     this.imageName = this.userInfo.firstName + ' ' + this.userInfo.lastName;
+  }
+
+  profileEdit() {
+    this.modalService.open(
+      EditPersonalInfoComponent,
+      {
+        message: this.userInfo,
+        callback: _response => {
+
+      }
+    });
+  }
+
+  AccountInfoEdit() {
+    this.modalService.open(
+      EditAccountInfoComponent,
+      {
+        message: this.account,
+        callback: _response => {
+
+      }
+    });
   }
 
 }

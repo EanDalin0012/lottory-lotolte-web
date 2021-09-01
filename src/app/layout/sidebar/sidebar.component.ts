@@ -20,7 +20,7 @@ export class SidebarComponent implements OnInit {
   accountTypes: AccountType[] = accountTypes;
   accountInfo: Account = {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',

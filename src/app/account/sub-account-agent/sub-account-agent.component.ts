@@ -25,7 +25,7 @@ export class SubAccountAgentComponent implements OnInit {
   accounts: Account[] = [];
   accountInfo: Account= {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',

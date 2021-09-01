@@ -28,6 +28,7 @@ export class AuthentcatiionService {
   public login(auth: AuthentcatiionRequest, basicAuth?: BasicAuth): Promise<any> {
     return new Promise((resovle) => {
       this.accessTokenRequest(auth, basicAuth).then(response => {
+        console.log('response accessTokenRequest:', response);
 
         if (response.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
@@ -35,8 +36,6 @@ export class AuthentcatiionService {
             if (result) {
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result.userInfo);
               Utils.setSecureStorage(LOCAL_STORAGE.Account_Info, result.accountInfo);
-              console.log('result', result);
-
               resovle(result);
             }
 
@@ -86,8 +85,6 @@ export class AuthentcatiionService {
           $('body').addClass('loaded');
           $('div.loading').addClass('none');
           const responseData = res as any;
-          console.log('responseData', responseData);
-
           if(responseData.result && responseData.result.responseCode !== '200') {
             this.modalService.alert(
               this.translate.instant('ServerResponseCode.Label.'+responseData.result.responseMessage),
@@ -95,8 +92,8 @@ export class AuthentcatiionService {
              modalClass: 'open-alert',
              btnText: this.translate.instant('Common.Button.Confirme'),
              callback: res => {
-               Utils.removeSecureStorage(localStorage.Authorization);
-               Utils.removeSecureStorage(localStorage.USER_INFO);
+               Utils.removeSecureStorage(LOCAL_STORAGE.Authorization);
+               Utils.removeSecureStorage(LOCAL_STORAGE.USER_INFO);
                this.router.navigate(['/login']);
              }
            });
@@ -148,9 +145,6 @@ export class AuthentcatiionService {
         Authorization: btoa
       };
 
-      console.log(auth.user_name);
-      console.log(auth.password);
-
       const formData = new FormData();
       formData.append('client_id', 'spring-security-oauth2-read-write-client');
       formData.append('grant_type', 'password');
@@ -166,6 +160,31 @@ export class AuthentcatiionService {
           resovle(auth);
         });
     });
+    }
+
+    public revokeToken(): Promise<any> {
+      return new Promise((resolve, reject) => {
+        const userInfo = Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
+        const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
+        const api  = "/api/oauth2/revoke-token";
+        const uri = this.baseUrl + api + '?userId=' + userInfo.id + '&lang=' + lang;
+        let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+        const access_token = authorization.access_token;
+        const headers = {
+          'Authorization': 'Bearer ' + access_token
+        };
+
+        this.httpClient.get(uri, {headers}).subscribe(rest => {
+          const result = rest as any;
+          if(result.body && result.body.responseCode === '200') {
+            this.router.navigate(["/login"]);
+            resolve(result.body);
+          } else {
+            reject();
+          }
+        });
+
+      });
     }
 
 }

@@ -35,7 +35,7 @@ export class AccountDepositComponent implements OnInit {
     operator: 'startsWith'
   };
   accounts:Account[] = [];
-  account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalance: 0};
+  account:Account = { id: 0, accountID: '', accountName: '', currency: '', accountType: '', status: '', accountBalance: 0};
   accountDisplay:Account[] = [];
 
   constructor(

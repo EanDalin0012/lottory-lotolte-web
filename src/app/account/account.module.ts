@@ -20,6 +20,8 @@ import { SubAccountMasterComponent } from './sub-account-master/sub-account-mast
 import { SubAccountAgentComponent } from './sub-account-agent/sub-account-agent.component';
 import { SubAccountMemberComponent } from './sub-account-member/sub-account-member.component';
 import { ShowAddAccountComponent } from './show-add-account/show-add-account.component';
+import { EditPersonalInfoComponent } from './edit-personal-info/edit-personal-info.component';
+import { EditAccountInfoComponent } from './edit-account-info/edit-account-info.component';
 
 
 
@@ -40,7 +42,9 @@ import { ShowAddAccountComponent } from './show-add-account/show-add-account.com
     SubAccountMasterComponent,
     SubAccountAgentComponent,
     SubAccountMemberComponent,
-    ShowAddAccountComponent
+    ShowAddAccountComponent,
+    EditPersonalInfoComponent,
+    EditAccountInfoComponent
   ],
   imports: [
     CommonModule,

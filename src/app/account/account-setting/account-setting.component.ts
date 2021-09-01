@@ -57,7 +57,7 @@ export class AccountSettingComponent implements OnInit {
   ngOnInit(): void {
     console.log('StoreUtil', Utils.getSecureStorage('account-setting'));
     const accountInfo = Utils.getSecureStorage('account-setting') as Account;
-    this.accountId = PipeUtils.account(accountInfo.accountId); ;
+    this.accountId = PipeUtils.account(accountInfo.accountID); ;
     this.accountName = accountInfo.accountName;
     this._status = accountInfo.status;
     this.id = accountInfo.id;

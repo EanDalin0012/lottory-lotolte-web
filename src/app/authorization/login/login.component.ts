@@ -73,8 +73,6 @@ export class LoginComponent implements OnInit {
       };
       this.authentcatiionService.login(logInfo).then((result: any) => {
         if(result) {
-          console.log('result', result);
-
           this.routors();
         }
       }).catch((err: any) => {

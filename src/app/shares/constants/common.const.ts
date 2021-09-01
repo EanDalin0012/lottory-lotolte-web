@@ -65,3 +65,15 @@ export enum BTN_ROLES {
 export enum AESINFO {
   STORE = 'AESINFO'
 }
+
+
+export const Genders = [
+  {
+    code: 'm',
+    text: 'Male',
+  },
+  {
+    code: 'f',
+    text: 'Female',
+  }
+];

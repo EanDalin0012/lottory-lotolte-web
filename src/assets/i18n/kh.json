@@ -36,8 +36,8 @@
   "Account": {
     "Label": {
       "Id": "Id",
-      "accountID": "លេខសម្គាល់គណនី",
-      "accountName":"ឈ្មោះ​គណនី",
+      "AccountID": "លេខសម្គាល់គណនី",
+      "AccountName":"ឈ្មោះ​គណនី",
       "balance":"សមតុល្យ"
     }
   }

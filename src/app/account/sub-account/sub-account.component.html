@@ -27,7 +27,7 @@
                   </li>
                   <li>
                       <div class="title">{{'Account.Label.AccountID' | translate}}</div>
-                      <div class="text">{{accountInfo.accountId | account}}</div>
+                      <div class="text">{{accountInfo.accountID | account}}</div>
                   </li>
                   <li>
                       <div class="title">{{'Account.Label.AccountBalance' | translate}}</div>
@@ -91,7 +91,7 @@
                   <tbody>
                       <tr *ngFor="let item of accountDisplays;let i = index;">
                           <td>{{i + 1}}</td>
-                          <td>{{item.accountId | account}}</td>
+                          <td>{{item.accountID | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center" [innerHTML] = "item.accountType | accountType"></td>
                           <td class="text-center">{{item.accountBalance}} {{item.currency}}</td>
@@ -176,7 +176,7 @@
                   <tbody>
                       <tr *ngFor="let item of accountDisplays;let i = index;">
                           <td>{{i + 1}}</td>
-                          <td>{{item.accountId | account}}</td>
+                          <td>{{item.accountID | account}}</td>
                           <td>{{item.accountName}}</td>
                           <td class="text-center" [innerHTML] = "item.accountType | accountType"></td>
                           <td class="text-center">{{item.accountBalance}} {{item.currency}}</td>

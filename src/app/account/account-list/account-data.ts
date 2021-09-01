@@ -32,7 +32,7 @@ export const accountDatas: Account[] = [
 
   {
     id: 7,
-    accountId: '000000007',
+    accountID: '000000007',
     accountName: 'Chiev Raksmey',
     accountBalance: 90.00,
     currency: 'USD',
@@ -41,7 +41,7 @@ export const accountDatas: Account[] = [
   },
   {
     id: 8,
-    accountId: '000000008',
+    accountID: '000000008',
     accountName: 'Sophat Rourn',
     accountBalance: 190.00,
     currency: 'USD',
@@ -50,7 +50,7 @@ export const accountDatas: Account[] = [
   },
   {
     id: 9,
-    accountId: '000000009',
+    accountID: '000000009',
     accountName: 'Khuon Paly',
     accountBalance: 190.00,
     currency: 'USD',

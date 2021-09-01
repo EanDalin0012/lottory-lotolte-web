@@ -11,4 +11,5 @@ export class PersonalInformation {
   accountType: string | undefined;
   currency: string | undefined;
   mainAccountID: number | undefined;
+  address?: string;
 }

@@ -125,6 +125,18 @@
                 </div>
             </div>
 
+            <div class="form-row row">
+              <div class="form-group col-md-12">
+                <label class="font-khmer-cursive">{{'Account.Label.Address' | translate}}</label>
+                <input #phoneNumber formControlName="address" type="text" [ngClass]="form.getRawValue().phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterAddress' | translate}}">
+
+                <div class="in_box">
+                    <button type="button" [ngClass]="form.getRawValue().address? 'btn_del' : ''" class="btn" (click)="isEmpty('phoneNumber')"></button>
+                </div>
+
+            </div>
+            </div>
+
 
             <div class="form-row row">
               <div class="form-group col-md-12">

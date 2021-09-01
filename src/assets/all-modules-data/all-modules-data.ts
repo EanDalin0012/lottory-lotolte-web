@@ -7,7 +7,7 @@ export const accountMasterAndAgent: Account[] = [
 // agent
   {
     id: 10,
-    accountId: '000000010',
+    accountID: '000000010',
     accountName: 'Lue Kongsun',
     accountBalance: 90.00,
     currency: 'USD',
@@ -16,7 +16,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 11,
-    accountId: '000000011',
+    accountID: '000000011',
     accountName: 'Tha Nit TK',
     accountBalance: 190.00,
     currency: 'USD',
@@ -25,7 +25,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 12,
-    accountId: '000000012',
+    accountID: '000000012',
     accountName: 'Puthary Chiev',
     accountBalance: 190.00,
     currency: 'USD',
@@ -34,7 +34,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 13,
-    accountId: '000000013',
+    accountID: '000000013',
     accountName: 'Chhor Deth',
     accountBalance: 90.00,
     currency: 'USD',
@@ -43,7 +43,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 14,
-    accountId: '000000014',
+    accountID: '000000014',
     accountName: 'Srey Man',
     accountBalance: 190.00,
     currency: 'USD',
@@ -52,7 +52,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 15,
-    accountId: '000000015',
+    accountID: '000000015',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -61,7 +61,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 16,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -70,7 +70,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 17,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -79,7 +79,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 18,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -88,7 +88,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 19,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -97,7 +97,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 20,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -106,7 +106,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 21,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -115,7 +115,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 22,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -124,7 +124,7 @@ export const accountMasterAndAgent: Account[] = [
   },
   {
     id: 23,
-    accountId: '000000016',
+    accountID: '000000016',
     accountName: 'Srey Pich',
     accountBalance: 190.00,
     currency: 'USD',
@@ -137,7 +137,7 @@ export const accountMasterAndAgent: Account[] = [
 export const subAccounts:Account[] = [
   {
     id: 1,
-    accountId: '000000021',
+    accountID: '000000021',
     accountName: 'John Doe',
     accountBalance: 1111,
     currency: 'KH',
@@ -146,7 +146,7 @@ export const subAccounts:Account[] = [
   },
   {
     id: 2,
-    accountId: '000000022',
+    accountID: '000000022',
     accountName: 'Richard Miles',
     accountBalance: 9000,
     currency: 'KH',
@@ -155,7 +155,7 @@ export const subAccounts:Account[] = [
   },
   {
     id: 3,
-    accountId: '000000023',
+    accountID: '000000023',
     accountName: 'John Smith',
     accountBalance: 1111,
     currency: 'KH',
@@ -164,7 +164,7 @@ export const subAccounts:Account[] = [
   },
   {
     id: 4,
-    accountId: '000000024',
+    accountID: '000000024',
     accountName: 'Mike Litorus',
     accountBalance: 1111,
     currency: 'KH',
@@ -173,7 +173,7 @@ export const subAccounts:Account[] = [
   },
   {
     id: 5,
-    accountId: '000000025',
+    accountID: '000000025',
     accountName: 'Wilmer Deluna',
     accountBalance: 1111,
     currency: 'KH',

@@ -11,6 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalService } from './modal.service';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthentcatiionService } from './authentcatiion.service';
+import { Utils } from '../utils/utils.static';
+import { LOCAL_STORAGE } from '../constants/common.const';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,6 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     private translate: TranslateService,
     private modalService: ModalService,
     private router: Router,
+    private authentcatiionService: AuthentcatiionService
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -66,6 +70,14 @@ export class AuthInterceptor implements HttpInterceptor {
              modalClass: 'open-alert',
              btnText: this.translate.instant('Common.Button.Confirme'),
              callback: res => {
+              // let authorization = Utils.getSecureStorage(LOCAL_STORAGE.Authorization);
+              // const access_token = authorization.access_token;
+              // if(authorization && access_token) {
+              //   this.authentcatiionService.revokeToken().then(response => {
+              //     console.log('response revokeToken:', response);
+              //     localStorage.clear();
+              //   });
+              // }
               localStorage.clear();
               this.router.navigate(['/login']);
              }

@@ -45,7 +45,7 @@ export class MyAccountComponent implements OnInit {
   deviceInfos: DeviceInfo[] = [];
   accountInfo: Account = {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',

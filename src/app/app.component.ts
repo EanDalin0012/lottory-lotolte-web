@@ -23,7 +23,9 @@ export class AppComponent implements OnDestroy {
         isClose: 'broswer is close'
       };
       // Cancel the event
-      e.preventDefault();
+      //e.preventDefault();
+      console.log( 'window.onbeforeunload', e);
+
       const api = environment.bizServer.server + '/api/client/v0/close';
         this.hTTPService.Post(api,requestData).then((resposne)=> {
 

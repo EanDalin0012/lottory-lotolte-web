@@ -49,6 +49,7 @@
                               </div>
                               <div class="col-md-7">
                                   <ul class="personal-info">
+
                                       <li>
                                           <div class="title">Phone:</div>
                                           <div class="text"><a href="">{{userInfo.phoneNumber}}</a></div>
@@ -93,8 +94,13 @@
                               </div>
                           </div>
                       </div>
-                      <div class="pro-edit"><a data-target="#profile_info" data-toggle="modal" class="edit-icon"><i
-                                  class="fa fa-pencil"></i></a></div>
+
+                      <div class="pro-edit">
+                        <a class="edit-icon" href="javascript:" (click)="profileEdit()">
+                          <i class="fa fa-pencil"></i>
+                        </a>
+                      </div>
+
                   </div>
               </div>
           </div>
@@ -107,28 +113,31 @@
         <div class="col-md-6 d-flex">
           <div class="card profile-box flex-fill" style="min-height: 210px;">
               <div class="card-body">
-                  <h3 class="card-title">Account Information <a class="edit-icon" data-toggle="modal"
-                          data-target="#personal_info_modal"><i class="fa fa-pencil"></i></a></h3>
+                  <h3 class="card-title">Account Information
+                    <a class="edit-icon" href="javascript:" (click)="AccountInfoEdit()">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  </h3>
                   <ul class="personal-info">
                       <li>
                           <div class="title">Account Name.</div>
-                          <div class="text">9876543210</div>
+                          <div class="text">{{account.accountName}}</div>
                       </li>
                       <li>
                           <div class="title">Acccount ID</div>
-                          <div class="text">9876543210</div>
+                          <div class="text">{{account.accountID | account}}</div>
                       </li>
                       <li>
                           <div class="title">Account Balance</div>
-                          <div class="text"><a href="">9876543210</a></div>
+                          <div class="text"><a href="">{{account.accountBalance | accountBalance: account.currency }} {{account.currency}}</a></div>
                       </li>
                       <li>
                           <div class="title">Account Status</div>
-                          <div class="text">Indian</div>
+                          <div class="text" [innerHTML] = "account.status | accountStatus"></div>
                       </li>
                       <li>
                           <div class="title">Account Type</div>
-                          <div class="text">Christian</div>
+                          <div class="text"[innerHTML] = "account.accountType | accountType" ></div>
                       </li>
 
                       <!-- <li>

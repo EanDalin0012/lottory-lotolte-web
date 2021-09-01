@@ -104,7 +104,9 @@
       "ImageIdentify":"Image of Identify",
       "MainAccount":"Main Account : {{account}}",
       "Amount":"Amount",
-      "Date":"Date"
+      "Date":"Date",
+      "Address":"Address",
+      "UpatePersonalInformation":"Update Personal Information"
 
     },
     "Message": {
@@ -133,7 +135,8 @@
       "EnterUserName": "Enter user name",
       "EnterPassword": "Enter password",
       "EnterConfirmPassword": "Enter confirm password",
-      "EnterIdentifyID": "Enter identify ID"
+      "EnterIdentifyID": "Enter identify ID",
+      "EnterAddress":"Enter address"
     }
 
   },

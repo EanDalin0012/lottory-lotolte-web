@@ -24,7 +24,7 @@ export class SubAccountMasterComponent implements OnInit {
   accounts: Account[] = [];
   accountInfo: Account= {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',
@@ -34,7 +34,7 @@ export class SubAccountMasterComponent implements OnInit {
 
   accountInfoMain: Account= {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',

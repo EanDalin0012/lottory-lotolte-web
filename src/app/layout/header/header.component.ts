@@ -6,6 +6,7 @@ import { Utils } from '../../shares/utils/utils.static';
 import { TranslateService } from '@ngx-translate/core';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { environment } from 'src/environments/environment';
+import { AuthentcatiionService } from '../../shares/services/authentcatiion.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -43,7 +44,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private headerService: HeaderService, private router: Router) {
+    private headerService: HeaderService,
+    private router: Router,
+    private authentcatiionService: AuthentcatiionService
+    ) {
       this.baseUrl = environment.bizServer.server;
 
     }
@@ -170,7 +174,12 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut() {
-    this.router.navigate(["/login"]);
+    this.authentcatiionService.revokeToken().then(response => {
+      console.log('response revokeToken:', response);
+
+      // this.router.navigate(["/login"]);
+    });
+
   }
 
   myProfile() {

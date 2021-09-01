@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { Account } from '../../shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
-import { LOCAL_STORAGE, BTN_ROLES } from '../../shares/constants/common.const';
+import { LOCAL_STORAGE, BTN_ROLES, Genders } from '../../shares/constants/common.const';
 import { accountDatas } from '../account-list/account-data';
 import { TranslateService } from '@ngx-translate/core';
 import { StepperActivateEvent } from '@progress/kendo-angular-layout';
@@ -57,7 +57,7 @@ export class AddAccountComponent implements OnInit {
     operator: 'startsWith'
   };
   accounts:Account[] = [];
-  account:Account = { id: 0, accountId: '', accountName: '', currency: '', accountType: '', status: '', accountBalance: 0};
+  account:Account = { id: 0, accountID: '', accountName: '', currency: '', accountType: '', status: '', accountBalance: 0};
   accountDisplay:Account[] = [];
 
   public stepsIcons = [
@@ -85,16 +85,7 @@ export class AddAccountComponent implements OnInit {
     code: '',
     text: 'Select Gender',
   }
-  genders = [
-    {
-      code: 'm',
-      text: 'Male',
-    },
-    {
-      code: 'f',
-      text: 'Female',
-    }
-  ];
+  genders = Genders;
 
 
 
@@ -104,7 +95,7 @@ export class AddAccountComponent implements OnInit {
 
   mainAccountInfo: Account = {
     id: 0,
-    accountId: '',
+    accountID: '',
     accountName: '',
     accountBalance: 0,
     accountType: '',
@@ -139,6 +130,7 @@ export class AddAccountComponent implements OnInit {
         otherPhoneNumber: ['', Validators.required],
         gender: new FormControl(),
         remark: [''],
+        address: [''],
         identifyID: [''],
         userName: [
           '',
@@ -162,13 +154,13 @@ export class AddAccountComponent implements OnInit {
 
    get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
-  }
+   }
 
   ngOnInit(): void {
     if(this.modal.message) {
       this.mainAccountInfo = this.modal.message.accountInfo;
       this.openAccounttype = this.modal.message.openAccount;
-      this.currentAccount = PipeUtils.account(this.mainAccountInfo.accountId) + ','+ this.mainAccountInfo.accountName;
+      this.currentAccount = PipeUtils.account(this.mainAccountInfo.accountID) + ','+ this.mainAccountInfo.accountName;
     }
 
     const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
@@ -426,7 +418,8 @@ export class AddAccountComponent implements OnInit {
         password: data.password,
         accountType: this.openAccounttype,
         currency: 'KH',
-        mainAccountID: this.mainAccountInfo.id
+        mainAccountID: this.mainAccountInfo.id,
+        address: data.address
       };
       createAccount.identifyInformation = {
         identifyID: data.identifyID,
