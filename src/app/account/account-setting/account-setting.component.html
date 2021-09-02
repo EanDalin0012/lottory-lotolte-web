@@ -7,77 +7,83 @@
           <div class="page-header">
               <div class="row">
                   <div class="col-sm-12">
-                      <h3 class="page-title">{{'Account.Label.accountSettings' | translate}}</h3>
+                      <h3 class="page-title">{{'Account.Label.AccountSettings' | translate}}</h3>
                   </div>
               </div>
           </div>
           <!-- /Page Header -->
 
-          <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">
-                  {{'Account.Label.accountID' | translate}}
-                  <span class="text-danger">*</span>
-                </label>
-                <input disabled  type="text" [ngClass]="accountId? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="accountId" placeholder="{{'Account.Holder.enterAccountID' | translate}}">
-            </div>
-            <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">
-                  {{'Account.Label.accountName' | translate}}
-                  <span class="text-danger">*</span>
-                </label>
-                <input type="text" [ngClass]="accountName? 'active-input' : ''" class=" form-control font-khmer-cursive" [(ngModel)]="accountName" placeholder="{{'Account.Holder.enterAccountName' | translate}}">
-                <div class="in_box">
-                  <button (click)="isEmpty('n')" type="button" [ngClass]="accountName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
-                </div>
-
-                <div *ngIf="accountName === '' || accountName === null">
-                  <small class="text-danger">{{'Account.Message.accountNameRequired' | translate}}</small>
-                </div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">
-                  {{'Account.Label.accountBalance' | translate}}
-                  <span class="text-danger">*</span>
-                </label>
-                <input disabled  type="text" [ngClass]="accountBalaceDisplay? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" [(ngModel)]="accountBalaceDisplay" placeholder="{{'Account.Holder.enterAccountBalance' | translate}}">
-            </div>
-            <div class="form-group col-md-6">
-                <label class="font-khmer-cursive">
-                  {{'Account.Label.accountStatus' | translate}}
-                  <span class="text-danger">*</span>
-                </label>
-                <kendo-dropdownlist (valueChange)="onChangeStatus($event)" [data]="accountStatus" [filterable]="true" [textField]="'text'" [valueField]="'value'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="status" [ngModelOptions]="{standalone:
-                  true}" [defaultItem]="defaultAccountStatus">
-                      <ng-template kendoDropDownListValueTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
-                      </ng-template>
-                      <ng-template kendoDropDownListItemTemplate let-dataItem>
-                          <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
-                      </ng-template>
-                  </kendo-dropdownlist>
-                  <div *ngIf="otherStatus === true">
-                    <small class="text-danger"> {{'Account.Message.accountStatusRequired' | translate}}</small>
+          <form [formGroup]="form">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">
+                    {{'Account.Label.AccountID' | translate}}
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input formControlName="accountID"  type="text" [ngClass]="form.getRawValue().accountID? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive"  placeholder="{{'Account.Holder.EnterAccountID' | translate}}">
+              </div>
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">
+                    {{'Account.Label.AccountName' | translate}}
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input formControlName="accountName" type="text" [ngClass]="form.getRawValue().accountName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterAccountName' | translate}}">
+                  <div class="in_box">
+                    <button (click)="isEmpty('accountName')" type="button" [ngClass]="form.getRawValue().accountName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>
-            </div>
-          </div>
 
-          <div class="form-row">
-            <div class="form-group col-md-12">
-              <label class="font-khmer-cursive">{{'Common.Label.Remark' | translate}}</label>
-              <input  type="text" [ngClass]="remark? 'active-input' : ''" class="form-control font-khmer-cursive" [(ngModel)]="remark" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
-
-              <div class="in_box">
-                  <button (click)="isEmpty('r')" type="button" [ngClass]="remark? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
+                  <div *ngIf="submitted && f.accountName.errors">
+                    <small class="text-danger">{{'Account.Message.AccountNameRequired' | translate}}</small>
+                  </div>
               </div>
             </div>
-          </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">
+                    {{'Account.Label.AccountBalance' | translate}}
+                    <span class="text-danger">*</span>
+                  </label>
+                  <input formControlName="accountBalace" type="text" [ngClass]="form.getRawValue().accountBalace? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterAccountBalance' | translate}}">
+              </div>
+
+              <div class="form-group col-md-6">
+                  <label class="font-khmer-cursive">
+                    {{'Account.Label.AccountStatus' | translate}}
+                    <span class="text-danger">*</span>
+                  </label>
+                  <kendo-dropdownlist (valueChange)="onChangeStatus($event)" [data]="accountStatus" [filterable]="true" [textField]="'text'" [valueField]="'value'" [kendoDropDownFilter]="filterSettings" [popupSettings]="{ popupClass: 'search_filter_pop' }" [(ngModel)]="status" [ngModelOptions]="{standalone:
+                    true}" [defaultItem]="defaultAccountStatus">
+                        <ng-template kendoDropDownListValueTemplate let-dataItem>
+                            <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
+                        </ng-template>
+                        <ng-template kendoDropDownListItemTemplate let-dataItem>
+                            <span class="template font-khmer-cursive">{{ dataItem.text}}</span>
+                        </ng-template>
+                    </kendo-dropdownlist>
+                    <div *ngIf="otherStatus === true">
+                      <small class="text-danger"> {{'Account.Message.AccountStatusRequired' | translate}}</small>
+                    </div>
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-12">
+                <label class="font-khmer-cursive">{{'Common.Label.Remark' | translate}}</label>
+                <input formControlName="remark" type="text" [ngClass]="form.getRawValue().remark? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
+
+                <div class="in_box">
+                    <button (click)="isEmpty('remark')" type="button" [ngClass]="form.getRawValue().remark? 'btn_del' : ''"  class="btn"></button>
+                </div>
+              </div>
+            </div>
+
+          </form>
 
           <div class="submit-section">
-            <button  class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 150px;">
+            <button (click)="save()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 150px;">
               <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
               <span class="font-weigh-700 margin-left-5px">{{'Common.Button.Save' | translate}}</span>
             </button>

@@ -1,11 +1,12 @@
 import { TranslateService } from '@ngx-translate/core';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AccountStatus } from 'src/app/shares/constants/common.const';
 import { StatusAccount } from '../../shares/model/account-status';
 import { DropDownFilterSettings } from '@progress/kendo-angular-dropdowns';
 import { Utils } from '../../shares/utils/utils.static';
 import { Account } from 'src/app/shares/model/account';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
+import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-account-setting',
@@ -14,14 +15,10 @@ import { PipeUtils } from '../../shares/utils/pipe-utils';
 })
 export class AccountSettingComponent implements OnInit {
 
-  id: number = 0;
-  accountId: string = '';
-  accountName: string = '';
-  accountBalace: number = 0;
+
+  @ViewChild("firstName") inputFirstName: any;
+
   accountBalaceDisplay = '';
-  currency: string = '';
-  accountType: string = '';
-  _status: string = '';
   remark: string = '';
   accountStatus: StatusAccount[] = [];
   otherStatus = false;
@@ -30,7 +27,7 @@ export class AccountSettingComponent implements OnInit {
     value: ''
   };
   defaultAccountStatus:StatusAccount = {
-    text: this.translateService.instant('Account.Label.selectAccountStatus'),
+    text: this.translateService.instant('Account.Label.SelectAccountStatus'),
     value: ''
   };
   filterSettings: DropDownFilterSettings = {
@@ -38,10 +35,23 @@ export class AccountSettingComponent implements OnInit {
     operator: 'startsWith'
   };
 
-
+  submitted = false;
+  form: any;
+  accountInfo: Account = {
+    id: 0,
+    accountID: '',
+    accountName: '',
+    accountBalance: 0,
+    accountType: '',
+    status:'',
+    currency: ''
+  };
   constructor(
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private formBuilder: FormBuilder,
   ) {
+    this.form as FormGroup;
+
     this.accountStatus = [
       {
         text: 'Active',
@@ -52,22 +62,26 @@ export class AccountSettingComponent implements OnInit {
         value: AccountStatus.Inactive
       }
     ];
+
+    this.form = this.formBuilder.group({
+      accountName: ['', Validators.required],
+      accountID: [{value: '', disabled: true}, Validators.required],
+      accountBalace: [{value: '', disabled: true}, Validators.required],
+      status: new FormControl(),
+      remark: ['']
+    });
+
    }
 
   ngOnInit(): void {
-    console.log('StoreUtil', Utils.getSecureStorage('account-setting'));
-    const accountInfo = Utils.getSecureStorage('account-setting') as Account;
-    this.accountId = PipeUtils.account(accountInfo.accountID); ;
-    this.accountName = accountInfo.accountName;
-    this._status = accountInfo.status;
-    this.id = accountInfo.id;
-    this.accountBalace = accountInfo.accountBalance ;
-    this.accountBalaceDisplay = accountInfo.accountBalance + ' '+accountInfo.currency;
-    this.checkStatus(accountInfo.status);
-  }
+    this.accountInfo = Utils.getSecureStorage('account-setting') as Account;
 
-  submitCompany() {
-
+    this.form.patchValue({
+      accountName: this.accountInfo.accountName,
+      accountID: PipeUtils.account(this.accountInfo.accountID),
+      accountBalace: PipeUtils.accountBalance(this.accountInfo.accountBalance, this.accountInfo.currency) + ' ' + this.accountInfo.currency
+    });
+    this.checkStatus(this.accountInfo.status);
   }
 
   onChangeStatus(event: any) {
@@ -88,14 +102,34 @@ export class AccountSettingComponent implements OnInit {
         break;
     }
   }
+
   isEmpty(value: string) {
     switch (value) {
-      case 'n':
-        this.accountName = '';
+      case 'accountName':
+        this.form.patchValue({
+          accountName: ''
+        });
         break;
-      case 'r':
-        this.remark = '';
+      case 'remark':
+        this.form.patchValue({
+          remark: ''
+        });
         break;
     }
   }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
+  }
+
+  save() {
+    this.submitted = true;
+    if(this.status.value === '') {
+      alert();
+    }
+    if(this.f.firstName.errors) {
+      this.inputFirstName.nativeElement.focus();
+    }
+  }
+
 }

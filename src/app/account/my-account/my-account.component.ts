@@ -106,7 +106,6 @@ export class MyAccountComponent implements OnInit {
       processing: true
     };
     this.dataService.viewNewAccountCloseData.subscribe(message => {
-      this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
       if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Seniar) {
         this.inquiry();
       }

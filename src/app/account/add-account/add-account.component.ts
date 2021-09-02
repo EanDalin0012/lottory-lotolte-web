@@ -111,7 +111,6 @@ export class AddAccountComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private el: ElementRef,
-    private notificationService: NotificationService,
     private hTTPService: HTTPService,
   ) {
     this.baseUrl = environment.bizServer.server;
@@ -431,12 +430,10 @@ export class AddAccountComponent implements OnInit {
       console.log(createAccount);
       const api = this.baseUrl + '/api/account/v0/save';
       this.hTTPService.Post(api,createAccount).then((resposne)=> {
-        console.log('resposne', resposne);
         if( resposne && resposne.result.responseCode !== '200') {
           this.translateErrorServer(resposne.result.responseMessage);
         }
        if(resposne.body != null && resposne.body.status === 'Y' && resposne.result.responseCode === '200') {
-          console.log('resposne', resposne);
           this.close();
           this.modalService.open(
             ShowAddAccountComponent,
@@ -451,8 +448,6 @@ export class AddAccountComponent implements OnInit {
 
     }
 
-    // this.close();
-    // this.viewAccountInfo();
   }
 
   viewAccountInfo() {
@@ -565,6 +560,9 @@ export class AddAccountComponent implements OnInit {
         break;
       case 'Invalid_MainAccountID':
         message = this.translateService.instant('ServerResponseCode.Label.Invalid_MainAccountID');
+        break;
+      case 'User_Had':
+        message = this.translateService.instant('ServerResponseCode.Label.User_Had');
         break;
       case '500':
         message = this.translateService.instant('ServerResponseCode.Label.Server_Error');

@@ -81,10 +81,7 @@ export class SubAccountComponent implements OnInit {
     };
 
     this.dataService.viewNewAccountCloseData.subscribe(message => {
-      this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountSenair);
-      if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Master || AccountTypeCode.Agent) {
-        this.dataService.unsubscribeNewAccountClose();
-        alert();
+      if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Master || message != '' && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Agent) {
         this.inquiry();
       }
     });
@@ -120,7 +117,6 @@ export class SubAccountComponent implements OnInit {
        });
       }
       if(resposne && resposne.result.responseCode === '200') {
-        console.log(resposne);
         this.accounts = resposne.body;
         this.accountDisplays = [];
         if(this.activeTab.index == 0) {

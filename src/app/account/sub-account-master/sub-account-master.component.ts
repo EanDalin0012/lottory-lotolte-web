@@ -12,6 +12,7 @@ import { HTTPService } from '../../shares/services/http.service';
 import { environment } from 'src/environments/environment';
 import { Utils } from '../../shares/utils/utils.static';
 import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
+import { AddAccountComponent } from '../add-account/add-account.component';
 @Component({
   selector: 'app-sub-account-master',
   templateUrl: './sub-account-master.component.html',
@@ -56,6 +57,7 @@ export class SubAccountMasterComponent implements OnInit {
     index: 0,
     class: 'nav-link'
   }
+  accountTypeCode = AccountTypeCode;
 
   constructor(
     private modalService: ModalService,
@@ -70,12 +72,17 @@ export class SubAccountMasterComponent implements OnInit {
     this.titleService.setTitle('Account-Admin');
     this.dtElement as DataTableDirective;
     this.dtOptions = {
-      // ... skipped ...
-      // pageLength: 10,
       dom: "lrtip",
       pageLength: 10,
       processing: true
     };
+
+    this.dataService.viewNewAccountCloseData.subscribe(message => {
+      if(message && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Agent || message != '' && message.close === 'Close_Add_Account' && message.createdAccountType === AccountTypeCode.Member) {
+        this.inquiry();
+      }
+    });
+
    }
 
   ngOnInit(): void {
@@ -96,22 +103,6 @@ export class SubAccountMasterComponent implements OnInit {
   }
 
   inquiry(){
-    // this.accounts = accountMasterAndAgent;
-    // this.accountDisplays = [];
-    // if(this.activeTab.index == 0) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Master == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // } else if (this.activeTab.index == 1) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Agent == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // }
-
 
     const api = this.baseUrl + '/api/sub/account/v0/inquiry';
     // const accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
@@ -157,14 +148,27 @@ export class SubAccountMasterComponent implements OnInit {
     this.srch = [...this.rows];
   }
 
-  newAccount() {
-    // this.modalService.open(
-    //   AddAccountComponent,
-    //   {
-    //   callback: _response => {
+  newAccount(accoutTypeCode: string) {
+    console.log(accoutTypeCode);
 
-    //   }
-    // });
+    let typeCode = '';
+    if(AccountTypeCode.Member === accoutTypeCode) {
+      typeCode = AccountTypeCode.Member
+    } else if (AccountTypeCode.Agent === accoutTypeCode) {
+      typeCode = AccountTypeCode.Agent
+    }
+    this.modalService.open(
+      AddAccountComponent,
+      {
+      message: {
+        openAccount: typeCode,
+        accountInfo: this.accountInfo,
+      },
+      callback: _response => {
+        console.log('_response', _response);
+
+      }
+    });
   }
 
   edit(item: any) {
@@ -193,7 +197,6 @@ export class SubAccountMasterComponent implements OnInit {
   }
 
   onSubAccountRouter(item: Account) {
-    console.log(item);
     this.subAccountRoutorUtil.subAccountRouter(item);
   }
 

@@ -43,7 +43,7 @@ export class DataService {
   }
 
   unsubscribeNewAccountClose() {
-    this.viewNewAccountClose.unsubscribe;
+    this.viewNewAccountClose.complete();
   }
 
 }

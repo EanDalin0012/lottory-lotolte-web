@@ -204,7 +204,8 @@
       "Invalid_Currency":"Account currency is required.",
       "Invalid_Token":"Invalid access token.",
       "UserNameNotFound":"Your user name not found.",
-      "InvalidPassword":"Your password is wrong."
+      "InvalidPassword":"Your password is wrong.",
+      "User_Had":"Your user name ready have."
     }
   }
 }
