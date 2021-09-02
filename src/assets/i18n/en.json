@@ -125,7 +125,9 @@
       "PasswordNoteFirstTime":"Password is generate by system. When user login first time need to change password again. thank",
       "ConfirmPasswordRequired":"*Confirm Password is required",
       "PasswordRequired":"*Password is required",
-      "PasswordReseted":"Your password reseted. Thank you"
+      "PasswordReseted":"Your password reseted. Thank you",
+      "PasswordNotMatch":"Your password not match.",
+      "PasswordChanged":"Password changed"
     },
     "Holder": {
       "EnterAccountID": "Enter account ID",

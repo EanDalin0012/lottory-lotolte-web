@@ -23,4 +23,6 @@ export interface UserInfomation{
   otherPhoneNumber: string;
   createDate: string;
   address: string;
+  isFirstLogin?: string;
+
 }

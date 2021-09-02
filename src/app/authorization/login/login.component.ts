@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccountTypeCode, LOCAL_STORAGE } from '../../shares/constants/common.const';
 import { DataService } from '../../shares/services/data.service';
-import { Utils } from '../../shares/utils/utils.static';
 import { AuthentcatiionService, AuthentcatiionRequest } from '../../shares/services/authentcatiion.service';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ModalService } from '../../shares/services/modal.service';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   @ViewChild("userName") inputUserName: any;
   @ViewChild("password") inputPassword: any;
+  isFirstLogin = false;
 
   formLogin: any;
   constructor(
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     private authentcatiionService: AuthentcatiionService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private modalService: ModalService,
     ) {
       this.formLogin as FormGroup;
       this.inputUserName as ElementRef;
@@ -73,7 +75,15 @@ export class LoginComponent implements OnInit {
       };
       this.authentcatiionService.login(logInfo).then((result: any) => {
         if(result) {
-          this.routors();
+          console.log(result);
+          this.isFirstLogin = result.userInfo.isFirstLogin;
+          if(this.isFirstLogin == false) {
+            this.routors();
+          } else {
+            this.changePassword(result.userInfo);
+          }
+          console.log(this.isFirstLogin);
+          // this.routors();
         }
       }).catch((err: any) => {
           console.log(err);
@@ -84,5 +94,16 @@ export class LoginComponent implements OnInit {
 
   get f(): { [key: string]: AbstractControl } {
     return this.formLogin.controls;
+  }
+
+  changePassword(item: any) {
+    this.modalService.open(
+      ChangePasswordComponent,
+      {
+        message: item,
+        callback: _response => {
+
+      }
+    });
   }
 }

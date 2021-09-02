@@ -33,6 +33,8 @@ export class AuthentcatiionService {
         if (response.access_token) {
           Utils.setSecureStorage(LOCAL_STORAGE.Authorization, response);
           this.loadUserByUserName(auth.user_name, response.access_token).then((result) => {
+            console.log( result.userInfo);
+
             if (result) {
               Utils.setSecureStorage(LOCAL_STORAGE.USER_INFO, result.userInfo);
               Utils.setSecureStorage(LOCAL_STORAGE.Account_Info, result.accountInfo);

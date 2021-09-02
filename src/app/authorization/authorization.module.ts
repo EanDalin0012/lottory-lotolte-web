@@ -4,13 +4,15 @@ import { AuthorizationComponent } from './authorization/authorization.component'
 import { LoginComponent } from './login/login.component';
 import { AuthorizationRoutingModule } from './authorization-routing.module';
 import { MshareModule } from '../shares/mshare/mshare.module';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
 @NgModule({
   declarations: [
     AuthorizationComponent,
-    LoginComponent
+    LoginComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,
