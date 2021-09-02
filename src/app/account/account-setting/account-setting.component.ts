@@ -7,6 +7,7 @@ import { Utils } from '../../shares/utils/utils.static';
 import { Account } from 'src/app/shares/model/account';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { ModalService } from '../../shares/services/modal.service';
 
 @Component({
   selector: 'app-account-setting',
@@ -16,7 +17,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from
 export class AccountSettingComponent implements OnInit {
 
 
-  @ViewChild("firstName") inputFirstName: any;
+  @ViewChild("accountName") inputAccountName: any;
 
   accountBalaceDisplay = '';
   remark: string = '';
@@ -49,6 +50,7 @@ export class AccountSettingComponent implements OnInit {
   constructor(
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
+    private modalService: ModalService,
   ) {
     this.form as FormGroup;
 
@@ -125,11 +127,40 @@ export class AccountSettingComponent implements OnInit {
   save() {
     this.submitted = true;
     if(this.status.value === '') {
-      alert();
+      this.otherStatus = true;
+    } else if(this.f.accountName.errors) {
+      this.inputAccountName.nativeElement.focus();
+    } else {
+      const data = this.form.getRawValue();
+      console.log(data, this.status);
+
     }
-    if(this.f.firstName.errors) {
-      this.inputFirstName.nativeElement.focus();
+  }
+
+  translateErrorServer(tran: string) {
+    let message = '';
+
+    switch(tran) {
+      case 'Invalid_Account_Satus':
+        message = this.translateService.instant('Account.Message.AccountStatusRequired');
+        break;
+      case 'Invalid_LastName':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_LastName');
+        break;
+      case '500':
+        message = this.translateService.instant('ServerResponseCode.Label.Server_Error');
+        break;
     }
+    this.modalService.alert(
+      message,
+     {
+     modalClass: 'open-alert',
+     btnText: this.translateService.instant('Common.Button.Confirme'),
+     callback: res => {
+
+     }
+   });
+
   }
 
 }

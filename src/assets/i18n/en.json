@@ -109,8 +109,10 @@
       "Address":"Address",
       "UpatePersonalInformation":"Update Personal Information",
       "UpateAccountInformation":"Update Account Information",
-      "ResetPassword":"Reset Password"
-
+      "ResetPassword":"Reset Password",
+      "YourAccount":"Your Account",
+      "WithdrawalCashOut":"Withdrawal Cash Out",
+      "DepositMoney":"Deposit Money"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
@@ -127,7 +129,10 @@
       "PasswordRequired":"*Password is required",
       "PasswordReseted":"Your password reseted. Thank you",
       "PasswordNotMatch":"Your password not match.",
-      "PasswordChanged":"Password changed"
+      "PasswordChanged":"Password changed",
+      "AcountBalance0":"Your acount balance is zero.",
+      "AmountRequire":"*Amount is required.",
+      "AmountOverZero":"Amount must be over zero"
     },
     "Holder": {
       "EnterAccountID": "Enter account ID",

@@ -6,11 +6,8 @@ import { AddAccountComponent } from './add-account/add-account.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
 import { MshareModule } from '../shares/mshare/mshare.module';
 import { AccountRoutingModule } from './account-routing.module';
-import { AgGridModule } from 'ag-grid-angular';
 import { DataTablesModule } from 'angular-datatables';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
-import { AccountDepositComponent } from './account-deposit/account-deposit.component';
-import { AccountWithdrawalComponent } from './account-withdrawal/account-withdrawal.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { AccountSettingComponent } from './account-setting/account-setting.component';
@@ -23,6 +20,8 @@ import { ShowAddAccountComponent } from './show-add-account/show-add-account.com
 import { EditPersonalInfoComponent } from './edit-personal-info/edit-personal-info.component';
 import { EditAccountInfoComponent } from './edit-account-info/edit-account-info.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AccountDepositMoneyComponent } from './account-deposit-money/account-deposit-money.component';
+import { AccountWithdrawalCashOutComponent } from './account-withdrawal-cash-out/account-withdrawal-cash-out.component';
 
 
 
@@ -33,8 +32,6 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AddAccountComponent,
     EditAccountComponent,
     AccountProfileComponent,
-    AccountDepositComponent,
-    AccountWithdrawalComponent,
     AccountDetailsComponent,
     MyAccountComponent,
     AccountSettingComponent,
@@ -46,7 +43,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ShowAddAccountComponent,
     EditPersonalInfoComponent,
     EditAccountInfoComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    AccountDepositMoneyComponent,
+    AccountWithdrawalCashOutComponent
   ],
   imports: [
     CommonModule,

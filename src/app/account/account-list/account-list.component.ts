@@ -9,9 +9,7 @@ import { accountDatas } from './account-data';
 import { Account } from 'src/app/shares/model/account';
 import { Utils } from '../../shares/utils/utils.static';
 import { LOCAL_STORAGE } from '../../shares/constants/common.const';
-import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
-import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { Router } from '@angular/router';
 import { StoreUtil } from '../../shares/utils/store';
 import { HTTPService } from '../../shares/services/http.service';
@@ -126,25 +124,25 @@ export class AccountListComponent implements OnInit {
   }
 
   deposit(value:any) {
-    this.modalService.open(
-      AccountDepositComponent,
-      {
-        message: value,
-        callback: _response => {
+    // this.modalService.open(
+    //   AccountDepositComponent,
+    //   {
+    //     message: value,
+    //     callback: _response => {
 
-      }
-    });
+    //   }
+    // });
   }
 
   withdrawal(value:any) {
-    this.modalService.open(
-      AccountWithdrawalComponent,
-      {
-        message: value,
-        callback: _response => {
+    // this.modalService.open(
+    //   AccountWithdrawalComponent,
+    //   {
+    //     message: value,
+    //     callback: _response => {
 
-      }
-    });
+    //   }
+    // });
   }
 
   newAccount() {

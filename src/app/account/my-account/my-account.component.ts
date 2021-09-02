@@ -14,11 +14,11 @@ import { LOCAL_STORAGE, AccountTypeCode } from '../../shares/constants/common.co
 import { DeviceInfo } from '../../shares/model/device-detector';
 import { ModalService } from '../../shares/services/modal.service';
 import { TranslateService } from '@ngx-translate/core';
-import { AccountDepositComponent } from '../account-deposit/account-deposit.component';
-import { AccountWithdrawalComponent } from '../account-withdrawal/account-withdrawal.component';
 import { AddAccountComponent } from '../add-account/add-account.component';
 import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
+import { AccountDepositMoneyComponent } from '../account-deposit-money/account-deposit-money.component';
+import { AccountWithdrawalCashOutComponent } from '../account-withdrawal-cash-out/account-withdrawal-cash-out.component';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -160,9 +160,9 @@ export class MyAccountComponent implements OnInit {
     this.router.navigate(['/acc/account-setting']);
   }
 
-  deposit(value:any) {
+  withdrawalCashOut(value:any) {
     this.modalService.open(
-      AccountDepositComponent,
+      AccountWithdrawalCashOutComponent,
       {
         message: value,
         callback: _response => {
@@ -171,15 +171,21 @@ export class MyAccountComponent implements OnInit {
     });
   }
 
-  withdrawal(value:any) {
-    this.modalService.open(
-      AccountWithdrawalComponent,
-      {
-        message: value,
-        callback: _response => {
+  depositMoney(value:Account) {
+    console.log(value);
+    if(this.accountInfo.accountBalance <= 0 ) {
+        this.message('Invalid_Balance');
+    } else {
+      this.modalService.open(
+        AccountDepositMoneyComponent,
+        {
+          message: value,
+          callback: _response => {
 
-      }
-    });
+        }
+      });
+    }
+
   }
 
   newAccount() {
@@ -234,5 +240,30 @@ export class MyAccountComponent implements OnInit {
           this.activeTab.index = 5;
           break;
       }
+  }
+
+  message(value: string) {
+    let message = '';
+
+    switch(value) {
+      case 'Invalid_Balance':
+        message = this.translate.instant('Account.Message.AcountBalance0');
+        break;
+      case 'Invalid_LastName':
+        message = this.translate.instant('ServerResponseCode.Label.Invalid_LastName');
+        break;
+      case '500':
+        message = this.translate.instant('ServerResponseCode.Label.Server_Error');
+        break;
+    }
+    this.modalService.alert(
+      message,
+     {
+     modalClass: 'open-alert',
+     btnText: this.translate.instant('Common.Button.Confirme'),
+     callback: res => {
+
+     }
+   });
   }
 }

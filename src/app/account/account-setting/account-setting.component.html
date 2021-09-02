@@ -27,7 +27,7 @@
                     {{'Account.Label.AccountName' | translate}}
                     <span class="text-danger">*</span>
                   </label>
-                  <input formControlName="accountName" type="text" [ngClass]="form.getRawValue().accountName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterAccountName' | translate}}">
+                  <input #accountName formControlName="accountName" type="text" [ngClass]="form.getRawValue().accountName? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterAccountName' | translate}}">
                   <div class="in_box">
                     <button (click)="isEmpty('accountName')" type="button" [ngClass]="form.getRawValue().accountName? 'btn_del' : ''" tabindex=-1 class="btn" tabindex=-1 tabindex=-1></button>
                   </div>

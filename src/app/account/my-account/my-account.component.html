@@ -151,20 +151,20 @@
                           <a class="action-icon dropdown-toggle cursor-pointer" data-toggle="dropdown" aria-expanded="false">
                             <i class="material-icons">more_vert</i>
                           </a>
-                          <div class="dropdown-menu dropdown-menu-right" style="width: 160px;">
+                          <div class="dropdown-menu dropdown-menu-right" style="width: 175px;">
                               <a (click)="setting(item)" class="dropdown-item" href="javascript:">
                                 <i class="la la-cog font-size-1-50rem"></i>
                                 {{'Common.Label.Setting' | translate}}
                               </a>
 
-                              <a class="dropdown-item" href="javascript:" (click)="deposit(item)">
+                              <a class="dropdown-item" href="javascript:" (click)="withdrawalCashOut(item)">
                                 <i class="pi pi-wallet font-size-1-50rem"></i>
-                                {{'Common.Label.DepositCashOut' | translate}}
+                                {{'Account.Label.WithdrawalCashOut' | translate}}
                               </a>
 
-                              <a class="dropdown-item" href="javascript:" (click)="withdrawal(item)">
+                              <a class="dropdown-item" href="javascript:" (click)="depositMoney(item)">
                                 <i class="pi pi-wallet font-size-1-50rem"></i>
-                                {{'Common.Label.WithDrawalMoney' | translate}}
+                                {{'Account.Label.DepositMoney' | translate}}
                               </a>
 
                               <a class="dropdown-item cursor-pointer" href="javascript:" (click)="details(item)">
