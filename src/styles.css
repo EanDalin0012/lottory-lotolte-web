@@ -9700,3 +9700,36 @@ body>.loading {
 .avatar-01 div.avatar-content {
   margin-right: 5px;
 }
+
+
+.notification-container {
+  width: 100%;
+  height: 180px;
+  border: 1px solid #ddd !important;
+  margin-bottom: 25px;
+  margin-top: 50px !important;
+  z-index: 99999;
+  position: fixed;
+}
+
+.k-notification-group {
+  top: 65px !important;
+}
+
+kendo-notification-container div.k-notification-group kendo-notification div.k-notification{
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgb(255, 255, 255);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNjMwIiBoZWlnaHQ9Ijk2IiB2aWV3Qm94PSIwIDAgMTYzMCA5NiI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJiIiB4MT0iLjUxMiIgeTE9Ii4yMjUiIHgyPSIuNDgzIiB5Mj0iMS44MjQiIGdyYWRpZW50VW5pdHM9Im9iamVjdEJvdW5kaW5nQm94Ij48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM2OGExZWYiIHN0b3Atb3BhY2l0eT0iLjMwNiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFiNzRjMSIgc3RvcC1vcGFjaXR5PSIuNjk4Ii8+PC9saW5lYXJHcmFkaWVudD48bGluZWFyR3JhZGllbnQgaWQ9ImMiIHgxPSIuNTgxIiB5MT0iLjI1MSIgeDI9Ii40ODIiIHkyPSIxLjk0MyIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzg0YWZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzQ0OTRkMCIgc3RvcC1vcGFjaXR5PSIuNjk4Ii8+PC9saW5lYXJHcmFkaWVudD48Y2xpcFBhdGggaWQ9ImEiPjxwYXRoIGQ9Ik0wIDBoMTYzMHY5NkgweiIgZmlsbD0iIzUzOTJlNCIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNhKSI+PHBhdGggZD0iTS03NDkyLjYzNS04NzMzLjE1NmMtMTQuNjc1LjAxLTE3LjE3OSA0LjQtNTYuMjc0LTE0LjY3NXMtMjQ2LjA4Mi0xMTkuODI2LTI0Ni4wODItMTE5LjgyNnYzNDMuNTcybDE2MzAuMjEzLjA2MS0uMDIxLTM3NS4zMTlzLTQzOC44MTYgMjc4LjE1LTQ2Ny41OCAyOTcuNjgyYy0zNi41NDggMjQuODE2LTU4LjI4NyAyMy41MzEtOTkuNDczIDguMDE0cy0yOTAuODYtMTE0LjAyLTMxNi43My0xMjMuNDEtMzYuNy0xNS45NjMtNjIuODc3LTE2LjAxNS0zNjYuNS0uMDkzLTM4MS4xNzYtLjA4NHoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDc3OTUuMDAxIDg2MjAuMjI4KSIgb3BhY2l0eT0iLjU5OCIgZmlsbD0idXJsKCNiKSIvPjxwYXRoIGQ9Ik0tNzc5Mi04NTY5Ljc3M3MyMDQuNzI5LTE4MC41MyAyMzkuMjYyLTIxMi44MTggNTkuMDQ3LTI4LjY1MyA4MS4yNjgtMjkuMzYgMzU2LjI4NyAwIDM1Ni4yODcgMCAyNy4wNDctMi44MjkgNTkuMTgzIDkuODMgMjkzLjQ1NiAxMDIuOTI1IDI5My40NTYgMTAyLjkyNSAzMS44MiAxMS41NiA2NC40NDktOS4xNjQgMTM0LjQtODkuMjgxIDE2Ny4yMzQtMTA4LjI3MiA0Ni4yNjktMTQuMjEzIDEwMi43NTQtNy40OTMgMjY2LjA4MyAyNy41MDggMjY2LjA4MyAyNy41MDhsLjM1IDI0Ni4xNzlMLTc3OTItODU1MC41eiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzc5Mi4wMDEgODgyMi4yMjgpIiBvcGFjaXR5PSIuMTU0IiBmaWxsPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTAgMGgxNjMwdjk2SDB6IiBmaWxsPSIjNTM5MmU0IiBvcGFjaXR5PSIuMiIvPjwvZz48L3N2Zz4=);
+}
+
+kendo-notification-container div.k-notification-group kendo-notification div.k-notification div.k-notification-wrap{
+  background: transparent !important;
+}
+.k-notification-content {
+  background: transparent;
+  font-size: 1.50rem !important;
+  color: #000003;
+  font-weight: 500;
+}

@@ -19,6 +19,7 @@ import { SubAccountRoutorUtil } from '../../shares/utils/sub-accunt-routor';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 import { AccountDepositMoneyComponent } from '../account-deposit-money/account-deposit-money.component';
 import { AccountWithdrawalCashOutComponent } from '../account-withdrawal-cash-out/account-withdrawal-cash-out.component';
+import { NotificService } from '../../shares/services/notific.service';
 @Component({
   selector: 'app-my-account',
   templateUrl: './my-account.component.html',
@@ -92,6 +93,7 @@ export class MyAccountComponent implements OnInit {
     private modalService: ModalService,
     private hTTPService: HTTPService,
     private translate: TranslateService,
+    private notificService: NotificService
   ) {
     this.baseUrl = environment.bizServer.server;
     const url = (window.location.href).split('/');
@@ -110,6 +112,8 @@ export class MyAccountComponent implements OnInit {
         this.inquiry();
       }
     });
+
+
   }
 
   ngOnInit(): void {
@@ -151,6 +155,7 @@ export class MyAccountComponent implements OnInit {
 }
 
   onTab(index: number) {
+    this.notificService.showTopRight('Hi! I am info notification with position set to', 'success');
     this.activeTab.index = index;
   }
 

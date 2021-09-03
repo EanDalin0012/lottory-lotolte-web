@@ -17,9 +17,7 @@ export class ModalService {
   i = 0;
   constructor(
     private dialogService: DialogService,
-    private modalData: ModalDataService,
-    private translate: TranslateService,
-    private notificationService: NotificationService
+    private modalData: ModalDataService
   ) { }
 
   /**
@@ -236,33 +234,33 @@ export class ModalService {
     });
   }
 
-  showNotificationService(content: string, duration?: number, cssClass?: string, closable?:boolean) {
-    console.log('cssClass',cssClass);
-    let css = cssClass;
-    let close = closable;
-    let time = 400;
-    if(duration) {
-      time = duration;
-    }
-    if(closable == undefined) {
-      close = false;
-    }
-    if(cssClass === undefined) {
-      css = '';
-    }
+  // showNotificationService(content: string, duration?: number, cssClass?: string, closable?:boolean) {
+  //   console.log('cssClass',cssClass);
+  //   let css = cssClass;
+  //   let close = closable;
+  //   let time = 400;
+  //   if(duration) {
+  //     time = duration;
+  //   }
+  //   if(closable == undefined) {
+  //     close = false;
+  //   }
+  //   if(cssClass === undefined) {
+  //     css = '';
+  //   }
 
-    if(content) {
-      this.notificationService.show({
-        content: content,
-        cssClass: css,
-        animation: { type: 'slide', duration: time },
-        position: { horizontal: 'center', vertical: 'bottom' },
-        type: { style: 'success', icon: true },
-        closable: close
-      });
-    }
+  //   if(content) {
+  //     this.notificationService.show({
+  //       content: content,
+  //       cssClass: css,
+  //       animation: { type: 'slide', duration: time },
+  //       position: { horizontal: 'center', vertical: 'bottom' },
+  //       type: { style: 'success', icon: true },
+  //       closable: close
+  //     });
+  //   }
 
-  }
+  // }
 
   closeAllDialog() {
     const modalStore = StoreUtil.get(MODAL_STORE_KEY.MODAL_STORE_KEY) as DialogRef[];
