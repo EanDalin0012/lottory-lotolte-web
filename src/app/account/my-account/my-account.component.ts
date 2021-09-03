@@ -155,7 +155,6 @@ export class MyAccountComponent implements OnInit {
 }
 
   onTab(index: number) {
-    this.notificService.showTopRight('Hi! I am info notification with position set to', 'success');
     this.activeTab.index = index;
   }
 
@@ -186,6 +185,14 @@ export class MyAccountComponent implements OnInit {
         {
           message: value,
           callback: _response => {
+            console.log('_response', _response);
+
+            if(_response != null && _response.responseCode != null &&_response.responseCode === '200') {
+              this.inquiry();
+              this.notificService.showTopRight('Deposit Money Success', 'success');
+            } else if (_response && _response != null &&_response.close != null &&_response.close === '500' && _response.responseCode != null && _response.responseCode === '500') {
+              this.notificService.showTopRight('Deposit Money Error', 'error');
+            }
 
         }
       });

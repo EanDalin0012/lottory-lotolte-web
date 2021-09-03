@@ -95,7 +95,7 @@
       "DateBirth":"Date of Birth",
       "PhoneNumber":"Phone Number",
       "OtherPhoneNumber":"Other Phone Number",
-      "CreateNewSeniarAccount":"Create New Seniar Account",
+      "CreateNewSeniarAccount":"Create New Account",
       "PersonalInformations":"Personal Informations",
       "UserAccount":"User Account",
       "UserName":"User Name",
@@ -115,7 +115,8 @@
       "YourAccount":"Your Account",
       "WithdrawalCashOut":"Withdrawal Cash Out",
       "DepositMoney":"Deposit Money",
-      "CashOutFromAccount":"Cash Out From Account"
+      "CashOutFromAccount":"Cash Out From Account",
+      "Currency":"Currency"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
@@ -135,7 +136,8 @@
       "PasswordChanged":"Password changed",
       "AcountBalance0":"Your acount balance is zero.",
       "AmountRequire":"*Amount is required.",
-      "AmountOverZero":"Amount must be over zero"
+      "AmountOverZero":"Amount must be over zero",
+      "AccountBalanceNotEnough":"Your account balance is not an enough amount."
     },
     "Holder": {
       "EnterAccountID": "Enter account ID",
@@ -215,7 +217,9 @@
       "InvalidPassword":"Your password is wrong.",
       "User_Had":"Your user name ready have.",
       "Invalid_AccountID":"Your Account ID Invalid.",
-      "Invalid_AccountStatus":"Invalid account status."
+      "Invalid_ToAccountID":"To account ID Invalid.",
+      "Invalid_AccountStatus":"Invalid account status.",
+      "Require_Amount":"Amount is required"
     }
   }
 }

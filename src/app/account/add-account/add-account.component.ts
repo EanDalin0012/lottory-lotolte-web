@@ -157,7 +157,7 @@ export class AddAccountComponent implements OnInit {
     if(this.modal.message) {
       this.mainAccountInfo = this.modal.message.accountInfo;
       this.openAccounttype = this.modal.message.openAccount;
-      this.currentAccount = PipeUtils.account(this.mainAccountInfo.accountID) + ','+ this.mainAccountInfo.accountName;
+      this.currentAccount = PipeUtils.account(this.mainAccountInfo.accountID) + ' - '+ this.mainAccountInfo.accountName;
     }
 
     const account_type = Utils.getSecureStorage(LOCAL_STORAGE.AccountTypeCode);
