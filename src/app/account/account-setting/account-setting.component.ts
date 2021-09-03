@@ -8,7 +8,9 @@ import { Account } from 'src/app/shares/model/account';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
 import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ModalService } from '../../shares/services/modal.service';
-
+import { HTTPService } from '../../shares/services/http.service';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-account-setting',
   templateUrl: './account-setting.component.html',
@@ -16,6 +18,7 @@ import { ModalService } from '../../shares/services/modal.service';
 })
 export class AccountSettingComponent implements OnInit {
 
+  private baseUrl: string = '';
 
   @ViewChild("accountName") inputAccountName: any;
 
@@ -51,7 +54,10 @@ export class AccountSettingComponent implements OnInit {
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
     private modalService: ModalService,
+    private hTTPService: HTTPService,
+    private router: Router,
   ) {
+    this.baseUrl = environment.bizServer.server;
     this.form as FormGroup;
 
     this.accountStatus = [
@@ -132,8 +138,22 @@ export class AccountSettingComponent implements OnInit {
       this.inputAccountName.nativeElement.focus();
     } else {
       const data = this.form.getRawValue();
-      console.log(data, this.status);
+      const dataInfo = {
+        accountID: this.accountInfo.accountID,
+        status: this.status.value,
+        id: this.accountInfo.id,
+        remark: data.remark
+      };
+      const api = this.baseUrl + '/api/account/v0/disable-account';
+      this.hTTPService.Post(api,dataInfo).then((resposne)=> {
+        if( resposne && resposne.result.responseCode !== '200') {
+          this.translateErrorServer(resposne.result.responseMessage);
+        }
+       if(resposne.body != null && resposne.result.responseCode === '200' && resposne.body.responseCode === '200') {
+        this.router.navigate(['/acc/my-account']);
+       }
 
+     });
     }
   }
 
@@ -141,11 +161,11 @@ export class AccountSettingComponent implements OnInit {
     let message = '';
 
     switch(tran) {
-      case 'Invalid_Account_Satus':
-        message = this.translateService.instant('Account.Message.AccountStatusRequired');
+      case 'Invalid_AccountID':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_AccountID');
         break;
-      case 'Invalid_LastName':
-        message = this.translateService.instant('ServerResponseCode.Label.Invalid_LastName');
+      case 'Invalid_AccountStatus':
+        message = this.translateService.instant('ServerResponseCode.Label.Invalid_AccountStatus');
         break;
       case '500':
         message = this.translateService.instant('ServerResponseCode.Label.Server_Error');

@@ -65,7 +65,7 @@ export function createTranslateLoader(http: HttpClient) {
 })
 export class AppModule {
   constructor(
-    private deviceService: DeviceDetectorService,
+
     private jsonipService: JsonipService,
     ) {
       this.jsonipService.jsonIp().then((result) => {
@@ -73,19 +73,5 @@ export class AppModule {
       }).catch((err) => {
 
       });
-      const data = this.deviceService.getDeviceInfo();
-      const deviceInfo: DeviceInfo = {
-        id: 0,
-        userAgent: data.userAgent,
-        os: data.os,
-        browser: data.browser,
-        device: data.device,
-        osVersion: data.os_version,
-        browserVersion: data.browser_version,
-        deviceType: data.deviceType,
-        orientation: data.orientation,
-        ip: '',
-      }
-      Utils.setSecureStorage(LOCAL_STORAGE.DEVICE_INFO, deviceInfo);
   }
  }

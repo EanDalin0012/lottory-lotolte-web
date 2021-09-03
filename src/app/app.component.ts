@@ -17,25 +17,25 @@ export class AppComponent implements OnDestroy {
   constructor(
     private hTTPService: HTTPService,
     private translate: TranslateService) {
-    window.onbeforeunload = (event) => {
-      const e = event || window.event;
-      const requestData = {
-        isClose: 'broswer is close'
-      };
-      // Cancel the event
-      //e.preventDefault();
-      console.log( 'window.onbeforeunload', e);
+    // window.onbeforeunload = (event) => {
+    //   const e = event || window.event;
+    //   const requestData = {
+    //     isClose: 'broswer is close'
+    //   };
+    //   // Cancel the event
+    //   //e.preventDefault();
+    //   console.log( 'window.onbeforeunload', e);
 
-      const api = environment.bizServer.server + '/api/client/v0/close';
-        this.hTTPService.Post(api,requestData).then((resposne)=> {
+    //   const api = environment.bizServer.server + '/api/client/v0/close';
+    //     this.hTTPService.Post(api,requestData).then((resposne)=> {
 
-       });
-      if (e) {
+    //    });
+    //   if (e) {
 
-        e.returnValue = ''; // Legacy method for cross browser support
-      }
-      return ''; // Legacy method for cross browser support
-    };
+    //     e.returnValue = ''; // Legacy method for cross browser support
+    //   }
+    //   return ''; // Legacy method for cross browser support
+    // };
     this.setInitialAppLanguage();
   }
   ngOnDestroy(): void {

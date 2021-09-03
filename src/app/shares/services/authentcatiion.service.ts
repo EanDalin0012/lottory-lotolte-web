@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Utils } from '../utils/utils.static';
 import { LOCAL_STORAGE } from '../constants/common.const';
 import { DeviceInfo } from '../model/device-detector';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class AuthentcatiionService {
     private modalService: ModalService,
     private translate: TranslateService,
     private router: Router,
-    private httpService: HTTPService
+    private httpService: HTTPService,
+    private deviceService: DeviceDetectorService,
   ) {
     this.baseUrl = environment.bizServer.server;
   }
@@ -52,23 +54,20 @@ export class AuthentcatiionService {
 
   private loadUserByUserName(userName: string, accessToken: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      const deviceInfo = Utils.getSecureStorage(LOCAL_STORAGE.DEVICE_INFO) as DeviceInfo;
+      const data = this.deviceService.getDeviceInfo();
       const userInfo = {
         userName: userName,
         deviceInfo: {
-          userAgent: deviceInfo.userAgent,
-          os: deviceInfo.os,
-          browser: deviceInfo.browser,
-          device: deviceInfo.device,
-          osVersion: deviceInfo.osVersion,
-          browserVersion: deviceInfo.browserVersion,
-          deviceType: deviceInfo.deviceType,
-          orientation: deviceInfo.orientation,
+          userAgent: data.userAgent,
+          os: data.os,
+          browser: data.browser,
+          device: data.device,
+          osVersion: data.os_version,
+          browserVersion: data.browser_version,
+          deviceType: data.deviceType,
+          orientation: data.orientation,
           networkIP: Utils.getSecureStorage(LOCAL_STORAGE.NekWorkIP),
-        },
-
-
-
+        }
       };
       const lang = Utils.getSecureStorage(LOCAL_STORAGE.I18N);
       const httpOptionsObj = {
@@ -76,7 +75,6 @@ export class AuthentcatiionService {
         Authorization: 'Bearer ' + accessToken
       };
       const uri = this.baseUrl + '/api/user/v0/loadUser?lang=' + lang;
-
       $('div.loading').removeClass('none');
       $('body').removeClass('loaded');
 

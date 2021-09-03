@@ -30,8 +30,7 @@ export class AccountWithdrawalCashOutComponent implements OnInit {
     this.form as FormGroup;
 
     this.form = this.formBuilder.group({
-      yourAccount: [{value: '', disabled: true}, Validators.required],
-      toAccount: [{value: '', disabled: true}, Validators.required],
+      cashOutFromAccount: [{value: '', disabled: true}, Validators.required],
       amount: ['', Validators.required],
       remark: ['']
     });
@@ -45,8 +44,7 @@ export class AccountWithdrawalCashOutComponent implements OnInit {
     }
 
     this.form.patchValue({
-      yourAccount: PipeUtils.account(this.userAccount.accountID) + ' '+ this.userAccount.accountName,
-      toAccount: PipeUtils.account(this.subAccount.accountID) + ' '+ this.subAccount.accountName
+      cashOutFromAccount: PipeUtils.account(this.subAccount.accountID) + ' '+ this.subAccount.accountName
     });
 
   }

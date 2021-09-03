@@ -58,7 +58,9 @@
       "Login":"Login",
       "Next":"Next",
       "Previous":"Previous",
-      "Action":"Action"
+      "Action":"Action",
+      "CashOut":"Cash Out",
+      "CashOutMoney":"Cash Out Money"
     },
     "Holder": {
       "EnterRemark": "Enter remark",
@@ -112,7 +114,8 @@
       "ResetPassword":"Reset Password",
       "YourAccount":"Your Account",
       "WithdrawalCashOut":"Withdrawal Cash Out",
-      "DepositMoney":"Deposit Money"
+      "DepositMoney":"Deposit Money",
+      "CashOutFromAccount":"Cash Out From Account"
     },
     "Message": {
       "DoYouWantDepositMoney":"Do you want to deposit money from account : {{fromAccountID}} to account : {{toAccountId}} amount : {{amount}} ?",
@@ -210,7 +213,9 @@
       "Invalid_Token":"Invalid access token.",
       "UserNameNotFound":"Your user name not found.",
       "InvalidPassword":"Your password is wrong.",
-      "User_Had":"Your user name ready have."
+      "User_Had":"Your user name ready have.",
+      "Invalid_AccountID":"Your Account ID Invalid.",
+      "Invalid_AccountStatus":"Invalid account status."
     }
   }
 }

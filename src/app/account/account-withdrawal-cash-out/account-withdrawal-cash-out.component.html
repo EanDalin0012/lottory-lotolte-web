@@ -3,7 +3,7 @@
       <div class="web_container">
           <!-- header -->
           <div class="pop_header">
-              <h1>Deposit Money</h1>
+              <h1>{{'Account.Label.WithdrawalCashOut' | translate}} </h1>
               <button type="button" class="btn_popclose" (click)="close()"><span>close</span></button>
           </div>
           <!-- //header -->
@@ -13,43 +13,34 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">
-                      {{'Account.Label.YourAccount' | translate}}
+                      {{'Account.Label.CashOutFromAccount' | translate}}
                       <span class="text-danger">*</span>
                     </label>
-                    <input formControlName="yourAccount"  type="text" [ngClass]="form.getRawValue().yourAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" >
+                    <input formControlName="cashOutFromAccount"  type="text" [ngClass]="form.getRawValue().cashOutFromAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive" >
                 </div>
                 <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">
-                      {{'Account.Label.ToAccount' | translate}}
-                      <span class="text-danger">*</span>
-                    </label>
-                    <input formControlName="toAccount" type="text" [ngClass]="form.getRawValue().toAccount? 'active-input' : ''" class="disable-01 form-control font-khmer-cursive">
+                  <label class="font-khmer-cursive">Amount</label>
+                  <span class="text-danger">*</span>
+                  <input #amount formControlName="amount" type="number" [ngClass]="form.getRawValue().amount? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Common.Holder.EnterAmount' | translate}}">
 
-                </div>
+                  <div class="in_box">
+                      <button (click)="isEmpty('amount')" type="button" [ngClass]="form.getRawValue().amount? 'btn_del' : ''" class="btn" ></button>
+                  </div>
+                  <div *ngIf="submitted && f.amount.errors">
+                    <small class="text-danger">{{'Account.Message.AmountRequire' | translate}}</small>
+                  </div>
+
+                  <div *ngIf="submitted && !f.amount.errors && thanZero">
+                    <small class="text-danger">{{'Account.Message.AmountOverZero' | translate}}</small>
+                  </div>
+
+              </div>
               </div>
 
 
               <div class="form-row">
 
-                <div class="form-group col-md-6">
-                    <label class="font-khmer-cursive">Amount</label>
-                    <span class="text-danger">*</span>
-                    <input #amount formControlName="amount" type="number" [ngClass]="form.getRawValue().amount? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Common.Holder.EnterAmount' | translate}}">
-
-                    <div class="in_box">
-                        <button (click)="isEmpty('amount')" type="button" [ngClass]="form.getRawValue().amount? 'btn_del' : ''" class="btn" ></button>
-                    </div>
-                    <div *ngIf="submitted && f.amount.errors">
-                      <small class="text-danger">{{'Account.Message.AmountRequire' | translate}}</small>
-                    </div>
-
-                    <div *ngIf="submitted && !f.amount.errors && thanZero">
-                      <small class="text-danger">{{'Account.Message.AmountOverZero' | translate}}</small>
-                    </div>
-
-                </div>
-
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
                   <label>{{'Common.Label.Remark' | translate}}</label>
                   <input formControlName="remark" type="text" [ngClass]="form.getRawValue().remark? 'active-input' : ''" class="form-control" placeholder="{{'Common.Holder.EnterRemark' | translate}}">
 
@@ -70,17 +61,15 @@
 
 
       <div class="c_btn">
-
           <button (click)="close()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
               <span class="k-icon k-i-close-circle k-i-x-circle margin-top-1px font-size-20px"></span>
-              <span class="font-weigh-700 margin-left-5px">Close</span>
+              <span class="font-weigh-700 margin-left-5px">{{'Common.Button.Close' | translate}}</span>
           </button>
 
-          <button (click)="save()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'">
+          <button (click)="save()" class="k-button btn-w100px-h35px font-khmer-cursive"  kendoButton [look]="'outline'" style="width: 170px;">
               <span class="k-icon k-i-download margin-top-1px font-size-20px"></span>
-              <span class="font-weigh-700 margin-left-5px">Save</span>
+              <span class="font-weigh-700 margin-left-5px">{{'Common.Button.CashOutMoney' | translate}}</span>
           </button>
-
       </div>
 
   </div>

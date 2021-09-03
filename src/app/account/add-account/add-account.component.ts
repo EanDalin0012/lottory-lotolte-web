@@ -12,7 +12,6 @@ import { ViewAccountComponent } from '../view-account/view-account.component';
 import { ModalService } from '../../shares/services/modal.service';
 import { CreateAccount } from '../../shares/model/create-account';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NotificationService } from '@progress/kendo-angular-notification';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
 import { Base64WriteImage } from '../../shares/model/base64-image';
 import { ErrorCodes } from '../../shares/constants/common.error.code.const';
@@ -109,8 +108,6 @@ export class AddAccountComponent implements OnInit {
     private translateService: TranslateService,
     private modalService: ModalService,
     private formBuilder: FormBuilder,
-    private dataService: DataService,
-    private el: ElementRef,
     private hTTPService: HTTPService,
   ) {
     this.baseUrl = environment.bizServer.server;
