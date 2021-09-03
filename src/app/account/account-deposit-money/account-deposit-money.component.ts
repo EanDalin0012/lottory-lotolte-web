@@ -87,6 +87,18 @@ export class AccountDepositMoneyComponent implements OnInit {
 
       }
       console.log(data);
+
+      const dataInfo = {
+        yourAccountID: this.userAccount.accountID,
+        yourAccountId: this.userAccount.id,
+        toAccountID: this.subAccount.accountID,
+        toAccountId: this.subAccount.id,
+        amount: data.amount,
+        remark: data.remark
+      };
+
+      console.log('dataInfo', dataInfo);
+
     }
   }
 
