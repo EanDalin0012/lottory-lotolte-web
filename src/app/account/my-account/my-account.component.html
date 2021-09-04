@@ -7,7 +7,7 @@
         <div class="col-sm-12">
             <h3 class="page-title">{{'MyAccount.Label.MyAccount' | translate}}</h3>
             <ul class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">{{'Common.Label.Dashboard' | translate}}</a></li>
+                <li class="breadcrumb-item"><a href="javascript:">{{'Common.Label.Dashboard' | translate}}</a></li>
                 <li class="breadcrumb-item active">{{'MyAccount.Label.MyAccount' | translate}}</li>
             </ul>
         </div>
@@ -37,11 +37,12 @@
                   <li>
                     <div class="title">{{'Common.Label.Status' | translate}}</div>
                     <div class="text" [innerHTML] = 'accountInfo.status | accountStatus'> </div>
-                </li>
-                <li>
-                  <div class="title">{{'Account.Label.AccountType' | translate}}</div>
-                  <div class="text" [innerHTML] = 'accountInfo.accountType | accountType'> </div>
-              </li>
+                  </li>
+
+                  <li>
+                    <div class="title">{{'Account.Label.AccountType' | translate}}</div>
+                    <div class="text" [innerHTML] = 'accountInfo.accountType | accountType'> </div>
+                  </li>
 
               </ul>
           </div>

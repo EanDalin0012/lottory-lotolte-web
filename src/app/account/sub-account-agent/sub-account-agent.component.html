@@ -36,7 +36,11 @@
                   <li>
                     <div class="title">{{'Account.Label.AccountType' | translate}}</div>
                     <div class="text" [innerHTML] = "accountInfo.accountType | accountType"></div>
-                </li>
+                  </li>
+                  <li>
+                    <div class="title">{{'Common.Label.Status' | translate}}</div>
+                    <div class="text" [innerHTML] = 'accountInfo.status | accountStatus'> </div>
+                  </li>
 
               </ul>
           </div>
