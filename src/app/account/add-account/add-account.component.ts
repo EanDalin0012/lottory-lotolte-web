@@ -33,7 +33,7 @@ export class AddAccountComponent implements OnInit {
   @ViewChild("lastName") inputLastName: any;
   @ViewChild("phoneNumber") inputPhoneNumber: any;
   @ViewChild("userName") inputUserName: any;
-  @ViewChild("pawword") inputPawword: any;
+  @ViewChild("password") inputPawword: any;
 
 
   modal:any;

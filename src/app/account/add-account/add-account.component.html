@@ -102,7 +102,7 @@
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">{{'Account.Label.PhoneNumber' | translate}}</label>
                     <span class="text-danger">*</span>
-                    <input #phoneNumber formControlName="phoneNumber" type="text" [ngClass]="form.getRawValue().phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterPhoneNumber' | translate}}">
+                    <input #phoneNumber formControlName="phoneNumber" type="tel" [ngClass]="form.getRawValue().phoneNumber? 'active-input' : ''" class=" form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterPhoneNumber' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="form.getRawValue().phoneNumber? 'btn_del' : ''" class="btn" (click)="isEmpty('phoneNumber')"></button>
@@ -115,7 +115,7 @@
 
                 <div class="form-group col-md-6">
                     <label class="font-khmer-cursive">{{'Account.Label.OtherPhoneNumber' | translate}}</label>
-                    <input formControlName="otherPhoneNumber" type="text" [ngClass]="form.getRawValue().otherPhoneNumber? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterOtherPhoneNumber' | translate}}">
+                    <input formControlName="otherPhoneNumber" type="tel" [ngClass]="form.getRawValue().otherPhoneNumber? 'active-input' : ''" class="form-control font-khmer-cursive" placeholder="{{'Account.Holder.EnterOtherPhoneNumber' | translate}}">
 
                     <div class="in_box">
                         <button type="button" [ngClass]="form.getRawValue().otherPhoneNumber? 'btn_del' : ''" (click)="isEmpty('otherPhoneNumber')"></button>
@@ -162,6 +162,15 @@
                 <label class="font-khmer-cursive">{{'Account.Label.Password' | translate}}</label>
                 <span class="text-danger">*</span>
                 <input #password formControlName="password" type="text"   [ngClass]="form.getRawValue().password? 'active-input' : ''" class=" form-control font-khmer-cursive my-disable"  placeholder="{{'Account.Holder.EnterPassword' | translate}}">
+
+                <div class="in_box">
+                  <button type="button" [ngClass]="form.getRawValue().password? 'btn_del' : ''" class="btn" (click)="isEmpty('password')"></button>
+              </div>
+
+              <ng-container *ngIf="submitted && f.password.errors">
+                <small class="text-danger font-weight-700">{{'Account.Message.PasswordRequired' | translate}}</small>
+              </ng-container>
+
                 <!-- <ng-container>
                   <small class="text-danger font-weight-700" style="color: #f39c12 !important;">{{'Account.Message.PasswordNoteFirstTime' | translate}}</small>
                 </ng-container> -->
