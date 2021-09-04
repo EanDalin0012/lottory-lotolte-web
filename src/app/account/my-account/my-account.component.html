@@ -94,7 +94,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a (click)="onTab(9)" [ngClass]="{ 'active' : activeTab.index === 9 }" href="javascript:" class="nav-link">Deposit Cash Out History</a>
+                  <a (click)="onTab(9)" [ngClass]="{ 'active' : activeTab.index === 9 }" href="javascript:" class="nav-link">withdrawal Cash Out History</a>
                 </li>
 
                 <li class="nav-item">
@@ -208,23 +208,24 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let item of transactionHistorys;let i = index;">
+                  <tr *ngFor="let item of depositTransactionHistorys;let i = index;">
                       <td class="padding-7px">{{i+1}}</td>
-                      <td class="padding-7px">{{item.accountId | account}}-{{item.accountName}}</td>
+                      <td class="padding-7px">{{item.accountID | account}}-{{item.accountName}}</td>
                       <td  class="text-right" >
-                        <ng-container *ngIf = "item.transactionType === 'withdrawal'">
+                        <!-- <ng-container *ngIf = "item.transactionType === 'withdrawal'">
                           <i class="pi pi-window-maximize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px; color: red;"></i>
                           <span style="color: red;">-</span>
                         </ng-container>
                         <ng-container *ngIf = "item.transactionType === 'deposit'">
                           <i class="pi pi-window-minimize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px;color: #26af48;"></i>
-                        </ng-container>
-                        <span [ngStyle]="{'color': item.transactionType === 'withdrawal' ? 'red' : '#26af48' }">
+                        </ng-container> -->
+                        <i class="pi pi-window-minimize font-size-1-50rem" style="margin-right: 10px;margin-top: 4px;color: #26af48;"></i>
+                        <span style="color: #26af48">
                           {{item.amount | accountBalance: item.currency }} {{item.currency}}
                         </span>
 
                       </td>
-                      <td class="padding-7px text-center">{{item.dateTime}} </td>
+                      <td class="padding-7px text-center">{{item.date}} </td>
                   </tr>
               </tbody>
           </table>
@@ -234,21 +235,20 @@
   <!-- /Tab 1 -->
 
   <ng-container *ngIf = "activeTab.index === 9">
-    <span>Deposit Cash Out</span>
     <div class="card-body padding-0">
       <div class="table-responsive custom-table-select">
           <table datatable [dtOptions]="dtOptions" class="table table-striped custom-table mb-0 datatable">
               <thead>
                   <tr>
                       <th>#</th>
-                      <th>Deposit Cash Out Account</th>
+                      <th>Withdrawal Cash Out Account</th>
                       <th>Amount</th>
                       <th>Date</th>
 
                   </tr>
               </thead>
               <tbody>
-                  <tr *ngFor="let item of depositCashOutAccount;let i = index;">
+                  <tr *ngFor="let item of withdrawalCashOutTransactionHistorys;let i = index;">
                       <td [width] = "50">{{i+1}}</td>
                       <td >{{item.accountID}}-{{item.accountName}}</td>
                       <td style="color: red;">

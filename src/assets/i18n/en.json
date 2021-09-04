@@ -137,7 +137,8 @@
       "AcountBalance0":"Your acount balance is zero.",
       "AmountRequire":"*Amount is required.",
       "AmountOverZero":"Amount must be over zero",
-      "AccountBalanceNotEnough":"Your account balance is not an enough amount."
+      "AccountBalanceNotEnough":"Your account balance is not an enough amount.",
+      "AccountNotEnoughBalance":"{{account}} is not enough balance."
     },
     "Holder": {
       "EnterAccountID": "Enter account ID",

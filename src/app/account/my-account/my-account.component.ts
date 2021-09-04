@@ -55,36 +55,32 @@ export class MyAccountComponent implements OnInit {
     currency: ''
   };
 
-  transactionHistorys = [
+  depositTransactionHistorys = [
     {
-      id: 3,
-      accountId: '000000002',
-      accountName: 'Dalin',
-      amount: 10000,
-      currency: 'KH',
-      transactionType: 'deposit',
-      dateTime: 'Wednesday, August 8, 2021'
+      id: 0,
+      accountID: '',
+      accountId: 0,
+      accountName: '',
+      amount: 0,
+      currency: '',
+      createBy: 0,
+      date: ''
     }
   ];
 
-  depositCashOutAccount = [
+  withdrawalCashOutTransactionHistorys = [
     {
-      id: 1,
-      accountID: '000-000-001',
-      accountName: 'Paly',
-      amount: 10000,
-      currency: 'KH',
-      date: '2021-08-28 12:00'
-    },
-    {
-      id: 2,
-      accountID: '000-000-002',
-      accountName: 'Dalin',
-      amount: 10000,
-      currency: 'KH',
-      date: '2021-08-28 2:00'
+      id: 0,
+      accountID: '',
+      accountId: 0,
+      accountName: '',
+      amount: 0,
+      currency: '',
+      createBy: 0,
+      date: ''
     }
   ];
+
 
   constructor(
     private titleService: Title,
@@ -121,10 +117,7 @@ export class MyAccountComponent implements OnInit {
   }
 
   inquiry(){
-    this.subAccounts = subAccounts;
-    this.dtTrigger.next();
-    this.rows = this.subAccounts;
-    this.srch = [...this.rows];
+
     const api = this.baseUrl + '/api/my/account/v0/inquiry';
     const userInfo =Utils.getSecureStorage(LOCAL_STORAGE.USER_INFO);
     const requestData = {
@@ -147,12 +140,40 @@ export class MyAccountComponent implements OnInit {
         this.deviceInfos = resposne.body.deviceInfos;
         this.accountInfo = resposne.body.accountInfo;
         console.log(this.accountInfo);
+        this.transactionHistory();
         this.checkActiveIndexTabeByAccountType(this.accountInfo.accountType);
         this.subAccounts = resposne.body.subAccounts;
+        this.dtTrigger.next();
+        this.rows = this.subAccounts;
+        this.srch = [...this.rows];
       }
 
     });
-}
+  }
+
+  transactionHistory() {
+    const api = this.baseUrl + '/api/transactionInfo/v0/inquiry-transaction-history';
+    const dataInfo = {
+        id: this.accountInfo.id,
+        accountID: this.accountInfo.accountID
+    };
+
+    this.hTTPService.Post(api,dataInfo).then((resposne)=> {
+      console.log(resposne);
+
+      if( resposne && resposne.result.responseCode !== '200') {
+        this.message(resposne.result.responseMessage);
+     }
+     if(resposne && resposne.result.responseCode === '200') {
+       this.depositTransactionHistorys = resposne.body.depositMoneys;
+       this.withdrawalCashOutTransactionHistorys = resposne.body.withdrawalCashOuts;
+      console.log('depositTransactionHistorys', this.depositTransactionHistorys);
+      console.log('withdrawalCashOutTransactionHistorys', this.withdrawalCashOutTransactionHistorys);
+
+     }
+
+   });
+  }
 
   onTab(index: number) {
     this.activeTab.index = index;
@@ -170,7 +191,14 @@ export class MyAccountComponent implements OnInit {
       {
         message: value,
         callback: _response => {
+          console.log('_response', _response);
 
+          if(_response != null && _response.responseCode != null &&_response.responseCode === '200') {
+            this.inquiry();
+            this.notificService.showTopRight('Withdrawal Cash Out Success', 'success');
+          } else if (_response && _response != null &&_response.close != null &&_response.close === '500' && _response.responseCode != null && _response.responseCode === '500') {
+            this.notificService.showTopRight('Deposit Money Error', 'error');
+          }
       }
     });
   }
@@ -263,6 +291,9 @@ export class MyAccountComponent implements OnInit {
         break;
       case 'Invalid_LastName':
         message = this.translate.instant('ServerResponseCode.Label.Invalid_LastName');
+        break;
+      case 'Require_AccountID':
+        message = this.translate.instant('ServerResponseCode.Label.Invalid_AccountID');
         break;
       case '500':
         message = this.translate.instant('ServerResponseCode.Label.Server_Error');

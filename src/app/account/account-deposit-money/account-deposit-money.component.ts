@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { BTN_ROLES, LOCAL_STORAGE } from '../../shares/constants/common.const';
+import { BTN_ROLES, LOCAL_STORAGE, TransactionType } from '../../shares/constants/common.const';
 import { PipeUtils } from '../../shares/utils/pipe-utils';
 import { TranslateService } from '@ngx-translate/core';
 import { Account } from '../../shares/model/account';
@@ -95,15 +95,20 @@ export class AccountDepositMoneyComponent implements OnInit {
         this.translateErrorServer('AccountBalanceNotEnough');
       } else {
         const dataInfo = {
-          yourAccountID: this.userAccount.accountID,
-          yourAccountId: this.userAccount.id,
+          fromAccountID: this.userAccount.accountID,
+          fromAccountId: this.userAccount.id,
+
           toAccountID: this.subAccount.accountID,
           toAccountId: this.subAccount.id,
-          amount: data.amount,
+
+          transactionType: TransactionType.DepositMoney,
+          transactionAmount: data.amount,
+
           remark: data.remark,
           currency: 'KH'
         };
-        const api = this.baseUrl + '/api/account-deposit/v0/deposit';
+
+        const api = this.baseUrl + '/api/transactionInfo/v0/doTransaction';
         this.hTTPService.Post(api,dataInfo).then(resposne=> {
           console.log('resposne',resposne);
 

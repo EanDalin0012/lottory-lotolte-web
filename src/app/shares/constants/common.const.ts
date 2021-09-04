@@ -1,3 +1,4 @@
+import { DepositMoney } from '../model/deposit-money';
 export enum MODAL_STORE_KEY {
   MODAL_STORE_KEY = 'Modal_Store_object_dialog'
 }
@@ -46,6 +47,22 @@ export enum AccountTypeCode {
   Master = 'mast',
   Agent = 'agen',
   Member = 'memb'
+}
+
+export const AccountCompany = [
+  {
+    id: 1,
+    accountID: '999999999'
+  },
+  {
+    id: 2,
+    accountID: '000000000'
+  }
+];
+
+export enum TransactionType {
+  WithdrawalCashOut = 'WithdrawalCashOut',
+  DepositMoney = 'DepositMoney'
 }
 
 export enum AccountStatus {

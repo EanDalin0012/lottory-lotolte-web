@@ -60,17 +60,15 @@ export class SubAccountAgentComponent implements OnInit {
 
     this.titleService.setTitle('Account-Admin');
     this.dtElement as DataTableDirective;
-    this.dtOptions = {
-      // ... skipped ...
-      // pageLength: 10,
-      dom: "lrtip",
-      pagingType: 'full_numbers',
-      pageLength: 10,
-      processing: true
-    };
+
    }
 
   ngOnInit(): void {
+    this.dtOptions = {
+      dom: "lrtip",
+      pageLength: 10,
+      processing: true
+    };
     const url = (window.location.href).split('/');
     this.dataService.visitParamRouterChange(url[3]);
     this.accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccountAgent);
@@ -78,25 +76,7 @@ export class SubAccountAgentComponent implements OnInit {
   }
 
   inquiry(){
-    // this.accounts = accountMasterAndAgent;
-    // this.accountDisplays = [];
-    // if(this.activeTab.index == 0) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Master == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // } else if (this.activeTab.index == 1) {
-    //   this.accounts.forEach(element => {
-    //     if(AccountTypeCode.Agent == element.accountType) {
-    //       this.accountDisplays.push(element);
-    //     }
-    //   });
-    // }
-
-
     const api = this.baseUrl + '/api/sub/account/v0/inquiry';
-    // const accountInfo = Utils.getSecureStorage(LOCAL_STORAGE.SubAccount_Info);
     const requestData = {
       mainAccountID: this.accountInfo.id,
     };
@@ -113,7 +93,6 @@ export class SubAccountAgentComponent implements OnInit {
        });
       }
       if(resposne && resposne.result.responseCode === '200') {
-        console.log(resposne);
         this.accounts = resposne.body;
         this.accountDisplays = [];
         if(this.activeTab.index == 0) {
@@ -168,7 +147,6 @@ export class SubAccountAgentComponent implements OnInit {
   }
 
   onSubAccountRouter(item: Account) {
-    console.log(item);
     this.subAccountRoutorUtil.subAccountRouter(item);
   }
 }
